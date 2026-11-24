@@ -7254,6 +7254,12 @@ ${label}`)));
       __publicField(this, "slotOf", /* @__PURE__ */ new Map());
       __publicField(this, "slotShown", []);
       __publicField(this, "grabbedSlot", /* @__PURE__ */ new Set());
+      /** The layer pool slots are on: Grabbable (20), or UI (5) with input="click". */
+      __publicField(this, "slotLayer", 20);
+      /** The slot whose item this page's chef holds by a click (not a physical grab), put on Default (0) so that it never
+       *  catches the pointer: it is drawn just in front of the head, in the way of every click (found in Play mode). The
+       *  slots of the ingredients on a held plate too. */
+      __publicField(this, "heldSlots", /* @__PURE__ */ new Set());
       __publicField(this, "flashes", /* @__PURE__ */ new Map());
       __publicField(this, "lastRenderG", null);
     }
@@ -7288,7 +7294,8 @@ ${label}`)));
       });
       this.floor?.On("click", (detail) => this.LocalIntent("E", "floor", detail.point ?? null));
       for (const corner of this.corners) corner.On("click", () => this.LocalIntent("E", "corner", null));
-      if (this.Settings.get("input") === "click") for (const slot of this.slots) slot.layer = 5;
+      this.slotLayer = this.Settings.get("input") === "click" ? 5 : 20;
+      for (const slot of this.slots) slot.layer = this.slotLayer;
       this.OnEffect("hand", (kind) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", "floor"));
       this.OnEffect("crate", (cell) => this.Host.animPlay(_Kitchen.CellKey(String(cell)), "IngredientCounter@Open"));
       this.OnEffect("trash", (cell) => {
@@ -7624,6 +7631,9 @@ ${label}`)));
           place.set(child, { at: "p:" + id, pos });
         }
       }
+      const heldNow = /* @__PURE__ */ new Set();
+      const mine = "h:" + HAND + this.Networking.LocalPlayer.uid;
+      const heldItem = this.holders[HAND + this.Networking.LocalPlayer.uid];
       for (const [id, slot] of [...this.slotOf]) {
         if (this.items[id]) continue;
         this.slotOf.delete(id);
@@ -7638,6 +7648,7 @@ ${label}`)));
         }
         const rec = this.items[id];
         const where = place.get(id) ?? { at: "?", pos: null };
+        if ((where.at === mine || heldItem !== void 0 && where.at === "p:" + heldItem) && !this.grabbedSlot.has(slot)) heldNow.add(slot);
         const icons = rec.k < 0 ? IngredientIcons.Text((rec.ings ?? []).map((c) => this.ingredientSettings.variants[this.items[c]?.k ?? 0]?.Icon ?? "")) : "";
         this.ShowSlot(slot, { id, k: rec.k, at: where.at, icons });
         if (where.pos && !this.grabbedSlot.has(slot)) {
@@ -7648,6 +7659,12 @@ ${label}`)));
           }
         }
       }
+      this.SetHeldSlots(heldNow);
+    }
+    SetHeldSlots(slots) {
+      for (const slot of this.heldSlots) if (!slots.has(slot)) this.slots[slot].layer = this.slotLayer;
+      for (const slot of slots) if (!this.heldSlots.has(slot)) this.slots[slot].layer = 0;
+      this.heldSlots = slots;
     }
     FreeSlot() {
       const used = new Set(this.slotOf.values());

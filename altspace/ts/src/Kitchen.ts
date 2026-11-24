@@ -166,6 +166,12 @@ export class Kitchen extends Behaviour implements KitchenItems {
   private readonly slotOf = new Map<string, number>();
   private readonly slotShown: Array<{ id: string; k: number; at: string; icons: string } | null> = [];
   private readonly grabbedSlot = new Set<number>();
+  /** The layer pool slots are on: Grabbable (20), or UI (5) with input="click". */
+  private slotLayer = 20;
+  /** The slot whose item this page's chef holds by a click (not a physical grab), put on Default (0) so that it never
+   *  catches the pointer: it is drawn just in front of the head, in the way of every click (found in Play mode). The
+   *  slots of the ingredients on a held plate too. */
+  private heldSlots = new Set<number>();
 
   override Start(): void {
     this.ingredientSettings = new IngredientSettings();
@@ -200,7 +206,8 @@ export class Kitchen extends Behaviour implements KitchenItems {
     });
     this.floor?.On("click", (detail) => this.LocalIntent("E", "floor", detail.point ?? null));
     for (const corner of this.corners) corner.On("click", () => this.LocalIntent("E", "corner", null));
-    if (this.Settings.get("input") === "click") for (const slot of this.slots) slot.layer = 5;
+    this.slotLayer = this.Settings.get("input") === "click" ? 5 : 20;
+    for (const slot of this.slots) slot.layer = this.slotLayer;
 
     // effects of the items and counters (sounds of ItemHandler, IngredientCounter's door, Trash's shrink)
     this.OnEffect("hand", (kind) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", "floor"));
@@ -591,6 +598,9 @@ export class Kitchen extends Behaviour implements KitchenItems {
         place.set(child, { at: "p:" + id, pos });
       }
     }
+    const heldNow = new Set<number>();
+    const mine = "h:" + HAND + this.Networking.LocalPlayer.uid;
+    const heldItem = this.holders[HAND + this.Networking.LocalPlayer.uid];
     // free the slots of items that are gone
     for (const [id, slot] of [...this.slotOf]) {
       if (this.items[id]) continue;
@@ -606,6 +616,7 @@ export class Kitchen extends Behaviour implements KitchenItems {
       }
       const rec = this.items[id]!;
       const where = place.get(id) ?? { at: "?", pos: null };
+      if ((where.at === mine || (heldItem !== undefined && where.at === "p:" + heldItem)) && !this.grabbedSlot.has(slot)) heldNow.add(slot);
       const icons = rec.k < 0 ? IngredientIcons.Text((rec.ings ?? []).map((c) => this.ingredientSettings.variants[this.items[c]?.k ?? 0]?.Icon ?? "")) : "";
       this.ShowSlot(slot, { id, k: rec.k, at: where.at, icons });
       if (where.pos && !this.grabbedSlot.has(slot)) {
@@ -616,6 +627,13 @@ export class Kitchen extends Behaviour implements KitchenItems {
         }
       }
     }
+    this.SetHeldSlots(heldNow);
+  }
+
+  private SetHeldSlots(slots: Set<number>): void {
+    for (const slot of this.heldSlots) if (!slots.has(slot)) this.slots[slot]!.layer = this.slotLayer;
+    for (const slot of slots) if (!this.heldSlots.has(slot)) this.slots[slot]!.layer = 0;
+    this.heldSlots = slots;
   }
 
   private FreeSlot(): number {

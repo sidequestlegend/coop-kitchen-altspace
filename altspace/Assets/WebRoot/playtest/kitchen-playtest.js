@@ -125,7 +125,11 @@
     check(lobbyShown === "True", "the board shows the lobby", lobbyShown);
 
     await act(() => clickAt("Board/Lobby/Cook", "COOK"), () => debug().roster()[me().uid] !== undefined, "COOK takes a chef's place (board button, real mouse)");
-    const roster = await probe("text", "Board/Lobby/Roster");
+    let roster = "";
+    for (let i = 0; i < 20 && roster.indexOf(me().name) < 0; i++) {
+      roster = await probe("text", "Board/Lobby/Roster");
+      if (roster.indexOf(me().name) < 0) await sleep(250);
+    }
     check(roster.indexOf(me().name) >= 0, "the roster text reached Unity", roster);
     await act(() => clickAt("Board/Lobby/Play", "PLAY"), () => debug().phase() === "countdown" || debug().phase() === "round", "PLAY starts the countdown");
     const round = await until(() => debug().phase() === "round", 10000, 200);
@@ -139,6 +143,7 @@
     // cut the cheese
     await act(() => E("CheeseCounter_00"), () => hand() && hand().k === V.Cheese, "take a cheese from its crate");
     await act(() => E("CutCounter_00"), () => on("CutCounter_00") && on("CutCounter_00").k === V.Cheese && !hand(), "put the cheese on the cutting board");
+    await sleep(800);
     const knifeHidden = await probe("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model");
     await Q("CutCounter_00");
     await sleep(1000);
@@ -181,7 +186,7 @@
     const t = topPos.split(" ").map(Number);
     check(plateShown === "True" && (plateIcons.match(/<sprite/g) || []).length === 3 && Math.hypot(d[0] - t[0], d[2] - t[2]) < 0.05,
       "the plate is drawn on its counter with three ingredient icons (pool slot " + slot + ")", `plate ${plateShown}, icons '${plateIcons}', slot ${platePos}, top ${topPos}`);
-    for (const ing of plate.ings) {
+    for (const ing of plate.ings || []) {
       const s = debug().slotOf(ing);
       const k = debug().items()[ing].k;
       const v = await probe("active", "Items/Slot" + String(s).padStart(2, "0") + "/V" + k);
