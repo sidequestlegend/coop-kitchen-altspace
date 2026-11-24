@@ -1,8 +1,8 @@
 # coop-kitchen (port)
 
-A co-op cooking game for Altspace, delivered as a snippet (`coop-kitchen`): the rules of **KitchenChaos** by
-**Hyago Oliveira** (https://github.com/HyagoOliveira/KitchenChaos, commit `4a73a26`), ported to TypeScript on the
-portkit runtime and made multiplayer: every player who joins the kitchen is a chef, counters and appliances are
+A co-op cooking game for Altspace, delivered as a snippet (`coop-kitchen`), based on code by Hyago Oliveira,
+github.com/HyagoOliveira/KitchenChaos (MIT; commit `4a73a26`): its rules ported to TypeScript on the portkit runtime
+and made multiplayer: every player who joins the kitchen is a chef, counters and appliances are
 shared, a referee client runs the rules and keeps the timers on a pausable shared clock.
 
 The game's own name is still to be chosen (proposals in `altspace/PORT.md`, section 11.1); it is not "Kitchen Chaos".
@@ -18,7 +18,7 @@ The game's own name is still to be chosen (proposals in `altspace/PORT.md`, sect
   from the upstream's ScriptableObject YAML (ingredient, recipe, order and timing values, counter positions, icon
   names) with `altspace/ts/tools/gen-data.ts`.
 - The kit's art is KayKit Restaurant Bits by Kay Lousberg (CC0); sounds from Kenney (CC0). Every source and licence is
-  in `altspace/THIRD-PARTY-NOTICES.md`.
+  in `altspace/THIRD-PARTY-NOTICES.md`; the full licence texts the kit ships are in `altspace/Assets/Kit/Licenses/`.
 
 ## Layout
 
@@ -36,6 +36,6 @@ altspace/                 the Unity project (kit builder, KayKit models, Kenney 
 ```
 cd altspace/ts
 npm install
-npm test          # typecheck, lint, 29 tests
+npm test          # typecheck, lint, 43 tests
 npm run build     # pk-coop-kitchen.js
 ```

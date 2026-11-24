@@ -1,9 +1,10 @@
 # PORT.md: coop-kitchen
 
-**Status (2026-11-24): the rules are ported to TypeScript and tested in Node; see section 11 (status, decisions, the three proposed names, gaps). Sections 1 to 10 are the analysis made before the port.**
+**Status (2026-11-25): the rules are ported to TypeScript and tested in Node, the kit is built, rungs 0 to 4 pass in the editor, and the independent review's findings are fixed (11.8); see section 11 (status, decisions, the three proposed names, gaps, trust). Sections 1 to 10 are the analysis made before the port; where the port went another way, section 11 says so.**
 
 Upstream: `HyagoOliveira/KitchenChaos` at commit `4a73a26`. Target: one Altspace snippet, a co-op
-cooking game under its own name, with the upstream rules and Code Monkey's course art (credited).
+cooking game under its own name, with the upstream rules. (This analysis first planned to use Code Monkey's course
+art, credited; the owner decided otherwise: no upstream art is used, the kit is KayKit (CC0), 11.7.)
 
 This file was written from a read-only pass over the clone on 2026-11-24. Nothing was compiled, run,
 built or opened in Unity. Scripts were read in full; scenes, prefabs and assets were read as YAML and
@@ -145,6 +146,7 @@ detector child at local `(0, 0.25, 0)`), with the component looked up on the hit
 | 13 | A holder (a counter top, a board, a stove, a crate top, a chef's hands) holds at most one item. A plate counts as one item whatever is on it. | `S/Items/ItemHolder.cs:18,86-88` | K |
 | 14 | Ingredient kinds: Bread, Cabbage, Cheese, Tomato, Meat. States: Raw, Cuttable, Ready, Burned. The ten ingredient variants are in 5.6. | `S/Items/Ingredients/IngredientName.cs:3-11`, `IngredientStatus.cs:3-10`, `T/Ingredients/**` | K |
 | 15 | The kitchen is surrounded by four invisible walls 8 m high. | `P/Levels/Boundries.prefab:46,126,171,216` | A |
+| 138 | Each crate shows its ingredient's icon on its door (added after the review: the first count of 137 missed it). | `S/Counters/IngredientCounter.cs:11-13,43-47` (`UpdateIcon`), the crate prefabs' `SpriteRenderer` | A |
 
 ### C. Taking and placing (E)
 
@@ -1072,17 +1074,17 @@ colliders), so VR players always have the desktop method as a fallback.
 | Take the item on a counter, board, stove, crate top or plate stack (17, 26, 27) | click the counter | grab the item |
 | Put the held item on an empty counter (20) | click the counter | hold it over the counter top and let go; it snaps to the holder position |
 | Put a held ingredient on a plate that is on a counter or on the floor (25, 33) | click that counter or plate | let go over the plate |
-| Take an ingredient from a counter onto the held plate (34) | click the counter while holding the plate | first version: point and click the counter while holding the plate. The natural gesture (bring the plate to the item) has no event of its own and **needs a spike** (a trigger volume on the plate is the candidate) |
+| Take an ingredient from a counter onto the held plate (34) | click the counter while holding the plate | first version: point and click the counter while holding the plate. The natural gesture (bring the plate to the item) has no event of its own and **needs a spike** (a trigger volume on the plate is the candidate). **As built: point and click; no trigger volume** |
 | Throw an ingredient away (56) | click the trash | let go over the trash |
-| Scrape the last ingredient off a held plate (57) | click the trash while holding the plate | point and click the trash, or touch the trash rim with the plate (trigger volume) |
+| Scrape the last ingredient off a held plate (57) | click the trash while holding the plate | point and click the trash, or touch the trash rim with the plate (trigger volume). **As built: point and click (or let go over the trash); no trigger volume** |
 | Deliver (59 to 63) | click the delivery counter | let go of the plate over the delivery counter |
 | Drop on the floor (23) | click the floor inside the kitchen | let go anywhere that is not over a counter, plate or trash |
 | Pick up from the floor (24) | click the loose item | grab it |
-| Start, pause, resume cutting (38, 41) | click the knife | push the knife (touch trigger, `trigger-enter` with the local player's hand) or click it |
-| Start, pause, resume cooking; cancel burning (46, 48, 52) | click the pan handle or stove knob | push the knob or click it |
+| Start, pause, resume cutting (38, 41) | click the knife | push the knife (touch trigger, `trigger-enter` with the local player's hand) or click it. **As built: click only** (laser or desktop); the push triggers were not built |
+| Start, pause, resume cooking; cancel burning (46, 48, 52) | click the pan handle or stove knob | push the knob or click it. **As built: click the knob only**; no push trigger |
 | Something the rules refuse (22, 19, 21, 31, 32, 58, 59) | nothing happens, the item stays in hand, plus the upstream cue where there is one | the same cue; because the hand has already let go, the item falls to the floor at the foot of that counter as a loose item (10.1 C9) |
 | Switch chef (111) | removed | removed |
-| Pause, restart, end round (86, 87) | click the board buttons | click or push the board buttons |
+| Pause, restart, end round (86, 87) | click the board buttons | click or push the board buttons. **As built: click** |
 | Join or leave the kitchen | click "Cook" on the board | the same |
 
 Holding: a chef holds at most one item, in whichever hand took it. A second grab while holding is
@@ -1113,7 +1115,7 @@ opposite row if testing shows people cannot see it):
 | Pause (86, 87) | PAUSE button during a round; panel with Resume, Restart, End round; the two confirmations kept |
 | Sounds (88) | two local volume controls (music, effects) with minus and plus buttons in steps of 0.1 and Reset; saved per device |
 | Results (83 to 85) | results panel with the four lines, "New High Score!" for each chef whose own saved best was beaten, the kitchen's best, Continue (back to the lobby panel) |
-| Credits (4) | credits panel: art by Code Monkey with his link, rules and original code by Hyago Oliveira (MIT, with the copyright line), port credits. Exact wording waits for the licence gate (6.3) |
+| Credits (4) | credits panel (as built, `MainMenu.CREDITS`): "Based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT)" with the copyright line, KayKit Restaurant Bits (CC0), Kenney's sounds (CC0), Liberation Sans (OFL, its copyright line), "not affiliated", port credits. No upstream art is used, so the course art is not credited |
 
 The floating texts over the delivery counter, boards and stoves are already world-space in upstream
 and stay where they are. Plate icons (37) become one text object per plate.
@@ -1212,6 +1214,14 @@ V1 to V8 must match exactly. V9 is compared event by event with a tolerance of o
 12. Join, leave and referee loss in random order for 10 minutes of virtual time (the contract's
     standard soak).
 
+As built (`test/scenarios.test.ts`, `test/review.test.ts`): 1 as "three chefs deliver" (no C# run of the same script;
+the golden V9 orders compare the order logic event for event), 2 as two tests (two Q presses and two E presses on one
+counter in the same tick, and two VR grabs of one item), 3 (500 random intents by four chefs, a third of them in the
+same tick as the one before; invariants every 10 intents), 4 (the referee leaves while cooking, during a plate return
+and the order wait), 5, 6, 7, 8, 10, 11 (two kitchens; no other game in the room), 12 (ten minutes of virtual time:
+players join, leave and the referee leaves, while chefs act at random). Not built: 9 (the pool's limit is in the rules
+tests: `rules.test.ts`).
+
 ### 9.3 Edit mode (rung 2)
 
 Bundle check, allow-list check, all bindings resolve, no missing scripts (the package stand-ins are
@@ -1230,7 +1240,10 @@ match, the right clip index was played.
 ### 9.5 Local Multiplayer, two players (rung 4)
 
 Both pages reach the same state digest after: a round played by both; both clicking the same item;
-one page reloading mid-round (late join); the referee's page closing mid-cook. Grab-based input is
+one page reloading mid-round (late join); the referee's page closing mid-cook. As built (`playtest/multi.json`): a
+round played by both, both pressing Q on one board at the same moment and then E on it at the same moment, one page
+reloading mid-round; the referee's page closing is covered in Node only (scenarios: the referee leaves), since Play mode
+cannot close the main editor's page and keep testing. Grab-based input is
 exercised here as far as Play mode allows (only the Grabbable layer can be grabbed in Play mode,
 SDK `Docs/building-in-unity/layers.md`).
 
@@ -1248,21 +1261,21 @@ intent round-trip time on Quest, frame time with a full pool, audio fall-off.
 | # | Change | Reason | Checklist |
 |---|---|---|---|
 | C1 | Every player is a chef with their own hands; the two capsule chefs and Tab switching are gone | owner's decision; Altspace players are their avatars | 110 to 112 |
-| C2 | "Facing" is replaced by an explicit target chosen by click, grab, release or touch | there is no chef object to cast from, and hands are better pointers | all of C to H |
+| C2 | "Facing" is replaced by an explicit target chosen by click, grab or release (touch: not built). **Reach:** a click counts within **2 m** of the nearest of the chef's head and hands (`Counter.REACH`: `Counter.interactReach` for counters, knives and knobs; `Kitchen.Reaches` for the floor, corners and loose items). Upstream's box cast reaches about 1 m ahead of the chef's centre (0.8 m plus half the 0.5 m box), 0.67 m at kit scale; 2 m from the head reaches the far edge of a counter top from where one stands at it and the floor about 1 m ahead. Board buttons have no reach (the board is the HUD). Each intent also carries what the chef saw of the target (`Kitchen.Seen`); if another chef changed it first, nothing happens (upstream one chef acts at a time) | there is no chef object to cast from, and hands are better pointers | all of C to H |
 | C3 | All rules run on one referee from chef intents; kitchen contents are one shared leaf | no host, shared state readable by all, no private ownership events (plan "Facts") | all |
 | C4 | Coroutines become deadlines on a pausable game clock; events land on a 50 ms grid; a round is exactly `round` seconds | a referee change must be able to resume; state cannot be written per frame | 131, 132 |
 | C5 | Pause stops the kitchen's game clock for everyone in it, not the world | a snippet cannot stop world time | 86 |
 | C6 | Five scenes become phases of one kit (lobby, countdown, round, times up, results, tutorial) | a kit cannot hold scenes | 1, 3, 83 to 85 |
 | C7 | The HUD and menus become a world-space board; tickets are three fixed slots; ingredient icons are sprite text | no screen overlay in a snippet; VR | 37, 70, 76, 77, 80 to 85 |
-| C8 | A dropped item rests where it was dropped (clicked floor point, or under the releasing hand) without physics | items are state, not synced rigid bodies | 23 to 25 |
+| C8 | A dropped item rests where it was dropped (clicked floor point, or on the floor under the releasing hand) without physics; the point is kept inside the kitchen's floor | items are state, not synced rigid bodies | 23 to 25 |
 | C9 | In VR, an item let go over a place that refuses it falls to the floor there | the hand has already let go; upstream would keep it in hand | 22 and the other refusals |
 | C10 | At most 48 items exist; crates refuse when the pool is full | pooled kit objects | 16 |
 | C11 | Trashing removes the item from state at once; the shrink is cosmetic | fixes the leak in 129 and avoids a half-trashed state on referee change | 56, 129 |
 | C12 | Removing an order twice is a no-op instead of an exception | 128 would crash the ticket code upstream | 128 |
 | C13 | Kitchen built at 0.64 scale; one plain counter left out as a doorway (10 plain counters instead of 11); the four 8 m invisible walls are not needed because the counters themselves bound the room | human scale; players must be able to walk in | 9, 10, 15 |
 | C14 | Chef speed does not change in the countdown or the final seconds | a snippet must not change world or player settings (README) | 79, 81 |
-| C15 | Effects get a real distance fall-off; HUD sounds play from the board; music is heard inside the footprint | several kitchens and other content share the world | N |
-| C16 | High score is per device and per world (`localStorage`), plus a kitchen best in room state | no per-player saved data on the platform | 84 |
+| C15 | Effects get a real distance fall-off; HUD sounds play from the board; pick-up and drop sounds play from the counter acted on (or the one nearest the spot on the floor), since a player's own position has no speaker; music: none ships (11.7) | several kitchens and other content share the world | N |
+| C16 | High score is per device and per world (`localStorage`), plus a kitchen best in room state; a device compares each round (named by its start time) once | no per-player saved data on the platform | 84 |
 | C17 | At time up the kitchen freezes (preparations stop) and is reset when the lobby returns | there is no scene unload to throw things away | 134 |
 | C18 | Tutorial: steps 1 and 2 dropped, prompts reworded, run in the classic kitchen, shared by all chefs, does not write the high score | see 8.7 | 113 to 122 |
 | C19 | Highlight is local and follows pointer or hand | C2 | 109 |
@@ -1392,7 +1405,8 @@ upstream author and licence.
 T: implemented and asserted by a Node test (rung 1). I: implemented in the script, but what it does is drawing or
 sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: left out (10.2). O: open.
 
-**Counts: T 89, I 30, C 6, X 11, O 1 (137).**
+**Counts: T 89, I 29, C 6, X 13, O 1 (138).** (Until the review: 137 items, with 6 and 108 marked I although no music
+ships; 138, the crate's icon, was missing.)
 
 | # | Status | Evidence or note |
 |---|---|---|
@@ -1401,7 +1415,7 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | 3 | T | PLAY, TUTORIAL, COOK buttons: scenarios.test.ts |
 | 4 | I | credits panel (MainMenu.ts) |
 | 5 | X |  |
-| 6 | I | music object, pitch/volume ops (BackgroundMusic.ts) |
+| 6 | X | no music ships (none with a licence we could verify, 11.7); BackgroundMusic.ts and the `music` setting stay for a licensed track, acting on a silent source |
 | 7 | T | helpers.play: 0.2 s + 3 s |
 | 8 | T | restart and lobby reset: scenarios.test.ts |
 | 9 | I | layout from the scene (data/kitchen-data.json); doorway C13 |
@@ -1476,7 +1490,7 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | 78 | I | CountDown (late joiner hears none: scenarios.test.ts) |
 | 79 | T | E during the countdown: rules.test.ts |
 | 80 | I | Timer mm:ss and bar |
-| 81 | T | booster: scenarios.test.ts; red text, beeps, pitch drawn (I) |
+| 81 | T | booster: scenarios.test.ts; red text and beeps drawn (I); the music pitch is left out with the music (6) |
 | 82 | T | Times Up, no E, results: scenarios.test.ts |
 | 83 | T | results lines: scenarios.test.ts |
 | 84 | I | per-device high score (Results.ts, C16) |
@@ -1503,7 +1517,7 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | 105 | I | board sounds |
 | 106 | I | board sounds |
 | 107 | X |  |
-| 108 | I | music |
+| 108 | X | no music ships (6) |
 | 109 | O | no hover event reaches the page (portkit GAPS: hover open); nothing highlights |
 | 110 | X |  |
 | 111 | X |  |
@@ -1533,8 +1547,9 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | 135 | T | rules.test.ts |
 | 136 | T | rules.test.ts |
 | 137 | T | rules.test.ts |
+| 138 | I | the crate counter's front shows its ingredient's icon (sprite text from the board's icon sprites, `CoopKitchenKitBuilder.CrateIcon`); Play mode reads it (rung 3) |
 
-### 11.4 Tests (`npm test`: 29 tests, all passing on the re-synced portkit)
+### 11.4 Tests (`npm test`: 43 tests, all passing on portkit 812f285)
 
 - `test/golden.test.ts` (8): the upstream C# compiled unchanged with dotnet 8 against `golden/UnityStubs.cs`, driven by
   `golden/Harness.cs`, written to `vectors/upstream.json`. V1 weighted pick (1,012 rolls), V2 waiting times, V3 tips
@@ -1542,13 +1557,20 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
   plates (200 random sequences), V7 score (100 sequences): exact. V9 preparations (13 timelines: cut, pause, booster
   windows, cook, burn, cancel, take off, warnings) and V9 orders (cadence, cap, expiry, removal, plate returns, tips):
   event for event, within the upstream's own frame drift (each chained `WaitForSeconds` ends on the first frame past
-  it); the 128 fix is asserted as a difference.
+  it). The two orders scenarios with deliveries are compared event for event too (since the review; before, only the
+  deliveries and tips): the upstream's log with the 128 fix applied to it as the test writes it out, every order's
+  creation, recipe and waiting time, every delivery, expiry, removal and plate return.
 - `test/scenarios.test.ts` (13): three chefs deliver three orders; cutting with pause; the stove's burn sequence, its
   cancel and its stop; plating rules, trash, Need Plate, Wrong Plate, plate return, floor drop and grab; an order
   expires; pause and resume (who may resume, deadlines unmoved in game time, restart); the referee leaves mid-round
   (cooking, plate return and next order on time); a chef leaves holding a plate; a late joiner; two kitchens in one
   room; time up with the x1.25 booster, results and lobby; the tutorial with two chefs; a forged command refused.
 - `test/rules.test.ts` (8): the E and Q cases the scenarios do not reach, on a RulesBench, and the key budget.
+- `test/review.test.ts` (14), one or more per review finding, each failing on the code before its fix (11.8): credits
+  and notices; reach; a later session's high score; a departing chef's item; VR releases to the floor; drops kept on
+  the floor; forged effects; two Q presses and two E presses on one counter; two grabs of one item; pick-up and drop
+  sounds where they happen; the pause panel; and PORT.md 9.2 #3 (500 random intents) and #12 (ten minutes of joins,
+  leaves and referee losses).
 
 ### 11.5 Gaps and local workarounds (portkit not edited)
 
@@ -1562,7 +1584,8 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | No hover event reaches the page | the highlight (109) is not done: open |
 | portkit's new generic `ts/golden/UnityStubs.cs` returns the original from `Instantiate` and has no ActionCode, AwaitableCoroutine or nested-coroutine runner | the game keeps its own `golden/UnityStubs.cs` |
 | `RulesBench` has no calling player and its `Storage` throws | `Kitchen.IntentFor(uid, ...)` beside `Intent`; `GameDataManager` falls back to an in-memory save |
-| (closed) No kit yet | the kit is built (11.7); `tools/gen-bindings.ts` now writes the contract the kit builder follows, and seeds its lock with the behaviour ids |
+| (closed) No kit yet | the kit is built (11.7); `tools/gen-bindings.ts` writes the contract the kit builder follows |
+| (closed by portkit 812f285) `KitStage.Behaviour` took no id or per-player flag | the builder passes each behaviour's id and `perPlayer` from the contract (`Behaviour(go, type, fields, perPlayer, id)`); `gen-bindings.ts` no longer seeds the lock. `Chef` keeps `static perPlayer` too |
 | Found in Play mode: the local chef's held item is drawn in front of their head, in the way of every desktop click (a click on it grabbed its pool slot and dropped the item) | `Kitchen.ts`: the slot of the item the local chef holds by a click, and of the ingredients on a plate they hold, goes to the Default layer (0) while held; a physical grab keeps its layer |
 | Closed by the portkit re-sync (c7abead..1118ef0) | `networkCallable` lists on Kitchen and MatchManager; music pitch and volume through `audioPitch` / `audioVolume`; the effects volume through `PlayOneShot`'s volume scale; `GameObject.ReleaseGrab()` |
 
@@ -1574,7 +1597,16 @@ looks to the others.
 Port code is MIT and credits Hyago Oliveira's MIT code. It is published from a fresh repository (`coop-kitchen-port`,
 not a fork) because the upstream repository carries assets that must not be republished (6.3 D, E). Nothing of the
 upstream's art, models, sounds, textures, fonts or plugins is in `altspace/`; `data/kitchen-data.json` holds data
-values from the upstream's ScriptableObject YAML (numbers, names, icon names) only. Art will be KayKit (CC0).
+values from the upstream's ScriptableObject YAML (numbers, names, icon names) only. The art is KayKit (CC0), 11.7.
+
+Attribution, as decided by the owner: "based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT)",
+with the copyright line, on the credits panel, in the manifest's description, the kit's notices and the script's
+banner. The MIT licence's own condition (the copyright and permission notice in copies) is met by the full text: in the
+script's banner (`ts/script-header.txt`), in the bundles (`Assets/Kit/Licenses/KitchenChaos-LICENSE.txt`) and at the
+repository root. The bundles also carry portkit's MIT text, the CC0 1.0 legal code (downloaded 2026-11-25 from
+https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt, plain text checked), the KayKit and Kenney licence
+files and Liberation Sans's OFL (added by the kit build). No shipped text names the upstream's title in bold or the
+course whose art the upstream credits; this analysis (sections 1 to 10) keeps those names.
 
 ### 11.7 The kit (Unity phase, 2026-11-24)
 
@@ -1660,3 +1692,44 @@ Credits panels, which only the Node scenarios cover.
 **Cosmetic, known:** the board's panels all stand switched on in the prefab (the script shows one at a time), so the
 kit photo shows them overlapping; the score label touches the first ticket's bar; plate icons face one way (a
 billboard needs the camera, which the graph allow list does not reach).
+
+### 11.8 The review (2026-11-25): what was fixed, and trust
+
+The independent review (`REVIEW-FINDINGS.md`, coop-kitchen) and how each finding ended. Node tests are in
+`test/review.test.ts` unless named otherwise; each failed on the code before its fix.
+
+| # | Finding | Now |
+|---|---|---|
+| 1 | Shipped texts named the course art's author and showed the upstream title in bold | Fixed: credits, notices in the kit, script banner and manifest description use "based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT)"; no bold title, no course-art credit (test "credits and notices") |
+| 2 | No reach: chefs clicked anything from anywhere | Fixed: 2 m from the head or hands (C2); Node test "reaches", Play mode (rung 3) "a click on a crate 3 m away does nothing" |
+| 3 | High scores stopped saving in later sessions (rounds checked by number, which starts at 1 again) | Fixed: rounds are named by their start time (`MatchRec.id`) |
+| 4 | A leaving chef's item fell at the world's origin | Fixed: the last position seen is kept (`Kitchen.lastHead`); with none, the kitchen's floor centre. The test puts the chef away from the origin, where the kit's objects stand in the fake room, so the two cannot be confused |
+| 5 | VR releases floated at hand height | Fixed: drops land on the floor below the point (`Kitchen.OnFloor`); Play mode checks a floor drop's height |
+| 6 | Two chefs at one counter: two Q presses started and paused a board; intents named a counter, not what was on it; lost VR grabs were never released | Fixed: intents carry what the chef saw (`Kitchen.Seen`) and a stale one does nothing; a grab the referee gave elsewhere is let go (`Kitchen.CheckGrabs`); PORT.md 9.2 #2, #3, #12 built; 9.5's "both clicking the same item" run in Play mode (rung 4) |
+| 7 | Music items 6, 81, 108 marked implemented though no music ships | Fixed in 11.3: 6 and 108 are X, 81's note says the pitch is left out |
+| 8 | MIT permission notice and Liberation Sans's OFL not shipped | Fixed: `Assets/Kit/Licenses/` (upstream MIT, portkit MIT, CC0 legal code), the OFL added by the kit build, the MIT text in the script's banner (11.6) |
+| 9 | `MainMenu.ts` overwrote the builder's fuller credits | Fixed: one text, `MainMenu.CREDITS`, carried to the builder by `kit-contract.json` |
+| 10 | `OnFx` callable by anyone; drop coordinates unchecked | Fixed: only the current referee's effects play; drops are kept inside the kitchen's floor. What stays open is below (trust) |
+| 11 | Any chef could Restart or End during another's pause | Fixed: the resume rule (the chef who paused, the referee, or any chef once the one who paused has left) |
+| 12 | Golden orders scenarios compared only deliveries and tips | Fixed: event for event (11.4); a plate return moved by 0.5 s now fails it (checked), and passed before |
+| 13 | PORT.md stale: course art (top, 8.5), VR push triggers, the crate's icon, sounds at the kitchen's centre | Fixed: the text (top, 8.4, 8.5, C2, C15); the crate's icon built (138); pick-up and drop sounds now play at the counter acted on or nearest the spot (test "pick-up sounds"; before, every one from the floor's speaker in the middle) |
+| 14 | Kit copy at 6c2033b | Re-synced to portkit 812f285 |
+
+**Trust: what a modified client can still do, compared with upstream.** Upstream is one program on one machine; every
+rule runs where the player is, and nothing is shared. Here the referee's client runs the rules for everyone (C3), and
+the runtime's trust rules apply (portkit README, "Trust" and "Referee"):
+
+- **Reach is checked on the clicking client only.** The referee does not know where another player is (the page reads
+  no remote poses; a chef publishes its own head only while holding an item, and could publish anything). A modified
+  client can act on any counter, knife or knob of the kitchen from anywhere in the room: a chef with an unlimited arm.
+  It cannot act outside the rules (intents run the upstream rule on the referee), nor drop an item outside the kitchen's
+  floor.
+- **Synced state is public space state.** As with VRChat's synced variables, a modified client can overwrite the
+  kitchen's leaves (items, orders, score, the match and the kitchen's best) directly; everyone then sees it until the
+  referee writes that leaf again. The referee does not re-check its own leaves against tampering.
+- **The referee seat.** Under the default election a modified client can take the seat (no server decides it) and then
+  run the kitchen as it likes: a modified referee can change any rule, play any effect and drop anything anywhere.
+- **Its own device.** The high score is in the device's own storage; a modified client can set its own, as upstream's
+  save file can be edited.
+- What it can no longer do (since this review): make others hear or see effects (only the referee's play), drop items
+  outside the kitchen, or restart or end a round another chef paused.

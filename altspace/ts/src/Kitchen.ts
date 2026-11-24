@@ -164,6 +164,8 @@ export class Kitchen extends Behaviour implements KitchenItems {
   private readonly sent = new Map<Behaviour, string>();
   private releasingFrom = "";
   private dropAt: number[] | null = null;
+  /** The target of the intent being run ("c:<cell>", "i:<item>", "floor", "corner"), for SoundSpot. */
+  private actionTarget = "";
   private lastSweep = 0;
 
   // pool drawing, per client
@@ -219,7 +221,8 @@ export class Kitchen extends Behaviour implements KitchenItems {
     for (const slot of this.slots) slot.layer = this.slotLayer;
 
     // effects of the items and counters (sounds of ItemHandler, IngredientCounter's door, Trash's shrink)
-    this.OnEffect("hand", (kind) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", "floor"));
+    // a pick-up or drop sounds at the counter where it happened (each has a 3D speaker), or the one nearest the floor spot
+    this.OnEffect("hand", (kind, at) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", typeof at === "string" && /^c_[A-Za-z0-9_]+$/.test(at) ? at : "floor"));
     this.OnEffect("crate", (cell) => this.Host.animPlay(Kitchen.CellKey(String(cell)), "IngredientCounter@Open"));
     this.OnEffect("trash", (cell) => {
       this.PlaySound("trash", Kitchen.CellKey(String(cell)));
@@ -417,6 +420,27 @@ export class Kitchen extends Behaviour implements KitchenItems {
     this.IntentFor(player.uid, kind, target, n(x), n(y), n(z), release === true, typeof seen === "string" ? seen : null);
   }
 
+  /** The kit object a pick-up or drop of the intent being run sounds at: the counter acted on, else the counter nearest
+   *  the spot on the floor (every counter has a 3D speaker), else the floor's own speaker in the kitchen's middle. */
+  SoundSpot(): string {
+    if (this.actionTarget.startsWith("c:") && this.counters.has(this.actionTarget.slice(2))) return Kitchen.CellKey(this.actionTarget.slice(2));
+    const loose = this.actionTarget.startsWith("i:") ? this.items[this.actionTarget.slice(2)]?.pos : undefined;
+    const spot = loose ?? this.dropAt;
+    if (!spot) return "floor";
+    let best = "floor";
+    let bestDistance = Infinity;
+    for (const [cell, counter] of this.counters) {
+      const t = counter.gameObject.transform;
+      if (!t.known) continue;
+      const d = Math.hypot(t.position.x - spot[0]!, t.position.z - spot[2]!);
+      if (d < bestDistance) {
+        bestDistance = d;
+        best = Kitchen.CellKey(cell);
+      }
+    }
+    return best;
+  }
+
   /**
    * The intent of the chef with user id `uid` (Intent, and rules tests that have no room). `seen`: what the chef saw of
    * the target (Seen); when the target has changed since, the intent is stale and nothing happens, except that an item a
@@ -430,6 +454,7 @@ export class Kitchen extends Behaviour implements KitchenItems {
     }
     const handler = this.Handler(uid);
     handler.detector = new BoxCaster(this.TargetObject(target));
+    this.actionTarget = target;
     this.dropAt = x !== null && y !== null && z !== null ? this.OnFloor([x, y, z]) : this.FloorBelowChef(uid);
     try {
       if (kind === "E") {
@@ -441,6 +466,7 @@ export class Kitchen extends Behaviour implements KitchenItems {
     } finally {
       this.dropAt = null;
       this.releasingFrom = "";
+      this.actionTarget = "";
     }
     this.CommitAll();
   }

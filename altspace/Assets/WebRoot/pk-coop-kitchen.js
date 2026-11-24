@@ -7285,13 +7285,13 @@ ${label}`)));
         const canReleaseItemOnTheFloor = !wasItemTransfered && !this.detector.HasHit;
         if (canReleaseItemOnTheFloor) {
           this.holder.ReleaseItem();
-          this.kitchen.Fx("hand", "drop", this.holder.key);
+          this.kitchen.Fx("hand", "drop", this.kitchen.SoundSpot());
         }
       } else {
         const item = this.TryGetCollectableItem();
         if (item) {
           this.holder.PlaceItem(item);
-          this.kitchen.Fx("hand", "pickup", this.holder.key);
+          this.kitchen.Fx("hand", "pickup", this.kitchen.SoundSpot());
         }
       }
     }
@@ -7668,6 +7668,8 @@ ${label}`)));
       __publicField(this, "sent", /* @__PURE__ */ new Map());
       __publicField(this, "releasingFrom", "");
       __publicField(this, "dropAt", null);
+      /** The target of the intent being run ("c:<cell>", "i:<item>", "floor", "corner"), for SoundSpot. */
+      __publicField(this, "actionTarget", "");
       __publicField(this, "lastSweep", 0);
       // pool drawing, per client
       __publicField(this, "slotOf", /* @__PURE__ */ new Map());
@@ -7720,7 +7722,7 @@ ${label}`)));
       for (const corner of this.corners) corner.On("click", (detail) => this.Reaches(detail, corner) && this.LocalIntent("E", "corner", null));
       this.slotLayer = this.Settings.get("input") === "click" ? 5 : 20;
       for (const slot of this.slots) slot.layer = this.slotLayer;
-      this.OnEffect("hand", (kind) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", "floor"));
+      this.OnEffect("hand", (kind, at) => this.PlaySound(kind === "pickup" ? "pickup" : "drop", typeof at === "string" && /^c_[A-Za-z0-9_]+$/.test(at) ? at : "floor"));
       this.OnEffect("crate", (cell) => this.Host.animPlay(_Kitchen.CellKey(String(cell)), "IngredientCounter@Open"));
       this.OnEffect("trash", (cell) => {
         this.PlaySound("trash", _Kitchen.CellKey(String(cell)));
@@ -7893,6 +7895,26 @@ ${label}`)));
       const n = (v) => typeof v === "number" && Number.isFinite(v) ? v : null;
       this.IntentFor(player.uid, kind, target, n(x), n(y), n(z), release === true, typeof seen === "string" ? seen : null);
     }
+    /** The kit object a pick-up or drop of the intent being run sounds at: the counter acted on, else the counter nearest
+     *  the spot on the floor (every counter has a 3D speaker), else the floor's own speaker in the kitchen's middle. */
+    SoundSpot() {
+      if (this.actionTarget.startsWith("c:") && this.counters.has(this.actionTarget.slice(2))) return _Kitchen.CellKey(this.actionTarget.slice(2));
+      const loose = this.actionTarget.startsWith("i:") ? this.items[this.actionTarget.slice(2)]?.pos : void 0;
+      const spot = loose ?? this.dropAt;
+      if (!spot) return "floor";
+      let best = "floor";
+      let bestDistance = Infinity;
+      for (const [cell, counter] of this.counters) {
+        const t = counter.gameObject.transform;
+        if (!t.known) continue;
+        const d = Math.hypot(t.position.x - spot[0], t.position.z - spot[2]);
+        if (d < bestDistance) {
+          bestDistance = d;
+          best = _Kitchen.CellKey(cell);
+        }
+      }
+      return best;
+    }
     /**
      * The intent of the chef with user id `uid` (Intent, and rules tests that have no room). `seen`: what the chef saw of
      * the target (Seen); when the target has changed since, the intent is stale and nothing happens, except that an item a
@@ -7906,6 +7928,7 @@ ${label}`)));
       }
       const handler = this.Handler(uid);
       handler.detector = new BoxCaster(this.TargetObject(target));
+      this.actionTarget = target;
       this.dropAt = x !== null && y !== null && z !== null ? this.OnFloor([x, y, z]) : this.FloorBelowChef(uid);
       try {
         if (kind === "E") {
@@ -7916,6 +7939,7 @@ ${label}`)));
       } finally {
         this.dropAt = null;
         this.releasingFrom = "";
+        this.actionTarget = "";
       }
       this.CommitAll();
     }

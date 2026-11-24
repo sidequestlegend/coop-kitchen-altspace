@@ -39,13 +39,13 @@ export class ItemHandler {
 
       if (canReleaseItemOnTheFloor) {
         this.holder.ReleaseItem();
-        this.kitchen.Fx("hand", "drop", this.holder.key);
+        this.kitchen.Fx("hand", "drop", this.kitchen.SoundSpot());
       }
     } else {
       const item = this.TryGetCollectableItem();
       if (item) {
         this.holder.PlaceItem(item);
-        this.kitchen.Fx("hand", "pickup", this.holder.key);
+        this.kitchen.Fx("hand", "pickup", this.kitchen.SoundSpot());
       }
     }
   }

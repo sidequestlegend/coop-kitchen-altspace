@@ -302,6 +302,27 @@ test("two chefs grab one item in VR: the one who does not get it lets go (findin
   assert.deepEqual(world.problems(), []);
 });
 
+// ---- 13: where pick-up and drop sounds play -------------------------------------------------------------------------
+
+test("a pick-up sounds at the counter it came from, a drop at the counter nearest the spot, not at the kitchen's middle (finding 13)", async () => {
+  // before the fix: every pick-up and drop sound played from the floor's speaker in the middle of the kitchen
+  const world = newWorld(54);
+  const ann = world.join({ name: "Ann", elements: [{ round: "300" }] });
+  const bob = world.join({ name: "Bob", elements: [{ round: "300" }] });
+  await settle(world);
+  await play(world, ann);
+  const audio = (c: FakeClient) => c.graph(SLUG).events.filter((e) => e.op === "audio");
+  const before = audio(bob).length;
+  await E(world, ann, CRATE[V.Meat]!);
+  const pickup = audio(bob).slice(before).filter((e) => e.args[0] === "0" || e.args[0] === "1");
+  assert.deepEqual(pickup.map((e) => e.target), ["c_MeatCounter_00"], "the pick-up sounds at the meat crate");
+  const mark = audio(bob).length;
+  await click(world, ann, "floor", "0", STEP, new Vector3(1, 0, -1));
+  const drop = audio(bob).slice(mark).filter((e) => e.args[0] === "2" || e.args[0] === "3");
+  assert.equal(drop.length, 1);
+  assert.ok(drop[0]!.target.startsWith("c_"), `the drop sounds at a counter: ${drop[0]!.target}`);
+});
+
 // ---- 11: the pause panel ----------------------------------------------------------------------------------------
 
 test("during one chef's pause another chef cannot restart or end the round (finding 11)", async () => {
