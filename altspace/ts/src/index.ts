@@ -81,6 +81,14 @@ function debugHooks(instance: GameInstance): Record<string, unknown> {
     orders: () => kitchen().orders.orders.list.map((o) => ({ ...o })),
     score: () => kitchen().score.Asset.Score,
     roster: () => ({ ...kitchen().roster }),
+    paused: () => kitchen().match.Paused,
+    pausedBy: () => kitchen().match.PausedBy,
+    /** The local player as the instance knows them. */
+    me: () => ({ sid: instance.networking.LocalPlayer.sid, uid: instance.networking.LocalPlayer.uid, name: instance.networking.LocalPlayer.displayName }),
+    /** The pool slot that shows an item on this page (-1: none). */
+    slotOf: (id: string) => kitchen().SlotOf(id),
+    /** A kit object's path by its key (bindings.json). */
+    pathOf: (key: string) => instance.bindings.objects[key]?.path ?? "",
   };
 }
 

@@ -1,0 +1,10 @@
+{
+  "name": "kitchen-multi",
+  "timeout": 420,
+  "players": 2,
+  "elements": [
+    "<script>window.__kitchenPlan = \"multi\";</script>",
+    "<script src=\"{SERVER}/web/playtest/kitchen-playtest.js\"></script>",
+    "<bs-snippet name=\"coop-kitchen\" title=\"Co-op Kitchen\" script=\"{SERVER}/web/pk-coop-kitchen.js\" position=\"0 0 0\" seed=\"1\" windows=\"{SERVER}/kits/windows/coop-kitchen\" android=\"{SERVER}/kits/android/coop-kitchen\"></bs-snippet>"
+  ]
+}
