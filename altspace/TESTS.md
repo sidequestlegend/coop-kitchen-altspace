@@ -1,7 +1,9 @@
 # coop-kitchen ("Co-op Kitchen", working title): test evidence
 
-Everything here ran on 2026-11-24 on Windows, Unity 6000.3.21f1, Creator SDK 4.0.29, in the Unity editor. Nothing ran
-in the Altspace app, on a Quest, or with controllers (rung 5: not run; worlds stay Private).
+Everything here ran on Windows, Unity 6000.3.21f1, Creator SDK 4.0.29, in the Unity editor: first on 2026-11-24, and
+again on 2026-11-25 after the re-sync to portkit 812f285 and the review's fixes (PORT.md 11.8); the numbers below are
+from the second pass. Nothing ran in the Altspace app, on a Quest, or with controllers (rung 5: not run; worlds stay
+Private).
 
 How to run each rung again (from `C:\workspace\AltspaceGames`, with an editor slot and the editor open):
 
@@ -21,27 +23,33 @@ portkit/tools/playtest.sh coop-kitchen-port/altspace coop-kitchen-port/altspace/
 
 ## Rung 1: Node (no Unity)
 
-`npm test` in `altspace/ts`, on the kit builder's real `bindings.json` (hash `f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b`):
-**29 tests, 29 pass, 0 fail**. 8 golden-vector tests against the upstream C# compiled with dotnet 8 (V1 to V7 exact,
-V9 timelines within the upstream's own frame drift, the fix of checklist 128 asserted as a difference), 8 rules tests
-on a RulesBench, 13 multi-client scenarios on the fake room (three chefs deliver; cutting and its pause; the burn
-sequence; plating rules; expiry; shared pause; referee loss mid-round; a chef leaving with a plate; a late joiner;
-two kitchens in one room; time up and results; the tutorial with two chefs; a forged command refused). Details in
-PORT.md 11.4.
+`npm test` in `altspace/ts`, on the kit builder's real `bindings.json` (hash `4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55`):
+**43 tests, 43 pass, 0 fail** (about 4 s). 8 golden-vector tests against the upstream C# compiled with dotnet 8 (V1 to
+V7 exact, V9 timelines within the upstream's own frame drift; the orders scenarios with deliveries now event for event,
+the fix of checklist 128 applied to the upstream's log as written in the test), 8 rules tests on a RulesBench, 13
+multi-client scenarios on the fake room (three chefs deliver; cutting and its pause; the burn sequence; plating rules;
+expiry; shared pause; referee loss mid-round; a chef leaving with a plate; a late joiner; two kitchens in one room; time
+up and results; the tutorial with two chefs; a forged command refused), and 14 review tests (`test/review.test.ts`, each
+failing on the code before its fix: run with the fixed sources stashed, 12 of the 14 failed, the other two being the new
+soak tests of PORT.md 9.2 #3 and #12, which pass on both). Details in PORT.md 11.4 and 11.8.
 
 ## Rung 2: the kit in edit mode (`PortKit/Kit/Check`)
 
 ```
 PASS graphs: the SDK's check found 0 nodes the app will not run
-PASS coop-kitchen bindings: 186 objects resolve by path; hash matches (f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b)
-PASS coop-kitchen android bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 417/6834, behaviours 382, scripts 9, ...
-PASS coop-kitchen windows bundle: PASS Kind=Pass Reasons=[] Reports=[] ...
+PASS coop-kitchen bindings: 186 objects resolve by path; hash matches (4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55)
+PASS coop-kitchen android bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 427/6881, behaviours 392, scripts 9, ...
+PASS coop-kitchen windows bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 427/6881, ...
 DONE
 ```
 
-The kit (`Logs/portkit_kits.txt`): 2,275 objects, 186 bound (48 grabbable pool slots, 59 clickable), 92 refs, 60
-behaviours, 54 events; relay graph 519 units, 49 distinct members, all on the SDK allow list of 29,061. Bundles:
-Android 1,586 KiB, Windows 2,215 KiB, each with the third-party notices inside.
+The kit (`Logs/portkit_kits.txt`): 2,285 objects (2,275 before; the ten crate icons are new), 186 bound (48 grabbable
+pool slots, 59 clickable), 92 refs, 60 behaviours (ids and `perPlayer` now passed to portkit's `KitStage`), 54 events;
+relay graph 565 units, 49 distinct members, all on the SDK allow list of 29,061. Bundles: Android 1,600 KiB (1,586
+before), Windows 2,231 KiB (2,215 before), each with the third-party notices and the licence texts inside
+(`Logs/portkit_bundles.txt`: `LICENSE-KayKit-Restaurant-Bits.txt`, `LICENSE-Kenney-Impact-Sounds.txt`,
+`LICENSE-Kenney-Interface-Sounds.txt`, `CC0-1.0-legalcode.txt`, `KitchenChaos-LICENSE.txt`, `portkit-LICENSE.txt`,
+`LiberationSans - OFL.txt`).
 
 Artifacts (`PortKit/Kit/Export Artifacts`, `altspace/dist/`, not committed): `android/coop-kitchen`,
 `windows/coop-kitchen`, `pk-coop-kitchen.js`, `coop-kitchen.jpg`, `coop-kitchen.snippet.html` (the game's settings,
@@ -53,7 +61,10 @@ A hand-written `<bs-snippet name="coop-kitchen" ... seed="1">` (the seed makes t
 built script and the bundles from the test's local server, and `Assets/WebRoot/playtest/kitchen-playtest.js`, which
 drives the kitchen through the SDK's desktop player with portkit's InputSim (the SDK casts its own rays and raises
 the clicks) and reads Unity back with the `probe` command (`Logs/portkit_playtest_kitchen-single.txt`, copied to
-`playtest/evidence_single.txt`). **RESULT 32 passed, 0 failed; 0 console error lines.** Pictures:
+`playtest/evidence_single.txt`). **RESULT 37 passed, 0 failed; 0 console error lines, twice in a row** on the rebuilt
+bundles (2026-11-25; the first pass on 2026-11-24 had 32 checks). Since the review a chef's reach is 2 m, so the test
+stands the desktop player at each counter before clicking it (InputSim `place`, and the page's own `TeleportTo`, which
+the runtime hears as `player-teleported`). Pictures (from the first pass):
 `playtest/evidence_single_plated.jpg` (the X Burger on its plate beside the board and stove),
 `playtest/evidence_single_delivered.jpg` (the board after the delivery: score 31, "+11 Tip!").
 
@@ -69,6 +80,9 @@ PASS PLAY starts the countdown
 PASS the round starts after the countdown: round
 PASS the first order is an X Burger (seed 1) and its ticket shows: {"id":1,"r":2,...,"wait":93,...}, ticket 'X Burger'
 PASS the ticket's ingredient icons reached Unity: <sprite name="Bread"><sprite name="CheeseSlice"><sprite name="MeatPattyCooked">
+PASS the cheese crate shows its ingredient's icon (checklist 138): <sprite name="CheeseBlock">
+PASS the credits panel carries the script's text: the MIT attribution, KayKit, Kenney, the font: <b>Co-op Kitchen</b> (working title) ...
+PASS a click on a crate 3 m away does nothing (a chef reaches 2 m): hand null
 PASS take a cheese from its crate
 PASS put the cheese on the cutting board
 PASS Q on the knife starts cutting: the knife shows and chops, the bar shows: knife before False, while cutting True, bar True
@@ -82,7 +96,9 @@ PASS take the cooked meat off the stove / plate the meat: an X Burger
 PASS the plate is drawn on its counter with three ingredient icons (pool slot 1): plate True, icons '<sprite name="CheeseSlice"><sprite name="Bread"><sprite name="MeatPattyCooked">', slot -2.880 1.040 3.360, top -2.880 0.900 3.360
 PASS pick up the plate
 PASS deliver it at the delivery counter
-PASS the score shows the delivery and its tip (20 + tip), on the board in Unity: score 31, board '31'
+PASS the score shows the delivery and its tip (20 + tip), on the board in Unity: score 30, board '30'
+PASS take bread for the floor
+PASS a floor click drops the held item on the floor where clicked (state and Unity): clicked 0.96 0.00 1.89, state [0.96,0,1.89], drawn at 0.960 0.140 1.890
 PASS Pause pauses the round / the pause panel shows: True / Resume carries on
 ```
 
@@ -99,8 +115,11 @@ The main editor and a Multiplayer Play Mode clone (`PortKit/Multiplayer/Activate
 press COOK. The player whose session id sorts first ("lead", Player 2 in this run) presses PLAY, puts bread on the
 plate and delivers; the other ("second", the main editor) cuts the cheese and cooks the meat and plates both on the
 lead's bread, then pauses and resumes, then reloads its page. The pages exchange the score they see and their state
-digests as one-shots (which the runtime ignores). **RESULT 41 passed, 0 failed; 0 console error lines**
-(`playtest/evidence_multi.txt`).
+digests as one-shots (which the runtime ignores). Since the review, before the reload, both chefs also act on one
+board at the same wall-clock moment named by the lead (both players run on this machine; the clicks landed 53 to 61 ms
+after it): Q on a board holding a cheese, then E on it holding the slice (PORT.md 9.5 "both clicking the same item").
+**RESULT 51 passed, 0 failed; 0 console error lines, twice in a row** on the rebuilt bundles (2026-11-25; 41 checks in
+the first pass) (`playtest/evidence_multi.txt`, the second run).
 
 ```
 [main] PASS two players in the room
@@ -120,8 +139,17 @@ digests as one-shots (which the runtime ignores). **RESULT 41 passed, 0 failed; 
 [main] PASS after reloading, this page sees the running round and the score (late join): round, score 30
 [main] PASS the reloaded page draws the kitchen as it is: score on the board, a plate on its counter: board '30', plate counter {"id":"i1","k":-1}
 [vp] PASS after reloading, the other page sees the score (late join): 30 / 30
-[vp] PASS both pages reach the same state digest after the reload: 28a63673
+[vp] PASS both pages reach the same state digest after the reload: de25a7c7
+[main] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
+[vp] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
+[main] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71..."]
+[vp] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71..."]
 ```
+
+Artifacts (`PortKit/Kit/Take Photos`, `PortKit/Kit/Export Artifacts`, 2026-11-25): `dist/` with the bundles (Android
+1,638,799 bytes, Windows 2,284,148), `pk-coop-kitchen.js` (540,780 bytes, the upstream's MIT notice and portkit's in its
+banner), the photo, the snippet markup and `manifest.json` (checks android PASS, windows PASS; its description uses
+the decided attribution).
 
 ## What remains unverified
 
@@ -132,6 +160,10 @@ digests as one-shots (which the runtime ignores). **RESULT 41 passed, 0 failed; 
   in the fake room; nobody listened in Play mode); the Animator states (they are in the bundles and the relay sends
   `animPlay`, but no test reads an Animator's state).
 - **In Play mode, not run:** the burn sequence, the tutorial, an order expiring, time up and the results panel,
-  trash, wrong plate, the floor, the Sounds and Credits panels, `door="east"`, two kitchens in one page, a referee
-  leaving (all covered by the Node scenarios on the fake room).
+  trash, wrong plate, the Sounds panel (the Credits panel's text is read, the panel not opened), `door="east"`, two
+  kitchens in one page, a referee leaving, a chef leaving with an item, a later session's high score, forged effects
+  or intents, VR grabs racing (all covered by the Node tests on the fake room).
+- **Reach in VR:** measured from the nearest of head and hands; in Play mode only the desktop head (and teleports) was
+  used. The 2 m value is a judgement (PORT.md C2), not tested with people.
+- **Where pick-up and drop sounds play** (the counter acted on): checked as relay records in Node; nobody listened.
 - **The highlight (checklist 109)** is not done: no hover event reaches the page.

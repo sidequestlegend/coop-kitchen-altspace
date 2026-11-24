@@ -192,9 +192,9 @@
     const round = await until(() => debug().phase() === "round", 10000, 200);
     check(!!round, "the round starts after the countdown", debug().phase());
     const first = await until(() => debug().orders().length > 0 && debug().orders()[0], 5000, 200);
-    const ticket = await probe("text", "Board/Orders/Ticket0/Name");
+    const ticket = await probeUntil("text", "Board/Orders/Ticket0/Name", (v) => v === "X Burger");
     check(!!first && first.r === 2 && ticket === "X Burger", "the first order is an X Burger (seed 1) and its ticket shows", `${show(first)}, ticket '${ticket}'`);
-    const icons = await probe("text", "Board/Orders/Ticket0/Icons");
+    const icons = await probeUntil("text", "Board/Orders/Ticket0/Icons", (v) => v.indexOf("<sprite") >= 0);
     check(icons.indexOf("<sprite") >= 0, "the ticket's ingredient icons reached Unity", icons);
     const crateIcon = await probe("text", "Counters/CheeseCounter_00/Icons");
     check(crateIcon.indexOf('<sprite name="CheeseBlock">') >= 0, "the cheese crate shows its ingredient's icon (checklist 138)", crateIcon);
@@ -290,9 +290,11 @@
     const dropped = await until(() => !hand() && debug().items()[bread] && debug().items()[bread].pos, 4000, 100);
     const pos = dropped ? debug().items()[bread].pos : null;
     const breadSlot = "Items/Slot" + String(debug().slotOf(bread)).padStart(2, "0");
-    const drawnAt = xyz(await probeUntil("pos", breadSlot, (v) => Math.abs(xyz(v)[1]) < 0.05 && Math.hypot(xyz(v)[0] - spot[0], xyz(v)[2] - spot[2]) < 0.3));
-    check(!!pos && pos[1] === 0 && Math.hypot(pos[0] - spot[0], pos[2] - spot[2]) < 0.3 && Math.abs(drawnAt[1]) < 0.05,
-      "a floor click drops the held item on the floor where clicked (state and Unity)", `state ${show(pos)}, drawn at ${drawnAt.join(" ")}`);
+    // the probe's "pos" is the middle of what the slot draws (where to point the mouse): a bread on the floor is 0.14 m up
+    const onFloor = (v) => xyz(v)[1] < 0.3 && Math.hypot(xyz(v)[0] - spot[0], xyz(v)[2] - spot[2]) < 0.3;
+    const drawnText = await probeUntil("pos", breadSlot, onFloor);
+    check(!!pos && pos[1] === 0 && Math.hypot(pos[0] - spot[0], pos[2] - spot[2]) < 0.3 && onFloor(drawnText),
+      "a floor click drops the held item on the floor where clicked (state and Unity)", `clicked ${spot.map((v) => v.toFixed(2)).join(" ")}, state ${show(pos)}, drawn at ${drawnText}`);
 
     // pause and resume
     await act(() => clickAt("Board/Hud/Pause", "Pause"), () => debug().paused(), "Pause pauses the round");

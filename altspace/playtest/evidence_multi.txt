@@ -10,8 +10,8 @@ local: script and bundles from the test server http://localhost:43700
 [main] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
 [main] REPLY k4 False
 [main] PASS the kitchen is in the scene: pool slots off, the west doorway open: holder True, slot 47 active False, doorway counter active False, stove True
-[main] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_79893d7b-a48a-4a42-91de-8dd7a274c96b"},{"id":2,"name":"Player 2","sid":"rsess_2c408f62-5e2b-49d2-9b2b-1884efb9e7d3"}]
-[main] INFO second chef (cuts, cooks, pauses, reloads): Main Editor
+[main] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_20148b52-7dd0-4d1a-b912-f1943157ab8c"},{"id":2,"name":"Player 2","sid":"rsess_5f9b5710-821f-48c9-8ded-317766b6531d"}]
+[main] INFO lead chef (plates, delivers): Main Editor
 [main] CMD k5 probe pk1:coop-kitchen:0 pos Board/Lobby/Cook
 [main] REPLY k5 5.570 2.120 0.000
 [main] CMD k6 look 5.570 2.120 0.000
@@ -21,131 +21,141 @@ local: script and bundles from the test server http://localhost:43700
 [main] INFO click COOK: ok screen 643,421 of 1285x842
 [main] PASS COOK: this player takes a chef's place:
 [main] PASS both players are chefs, on both pages: {"ea71beabbcdd9d67f76671884c9073a7":0,"0f2b21f87e29f9a5936877c44d19f63a":1}
-[main] PASS the round runs on this page: round
-[main] CMD k8 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_00/Front
-[main] REPLY k8 3.840 0.350 2.890
-[main] CMD k9 look 3.840 0.350 2.890
+[main] CMD k8 probe pk1:coop-kitchen:0 pos Board/Lobby/Play
+[main] REPLY k8 5.570 1.900 0.480
+[main] CMD k9 look 5.570 1.900 0.480
 [main] REPLY k9 ok camera at 0.00,1.60,0.00
-[main] CMD k10 click 3.840 0.350 2.890
-[main] REPLY k10 ok screen 643,421 of 1285x842
-[main] INFO click E CheeseCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: take a cheese:
-[main] CMD k11 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
-[main] REPLY k11 -3.840 0.350 2.890
-[main] CMD k12 look -3.840 0.350 2.890
-[main] REPLY k12 ok camera at 0.00,1.60,0.00
-[main] CMD k13 click -3.840 0.350 2.890
-[main] REPLY k13 ok screen 643,421 of 1285x842
-[main] INFO click E CutCounter_00: ok screen 643,421 of 1285x842
-[main] INFO second: put it on the board: not yet after try 1; hand {"id":"i4","k":3}
-[main] CMD k14 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
-[main] REPLY k14 -3.840 0.350 2.890
-[main] CMD k15 look -3.840 0.350 2.890
-[main] REPLY k15 ok camera at 0.00,1.60,0.00
-[main] CMD k16 click -3.840 0.350 2.890
+[main] CMD k10 click 5.570 1.900 0.480
+[main] REPLY k10 ok screen 642,421 of 1285x842
+[main] INFO click PLAY: ok screen 642,421 of 1285x842
+[main] PASS PLAY starts the round for both:
+[main] PASS the round runs on this page: round
+[main] CMD k11 probe pk1:coop-kitchen:0 pos Counters/BreadCounter_00/Front
+[main] REPLY k11 0.960 0.350 2.890
+[main] CMD k12 probe pk1:coop-kitchen:0 pos Counters/BreadCounter_00
+[main] REPLY k12 0.960 0.620 3.360
+[main] CMD k13 place 0.960 0 2.390
+[main] REPLY k13 ok 0.96 0.00 2.39 camera 0.96 1.60 2.39
+[main] CMD k14 probe pk1:coop-kitchen:0 pos Counters/BreadCounter_00/Front
+[main] REPLY k14 0.960 0.350 2.890
+[main] CMD k15 look 0.960 0.350 2.890
+[main] REPLY k15 ok camera at 0.96,1.60,2.39
+[main] CMD k16 click 0.960 0.350 2.890
 [main] REPLY k16 ok screen 643,421 of 1285x842
-[main] INFO click E CutCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: put it on the board:
-[main] CMD k17 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/CuttingBoard/Knife
-[main] REPLY k17 -3.890 0.960 3.000
-[main] CMD k18 look -3.890 0.960 3.000
-[main] REPLY k18 ok camera at 0.00,1.60,0.00
-[main] CMD k19 click -3.890 0.960 3.000
-[main] REPLY k19 ok screen 642,421 of 1285x842
-[main] INFO click Q CutCounter_00: ok screen 642,421 of 1285x842
-[main] CMD k20 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00/Front
-[main] REPLY k20 2.880 0.350 2.890
-[main] CMD k21 look 2.880 0.350 2.890
-[main] REPLY k21 ok camera at 0.00,1.60,0.00
-[main] CMD k22 click 2.880 0.350 2.890
-[main] REPLY k22 ok screen 642,421 of 1285x842
-[main] INFO click E MeatCounter_00: ok screen 642,421 of 1285x842
-[main] PASS second: take a meat:
-[main] CMD k23 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
-[main] REPLY k23 -1.920 0.350 2.890
-[main] CMD k24 look -1.920 0.350 2.890
-[main] REPLY k24 ok camera at 0.00,1.60,0.00
-[main] CMD k25 click -1.920 0.350 2.890
-[main] REPLY k25 ok screen 643,421 of 1285x842
-[main] INFO click E StoveCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: put it on the stove:
-[main] CMD k26 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Knob
-[main] REPLY k26 -2.200 0.720 2.820
-[main] CMD k27 look -2.200 0.720 2.820
-[main] REPLY k27 ok camera at 0.00,1.60,0.00
-[main] CMD k28 click -2.200 0.720 2.820
+[main] INFO click E BreadCounter_00: ok screen 643,421 of 1285x842
+[main] PASS lead: take bread:
+[main] CMD k17 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[main] REPLY k17 -2.880 0.350 2.890
+[main] CMD k18 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01
+[main] REPLY k18 -2.880 0.450 3.360
+[main] CMD k19 place -2.880 0 2.390
+[main] REPLY k19 ok -2.88 0.00 2.39 camera -2.88 1.60 2.39
+[main] CMD k20 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[main] REPLY k20 -2.880 0.350 2.890
+[main] CMD k21 look -2.880 0.350 2.890
+[main] REPLY k21 ok camera at -2.88,1.60,2.39
+[main] CMD k22 click -2.880 0.350 2.890
+[main] REPLY k22 ok screen 643,421 of 1285x842
+[main] INFO click E Counter_Plate_01: ok screen 643,421 of 1285x842
+[main] PASS lead: plate the bread:
+[main] PASS the other chef's slice and meat arrive on the plate (seen here): [0,4,6]
+[main] CMD k23 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[main] REPLY k23 -2.880 0.350 2.890
+[main] CMD k24 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01
+[main] REPLY k24 -2.880 0.450 3.360
+[main] CMD k25 place -2.880 0 2.390
+[main] REPLY k25 ok -2.88 0.00 2.39 camera -2.88 1.60 2.39
+[main] CMD k26 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[main] REPLY k26 -2.880 0.350 2.890
+[main] CMD k27 look -2.880 0.350 2.890
+[main] REPLY k27 ok camera at -2.88,1.60,2.39
+[main] CMD k28 click -2.880 0.350 2.890
 [main] REPLY k28 ok screen 643,421 of 1285x842
-[main] INFO click Q StoveCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: the cheese is cut: {"id":"i6","k":4}
-[main] CMD k29 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
-[main] REPLY k29 -3.840 0.350 2.890
-[main] CMD k30 look -3.840 0.350 2.890
-[main] REPLY k30 ok camera at 0.00,1.60,0.00
-[main] CMD k31 click -3.840 0.350 2.890
-[main] REPLY k31 ok screen 643,421 of 1285x842
-[main] INFO click E CutCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: take the slice:
-[main] CMD k32 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
-[main] REPLY k32 -2.880 0.350 2.890
-[main] CMD k33 look -2.880 0.350 2.890
-[main] REPLY k33 ok camera at 0.00,1.60,0.00
-[main] CMD k34 click -2.880 0.350 2.890
+[main] INFO click E Counter_Plate_01: ok screen 643,421 of 1285x842
+[main] PASS lead: pick up the plate:
+[main] CMD k29 probe pk1:coop-kitchen:0 pos Counters/Counter_Delivery/Front
+[main] REPLY k29 4.330 0.350 2.400
+[main] CMD k30 probe pk1:coop-kitchen:0 pos Counters/Counter_Delivery
+[main] REPLY k30 4.800 0.450 2.400
+[main] CMD k31 place 3.830 0 2.400
+[main] REPLY k31 ok 3.83 0.00 2.40 camera 3.83 1.60 2.40
+[main] CMD k32 probe pk1:coop-kitchen:0 pos Counters/Counter_Delivery/Front
+[main] REPLY k32 4.330 0.350 2.400
+[main] CMD k33 look 4.330 0.350 2.400
+[main] REPLY k33 ok camera at 3.83,1.60,2.40
+[main] CMD k34 click 4.330 0.350 2.400
 [main] REPLY k34 ok screen 643,421 of 1285x842
-[main] INFO click E Counter_Plate_01: ok screen 643,421 of 1285x842
-[main] PASS second: plate the slice on the lead's bread:
-[main] PASS second: the meat is cooked: {"id":"i7","k":6}
-[main] CMD k35 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
-[main] REPLY k35 -1.920 0.350 2.890
-[main] CMD k36 look -1.920 0.350 2.890
-[main] REPLY k36 ok camera at 0.00,1.60,0.00
-[main] CMD k37 click -1.920 0.350 2.890
-[main] REPLY k37 ok screen 643,421 of 1285x842
-[main] INFO click E StoveCounter_00: ok screen 643,421 of 1285x842
-[main] PASS second: take the meat:
-[main] CMD k38 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
-[main] REPLY k38 -2.880 0.350 2.890
-[main] CMD k39 look -2.880 0.350 2.890
-[main] REPLY k39 ok camera at 0.00,1.60,0.00
-[main] CMD k40 click -2.880 0.350 2.890
-[main] REPLY k40 ok screen 643,421 of 1285x842
-[main] INFO click E Counter_Plate_01: ok screen 643,421 of 1285x842
-[main] PASS second: plate the meat:
-[main] CMD k41 probe pk1:coop-kitchen:0 text Board/Hud/Score/Current
-[main] REPLY k41 30
-[main] PASS the other chef's delivery shows in the score here (state and board): 30 / 30, board '30'
-[main] CMD k42 probe pk1:coop-kitchen:0 pos Board/Hud/Pause
-[main] REPLY k42 5.600 1.750 -1.200
-[main] CMD k43 look 5.600 1.750 -1.200
-[main] REPLY k43 ok camera at 0.00,1.60,0.00
-[main] CMD k44 click 5.600 1.750 -1.200
-[main] REPLY k44 ok screen 642,421 of 1285x842
-[main] INFO click Pause: ok screen 642,421 of 1285x842
-[main] PASS second: pause the round:
-[main] CMD k45 probe pk1:coop-kitchen:0 pos Board/PausePanel/Options/Resume
-[main] REPLY k45 5.540 2.170 0.000
-[main] CMD k46 look 5.540 2.170 0.000
-[main] REPLY k46 ok camera at 0.00,1.60,0.00
-[main] CMD k47 click 5.540 2.170 0.000
-[main] REPLY k47 ok screen 642,421 of 1285x842
-[main] INFO click Resume: ok screen 642,421 of 1285x842
-[main] PASS second: resume (the chef who paused):
-[main] INFO the second chef reloads its page
-[main] PASS the kit loads from a hand-written bs-snippet and the instance starts:
-[main] CMD k1 probe pk1:coop-kitchen:0 exists .
-[main] REPLY k1 True
-[main] CMD k2 probe pk1:coop-kitchen:0 active Items/Slot47
-[main] REPLY k2 False
-[main] CMD k3 probe pk1:coop-kitchen:0 exists Counters/StoveCounter_00/Stove/Pan
-[main] REPLY k3 True
-[main] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
-[main] REPLY k4 False
-[main] PASS the kitchen is in the scene: pool slots off, the west doorway open (again): holder True, slot 47 active False, doorway counter active False, stove True
-[main] PASS two players in the room: [{"id":2,"name":"Player 2","sid":"rsess_2c408f62-5e2b-49d2-9b2b-1884efb9e7d3"},{"id":3,"name":"Main Editor","sid":"rsess_ae6ad7a5-6c96-4258-9871-e72176510397"}]
-[main] PASS after reloading, this page sees the running round and the score (late join): round, score 30
-[main] CMD k5 probe pk1:coop-kitchen:0 text Board/Hud/Score/Current
-[main] REPLY k5 30
-[main] PASS the reloaded page draws the kitchen as it is: score on the board, a plate on its counter: board '30', plate counter {"id":"i1","k":-1}
-[main] INFO page result 5 passed, 0 failed
+[main] INFO click E Counter_Delivery: ok screen 643,421 of 1285x842
+[main] PASS lead: deliver the X Burger:
+[main] PASS the delivery updates the score on the other page too: 30 there, 30 here, their board '30'
+[main] CMD k35 probe pk1:coop-kitchen:0 active Board/PausePanel
+[main] REPLY k35 True
+[main] CMD k36 probe pk1:coop-kitchen:0 text Board/PausePanel/PausedBy
+[main] REPLY k36 Paused by Player 2
+[main] PASS a pause by the other chef shows here (pause panel on): paused true, by 0f2b21f87e29f9a5936877c44d19f63a, panel True, 'Paused by Player 2'
+[main] PASS the other chef's resume arrives here:
+[main] CMD k37 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_01/Front
+[main] REPLY k37 0.000 0.350 -2.890
+[main] CMD k38 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_01
+[main] REPLY k38 0.000 0.620 -3.360
+[main] CMD k39 place 0.000 0 -2.390
+[main] REPLY k39 ok 0.00 0.00 -2.39 camera 0.00 1.60 -2.39
+[main] CMD k40 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_01/Front
+[main] REPLY k40 0.000 0.350 -2.890
+[main] CMD k41 look 0.000 0.350 -2.890
+[main] REPLY k41 ok camera at 0.00,1.60,-2.39
+[main] CMD k42 click 0.000 0.350 -2.890
+[main] REPLY k42 ok screen 643,421 of 1285x842
+[main] INFO click E CheeseCounter_01: ok screen 643,421 of 1285x842
+[main] PASS lead: take a cheese for the race:
+[main] CMD k43 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[main] REPLY k43 0.960 0.350 -2.890
+[main] CMD k44 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01
+[main] REPLY k44 0.960 0.450 -3.360
+[main] CMD k45 place 0.960 0 -2.390
+[main] REPLY k45 ok 0.96 0.00 -2.39 camera 0.96 1.60 -2.39
+[main] CMD k46 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[main] REPLY k46 0.960 0.350 -2.890
+[main] CMD k47 look 0.960 0.350 -2.890
+[main] REPLY k47 ok camera at 0.96,1.60,-2.39
+[main] CMD k48 click 0.960 0.350 -2.890
+[main] REPLY k48 ok screen 643,421 of 1285x842
+[main] INFO click E CutCounter_01: ok screen 643,421 of 1285x842
+[main] PASS lead: put it on the second board:
+[main] CMD k49 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[main] REPLY k49 0.960 0.350 -2.890
+[main] CMD k50 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01
+[main] REPLY k50 0.960 0.450 -3.360
+[main] CMD k51 place 0.960 0 -2.390
+[main] REPLY k51 ok 0.96 0.00 -2.39 camera 0.96 1.60 -2.39
+[main] CMD k52 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/CuttingBoard/Knife
+[main] REPLY k52 1.010 0.960 -3.000
+[main] CMD k53 look 1.010 0.960 -3.000
+[main] REPLY k53 ok camera at 0.96,1.60,-2.39
+[main] CMD k54 click 1.010 0.960 -3.000
+[main] REPLY k54 ok screen 642,421 of 1285x842
+[main] INFO Q race click at 55 ms past the moment: ok screen 642,421 of 1285x842
+[main] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
+[main] PASS the race's cheese is cut: {"id":"i10","k":4}
+[main] CMD k55 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[main] REPLY k55 0.960 0.350 -2.890
+[main] CMD k56 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01
+[main] REPLY k56 0.960 0.450 -3.360
+[main] CMD k57 place 0.960 0 -2.390
+[main] REPLY k57 ok 0.96 0.00 -2.39 camera 0.96 1.60 -2.39
+[main] CMD k58 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[main] REPLY k58 0.960 0.350 -2.890
+[main] CMD k59 look 0.960 0.350 -2.890
+[main] REPLY k59 ok camera at 0.96,1.60,-2.39
+[main] CMD k60 click 0.960 0.350 -2.890
+[main] REPLY k60 ok screen 643,421 of 1285x842
+[main] INFO E race click at 61 ms past the moment: ok screen 643,421 of 1285x842
+[main] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71beabbcdd9d67f76671884c9073a7"]
+[main] PASS after reloading, the other page sees the score (late join): 30 / 30
+[main] PASS both pages reach the same state digest after the reload: de25a7c7
+[main] CMD k61 shot multi_lead 0 1.7 0 0 0.9 3.36 70
+[main] REPLY k61 Library/PortKit/shots/kitchen-multi_multi_lead.jpg
+[main] INFO page result 22 passed, 0 failed
 [main] DONE
 [vp-mppm3baa9e3c] INFO vp-mppm3baa9e3c in Play, page port 43600
 [vp-mppm3baa9e3c] PASS the kit loads from a hand-written bs-snippet and the instance starts:
@@ -158,8 +168,8 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
 [vp-mppm3baa9e3c] REPLY k4 False
 [vp-mppm3baa9e3c] PASS the kitchen is in the scene: pool slots off, the west doorway open: holder True, slot 47 active False, doorway counter active False, stove True
-[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_79893d7b-a48a-4a42-91de-8dd7a274c96b"},{"id":2,"name":"Player 2","sid":"rsess_2c408f62-5e2b-49d2-9b2b-1884efb9e7d3"}]
-[vp-mppm3baa9e3c] INFO lead chef (plates, delivers): Player 2
+[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_20148b52-7dd0-4d1a-b912-f1943157ab8c"},{"id":2,"name":"Player 2","sid":"rsess_5f9b5710-821f-48c9-8ded-317766b6531d"}]
+[vp-mppm3baa9e3c] INFO second chef (cuts, cooks, pauses, reloads): Player 2
 [vp-mppm3baa9e3c] CMD k5 probe pk1:coop-kitchen:0 pos Board/Lobby/Cook
 [vp-mppm3baa9e3c] REPLY k5 5.570 2.120 0.000
 [vp-mppm3baa9e3c] CMD k6 look 5.570 2.120 0.000
@@ -169,62 +179,216 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] INFO click COOK: ok screen 1280,351 of 2560x702
 [vp-mppm3baa9e3c] PASS COOK: this player takes a chef's place:
 [vp-mppm3baa9e3c] PASS both players are chefs, on both pages: {"ea71beabbcdd9d67f76671884c9073a7":0,"0f2b21f87e29f9a5936877c44d19f63a":1}
-[vp-mppm3baa9e3c] CMD k8 probe pk1:coop-kitchen:0 pos Board/Lobby/Play
-[vp-mppm3baa9e3c] REPLY k8 5.570 1.900 0.480
-[vp-mppm3baa9e3c] CMD k9 look 5.570 1.900 0.480
-[vp-mppm3baa9e3c] REPLY k9 ok camera at 0.00,1.60,0.00
-[vp-mppm3baa9e3c] CMD k10 click 5.570 1.900 0.480
-[vp-mppm3baa9e3c] REPLY k10 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO click PLAY: ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] PASS PLAY starts the round for both:
 [vp-mppm3baa9e3c] PASS the round runs on this page: round
-[vp-mppm3baa9e3c] CMD k11 probe pk1:coop-kitchen:0 pos Counters/BreadCounter_00/Front
-[vp-mppm3baa9e3c] REPLY k11 0.960 0.350 2.890
-[vp-mppm3baa9e3c] CMD k12 look 0.960 0.350 2.890
-[vp-mppm3baa9e3c] REPLY k12 ok camera at 0.00,1.60,0.00
-[vp-mppm3baa9e3c] CMD k13 click 0.960 0.350 2.890
+[vp-mppm3baa9e3c] CMD k8 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k8 3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k9 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_00
+[vp-mppm3baa9e3c] REPLY k9 3.840 0.620 3.360
+[vp-mppm3baa9e3c] CMD k10 place 3.840 0 2.390
+[vp-mppm3baa9e3c] REPLY k10 ok 3.84 0.00 2.39 camera 3.84 1.60 2.39
+[vp-mppm3baa9e3c] CMD k11 probe pk1:coop-kitchen:0 pos Counters/CheeseCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k11 3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k12 look 3.840 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k12 ok camera at 3.84,1.60,2.39
+[vp-mppm3baa9e3c] CMD k13 click 3.840 0.350 2.890
 [vp-mppm3baa9e3c] REPLY k13 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO click E BreadCounter_00: ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] PASS lead: take bread:
-[vp-mppm3baa9e3c] CMD k14 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
-[vp-mppm3baa9e3c] REPLY k14 -2.880 0.350 2.890
-[vp-mppm3baa9e3c] CMD k15 look -2.880 0.350 2.890
-[vp-mppm3baa9e3c] REPLY k15 ok camera at 0.00,1.60,0.00
-[vp-mppm3baa9e3c] CMD k16 click -2.880 0.350 2.890
-[vp-mppm3baa9e3c] REPLY k16 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO click E Counter_Plate_01: ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] PASS lead: plate the bread:
-[vp-mppm3baa9e3c] PASS the other chef's slice and meat arrive on the plate (seen here): [0,4,6]
-[vp-mppm3baa9e3c] CMD k17 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
-[vp-mppm3baa9e3c] REPLY k17 -2.880 0.350 2.890
-[vp-mppm3baa9e3c] CMD k18 look -2.880 0.350 2.890
-[vp-mppm3baa9e3c] REPLY k18 ok camera at 0.00,1.60,0.00
-[vp-mppm3baa9e3c] CMD k19 click -2.880 0.350 2.890
+[vp-mppm3baa9e3c] INFO click E CheeseCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: take a cheese:
+[vp-mppm3baa9e3c] CMD k14 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k14 -3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k15 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00
+[vp-mppm3baa9e3c] REPLY k15 -3.840 0.450 3.360
+[vp-mppm3baa9e3c] CMD k16 place -3.840 0 2.390
+[vp-mppm3baa9e3c] REPLY k16 ok -3.84 0.00 2.39 camera -3.84 1.60 2.39
+[vp-mppm3baa9e3c] CMD k17 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k17 -3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k18 look -3.840 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k18 ok camera at -3.84,1.60,2.39
+[vp-mppm3baa9e3c] CMD k19 click -3.840 0.350 2.890
 [vp-mppm3baa9e3c] REPLY k19 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E CutCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: put it on the board:
+[vp-mppm3baa9e3c] CMD k20 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k20 -3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k21 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00
+[vp-mppm3baa9e3c] REPLY k21 -3.840 0.450 3.360
+[vp-mppm3baa9e3c] CMD k22 place -3.840 0 2.390
+[vp-mppm3baa9e3c] REPLY k22 ok -3.84 0.00 2.39 camera -3.84 1.60 2.39
+[vp-mppm3baa9e3c] CMD k23 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/CuttingBoard/Knife
+[vp-mppm3baa9e3c] REPLY k23 -3.890 0.960 3.000
+[vp-mppm3baa9e3c] CMD k24 look -3.890 0.960 3.000
+[vp-mppm3baa9e3c] REPLY k24 ok camera at -3.84,1.60,2.39
+[vp-mppm3baa9e3c] CMD k25 click -3.890 0.960 3.000
+[vp-mppm3baa9e3c] REPLY k25 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click Q CutCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] CMD k26 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k26 2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k27 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00
+[vp-mppm3baa9e3c] REPLY k27 2.880 0.620 3.360
+[vp-mppm3baa9e3c] CMD k28 place 2.880 0 2.390
+[vp-mppm3baa9e3c] REPLY k28 ok 2.88 0.00 2.39 camera 2.88 1.60 2.39
+[vp-mppm3baa9e3c] CMD k29 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k29 2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k30 look 2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k30 ok camera at 2.88,1.60,2.39
+[vp-mppm3baa9e3c] CMD k31 click 2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k31 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E MeatCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: take a meat:
+[vp-mppm3baa9e3c] CMD k32 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k32 -1.920 0.350 2.890
+[vp-mppm3baa9e3c] CMD k33 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00
+[vp-mppm3baa9e3c] REPLY k33 -1.920 0.540 3.360
+[vp-mppm3baa9e3c] CMD k34 place -1.920 0 2.390
+[vp-mppm3baa9e3c] REPLY k34 ok -1.92 0.00 2.39 camera -1.92 1.60 2.39
+[vp-mppm3baa9e3c] CMD k35 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k35 -1.920 0.350 2.890
+[vp-mppm3baa9e3c] CMD k36 look -1.920 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k36 ok camera at -1.92,1.60,2.39
+[vp-mppm3baa9e3c] CMD k37 click -1.920 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k37 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E StoveCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: put it on the stove:
+[vp-mppm3baa9e3c] CMD k38 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k38 -1.920 0.350 2.890
+[vp-mppm3baa9e3c] CMD k39 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00
+[vp-mppm3baa9e3c] REPLY k39 -1.920 0.540 3.360
+[vp-mppm3baa9e3c] CMD k40 place -1.920 0 2.390
+[vp-mppm3baa9e3c] REPLY k40 ok -1.92 0.00 2.39 camera -1.92 1.60 2.39
+[vp-mppm3baa9e3c] CMD k41 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Knob
+[vp-mppm3baa9e3c] REPLY k41 -2.200 0.720 2.820
+[vp-mppm3baa9e3c] CMD k42 look -2.200 0.720 2.820
+[vp-mppm3baa9e3c] REPLY k42 ok camera at -1.92,1.60,2.39
+[vp-mppm3baa9e3c] CMD k43 click -2.200 0.720 2.820
+[vp-mppm3baa9e3c] REPLY k43 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click Q StoveCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: the cheese is cut: {"id":"i6","k":4}
+[vp-mppm3baa9e3c] CMD k44 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k44 -3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k45 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00
+[vp-mppm3baa9e3c] REPLY k45 -3.840 0.450 3.360
+[vp-mppm3baa9e3c] CMD k46 place -3.840 0 2.390
+[vp-mppm3baa9e3c] REPLY k46 ok -3.84 0.00 2.39 camera -3.84 1.60 2.39
+[vp-mppm3baa9e3c] CMD k47 probe pk1:coop-kitchen:0 pos Counters/CutCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k47 -3.840 0.350 2.890
+[vp-mppm3baa9e3c] CMD k48 look -3.840 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k48 ok camera at -3.84,1.60,2.39
+[vp-mppm3baa9e3c] CMD k49 click -3.840 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k49 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E CutCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: take the slice:
+[vp-mppm3baa9e3c] CMD k50 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[vp-mppm3baa9e3c] REPLY k50 -2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k51 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01
+[vp-mppm3baa9e3c] REPLY k51 -2.880 0.450 3.360
+[vp-mppm3baa9e3c] CMD k52 place -2.880 0 2.390
+[vp-mppm3baa9e3c] REPLY k52 ok -2.88 0.00 2.39 camera -2.88 1.60 2.39
+[vp-mppm3baa9e3c] CMD k53 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[vp-mppm3baa9e3c] REPLY k53 -2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k54 look -2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k54 ok camera at -2.88,1.60,2.39
+[vp-mppm3baa9e3c] CMD k55 click -2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k55 ok screen 1280,351 of 2560x702
 [vp-mppm3baa9e3c] INFO click E Counter_Plate_01: ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] PASS lead: pick up the plate:
-[vp-mppm3baa9e3c] CMD k20 probe pk1:coop-kitchen:0 pos Counters/Counter_Delivery/Front
-[vp-mppm3baa9e3c] REPLY k20 4.330 0.350 2.400
-[vp-mppm3baa9e3c] CMD k21 look 4.330 0.350 2.400
-[vp-mppm3baa9e3c] REPLY k21 ok camera at 0.00,1.60,0.00
-[vp-mppm3baa9e3c] CMD k22 click 4.330 0.350 2.400
-[vp-mppm3baa9e3c] REPLY k22 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO click E Counter_Delivery: ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] PASS lead: deliver the X Burger:
-[vp-mppm3baa9e3c] PASS the delivery updates the score on the other page too: 30 there, 30 here, their board '30'
-[vp-mppm3baa9e3c] CMD k23 probe pk1:coop-kitchen:0 active Board/PausePanel
-[vp-mppm3baa9e3c] REPLY k23 True
-[vp-mppm3baa9e3c] CMD k24 probe pk1:coop-kitchen:0 text Board/PausePanel/PausedBy
-[vp-mppm3baa9e3c] REPLY k24 Paused by Main Editor
-[vp-mppm3baa9e3c] PASS a pause by the other chef shows here (pause panel on): paused true, by ea71beabbcdd9d67f76671884c9073a7, panel True, 'Paused by Main Editor'
-[vp-mppm3baa9e3c] PASS the other chef's resume arrives here:
-[vp-mppm3baa9e3c] PASS after reloading, the other page sees the score (late join): 30 / 30
-[vp-mppm3baa9e3c] PASS both pages reach the same state digest after the reload: 28a63673
-[vp-mppm3baa9e3c] CMD k25 shot multi_lead 0 1.7 0 0 0.9 3.36 70
-[vp-mppm3baa9e3c] REPLY k25 Library/PortKit/shots/kitchen-multi_multi_lead.jpg
-[vp-mppm3baa9e3c] INFO page result 17 passed, 0 failed
+[vp-mppm3baa9e3c] PASS second: plate the slice on the lead's bread:
+[vp-mppm3baa9e3c] PASS second: the meat is cooked: {"id":"i7","k":6}
+[vp-mppm3baa9e3c] CMD k56 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k56 -1.920 0.350 2.890
+[vp-mppm3baa9e3c] CMD k57 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00
+[vp-mppm3baa9e3c] REPLY k57 -1.920 0.540 3.360
+[vp-mppm3baa9e3c] CMD k58 place -1.920 0 2.390
+[vp-mppm3baa9e3c] REPLY k58 ok -1.92 0.00 2.39 camera -1.92 1.60 2.39
+[vp-mppm3baa9e3c] CMD k59 probe pk1:coop-kitchen:0 pos Counters/StoveCounter_00/Front
+[vp-mppm3baa9e3c] REPLY k59 -1.920 0.350 2.890
+[vp-mppm3baa9e3c] CMD k60 look -1.920 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k60 ok camera at -1.92,1.60,2.39
+[vp-mppm3baa9e3c] CMD k61 click -1.920 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k61 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E StoveCounter_00: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: take the meat:
+[vp-mppm3baa9e3c] CMD k62 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[vp-mppm3baa9e3c] REPLY k62 -2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k63 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01
+[vp-mppm3baa9e3c] REPLY k63 -2.880 0.450 3.360
+[vp-mppm3baa9e3c] CMD k64 place -2.880 0 2.390
+[vp-mppm3baa9e3c] REPLY k64 ok -2.88 0.00 2.39 camera -2.88 1.60 2.39
+[vp-mppm3baa9e3c] CMD k65 probe pk1:coop-kitchen:0 pos Counters/Counter_Plate_01/Front
+[vp-mppm3baa9e3c] REPLY k65 -2.880 0.350 2.890
+[vp-mppm3baa9e3c] CMD k66 look -2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k66 ok camera at -2.88,1.60,2.39
+[vp-mppm3baa9e3c] CMD k67 click -2.880 0.350 2.890
+[vp-mppm3baa9e3c] REPLY k67 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click E Counter_Plate_01: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: plate the meat:
+[vp-mppm3baa9e3c] CMD k68 probe pk1:coop-kitchen:0 text Board/Hud/Score/Current
+[vp-mppm3baa9e3c] REPLY k68 30
+[vp-mppm3baa9e3c] PASS the other chef's delivery shows in the score here (state and board): 30 / 30, board '30'
+[vp-mppm3baa9e3c] CMD k69 probe pk1:coop-kitchen:0 pos Board/Hud/Pause
+[vp-mppm3baa9e3c] REPLY k69 5.600 1.750 -1.200
+[vp-mppm3baa9e3c] CMD k70 look 5.600 1.750 -1.200
+[vp-mppm3baa9e3c] REPLY k70 ok camera at -2.88,1.60,2.39
+[vp-mppm3baa9e3c] CMD k71 click 5.600 1.750 -1.200
+[vp-mppm3baa9e3c] REPLY k71 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click Pause: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: pause the round:
+[vp-mppm3baa9e3c] CMD k72 probe pk1:coop-kitchen:0 pos Board/PausePanel/Options/Resume
+[vp-mppm3baa9e3c] REPLY k72 5.540 2.170 0.000
+[vp-mppm3baa9e3c] CMD k73 look 5.540 2.170 0.000
+[vp-mppm3baa9e3c] REPLY k73 ok camera at -2.88,1.60,2.39
+[vp-mppm3baa9e3c] CMD k74 click 5.540 2.170 0.000
+[vp-mppm3baa9e3c] REPLY k74 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO click Resume: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS second: resume (the chef who paused):
+[vp-mppm3baa9e3c] PASS second: the lead names the moment for the Q race:
+[vp-mppm3baa9e3c] CMD k75 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[vp-mppm3baa9e3c] REPLY k75 0.960 0.350 -2.890
+[vp-mppm3baa9e3c] CMD k76 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01
+[vp-mppm3baa9e3c] REPLY k76 0.960 0.450 -3.360
+[vp-mppm3baa9e3c] CMD k77 place 0.960 0 -2.390
+[vp-mppm3baa9e3c] REPLY k77 ok 0.96 0.00 -2.39 camera 0.96 1.60 -2.39
+[vp-mppm3baa9e3c] CMD k78 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/CuttingBoard/Knife
+[vp-mppm3baa9e3c] REPLY k78 1.010 0.960 -3.000
+[vp-mppm3baa9e3c] CMD k79 look 1.010 0.960 -3.000
+[vp-mppm3baa9e3c] REPLY k79 ok camera at 0.96,1.60,-2.39
+[vp-mppm3baa9e3c] CMD k80 click 1.010 0.960 -3.000
+[vp-mppm3baa9e3c] REPLY k80 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO Q race click at 56 ms past the moment: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
+[vp-mppm3baa9e3c] PASS the race's cheese is cut: {"id":"i10","k":4}
+[vp-mppm3baa9e3c] PASS second: the lead names the moment for the E race:
+[vp-mppm3baa9e3c] CMD k81 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[vp-mppm3baa9e3c] REPLY k81 0.960 0.350 -2.890
+[vp-mppm3baa9e3c] CMD k82 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01
+[vp-mppm3baa9e3c] REPLY k82 0.960 0.450 -3.360
+[vp-mppm3baa9e3c] CMD k83 place 0.960 0 -2.390
+[vp-mppm3baa9e3c] REPLY k83 ok 0.96 0.00 -2.39 camera 0.96 1.60 -2.39
+[vp-mppm3baa9e3c] CMD k84 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
+[vp-mppm3baa9e3c] REPLY k84 0.960 0.350 -2.890
+[vp-mppm3baa9e3c] CMD k85 look 0.960 0.350 -2.890
+[vp-mppm3baa9e3c] REPLY k85 ok camera at 0.96,1.60,-2.39
+[vp-mppm3baa9e3c] CMD k86 click 0.960 0.350 -2.890
+[vp-mppm3baa9e3c] REPLY k86 ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO E race click at 54 ms past the moment: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71beabbcdd9d67f76671884c9073a7"]
+[vp-mppm3baa9e3c] INFO the second chef reloads its page
+[vp-mppm3baa9e3c] PASS the kit loads from a hand-written bs-snippet and the instance starts:
+[vp-mppm3baa9e3c] CMD k1 probe pk1:coop-kitchen:0 exists .
+[vp-mppm3baa9e3c] REPLY k1 True
+[vp-mppm3baa9e3c] CMD k2 probe pk1:coop-kitchen:0 active Items/Slot47
+[vp-mppm3baa9e3c] REPLY k2 False
+[vp-mppm3baa9e3c] CMD k3 probe pk1:coop-kitchen:0 exists Counters/StoveCounter_00/Stove/Pan
+[vp-mppm3baa9e3c] REPLY k3 True
+[vp-mppm3baa9e3c] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
+[vp-mppm3baa9e3c] REPLY k4 False
+[vp-mppm3baa9e3c] PASS the kitchen is in the scene: pool slots off, the west doorway open (again): holder True, slot 47 active False, doorway counter active False, stove True
+[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_20148b52-7dd0-4d1a-b912-f1943157ab8c"},{"id":3,"name":"Player 2","sid":"rsess_eeec4b60-e60c-452d-87ab-c18a1989825d"}]
+[vp-mppm3baa9e3c] PASS after reloading, this page sees the running round and the score (late join): round, score 30
+[vp-mppm3baa9e3c] CMD k5 probe pk1:coop-kitchen:0 text Board/Hud/Score/Current
+[vp-mppm3baa9e3c] REPLY k5 30
+[vp-mppm3baa9e3c] PASS the reloaded page draws the kitchen as it is: score on the board, a plate on its counter: board '30', plate counter {"id":"i1","k":-1}
+[vp-mppm3baa9e3c] INFO page result 5 passed, 0 failed
 [vp-mppm3baa9e3c] DONE
 served: /web/pk-coop-kitchen.js x3, /web/playtest/kitchen-playtest.js x3, HEAD /kits/windows/coop-kitchen x3
 console (main editor): 0 error lines
-RESULT 41 passed, 0 failed
+RESULT 51 passed, 0 failed
 DONE

@@ -1680,14 +1680,16 @@ hidden by the page (`Kitchen.Flash`), as before; they have no animation.
 and counters by real clicks), 30 to 34 and 36 (plating an X Burger; the plate drawn with its three ingredients), 37
 (plate icons as sprite text), 38 and 40 (Q on the knife; the knife chops, the bar shows), 46 and 47 (Q on the knob;
 the sizzle loop switched on), 59 and 75 (a delivery and its tip), 70 (the ticket's name and icons), 76 (the score on
-the board), 86 (the pause panel, and a pause by one chef on the other's board), and late join by reload. Counts in
-11.3 are unchanged (T 89, I 30, C 6, X 11, O 1); 11 of the 30 I items are now seen in Play mode (4 of them only in
-part: no test reads an Animator state or hears a sound).
+the board), 86 (the pause panel, and a pause by one chef on the other's board), and late join by reload. Since the
+review (2026-11-25, rung 3 37/0 and rung 4 51/0, each twice): 138 (the crate's icon), the credits text, the 2 m reach
+(a click from 3 m does nothing), a floor drop lying on the floor, and two chefs pressing Q, then E, on one board at the
+same moment (C2's stale intents). Counts in 11.3: T 89, I 29, C 6, X 13, O 1; 12 of the 29 I items are seen in Play
+mode (4 of them only in part: no test reads an Animator state or hears a sound).
 
 **Still unverified** (only the app or a headset can show them, rung 5): hand grabs and releases on the pool slots,
 laser clicks, held items as others see them, latency on Quest, frame time with 48 items, the sounds, the Animator
-motions as seen; and in Play mode the burn sequence, tutorial, expiry, time up, results, trash, floor, Sounds and
-Credits panels, which only the Node scenarios cover.
+motions as seen, the reach as people feel it; and in Play mode the burn sequence, tutorial, expiry, time up, results,
+trash, Sounds panel and a chef or referee leaving, which only the Node tests cover.
 
 **Cosmetic, known:** the board's panels all stand switched on in the prefab (the script shows one at a time), so the
 kit photo shows them overlapping; the score label touches the first ticket's bar; plate icons face one way (a
