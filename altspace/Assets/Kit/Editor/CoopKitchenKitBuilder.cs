@@ -133,7 +133,7 @@ namespace CoopKitchen
             so.ApplyModifiedPropertiesWithoutUndo();
             var mirror = new AotList();
             foreach (var c in clipList) mirror.Add(c);
-            (sfx.GetComponent<Variables>() ?? sfx.AddComponent<Variables>()).declarations.Set(RelayGraph.ClipsVariable, mirror);
+            (Need<Variables>(sfx)).declarations.Set(RelayGraph.ClipsVariable, mirror);
             stage.Report.AppendLine($"   sfx: {clipList.Count} clips ({string.Join(", ", clipList.Select(c => c.name))}); source {source != null}");
 
             foreach (var go in off) go.SetActive(false);
@@ -170,16 +170,23 @@ namespace CoopKitchen
             return go;
         }
 
+        /// <summary>The component, added if missing (Unity's null is not C#'s: no ??).</summary>
+        static T Need<T>(GameObject go) where T : Component
+        {
+            var c = go.GetComponent<T>();
+            return c != null ? c : go.AddComponent<T>();
+        }
+
         static void Box(GameObject go, Vector3 centre, Vector3 size)
         {
-            var box = go.GetComponent<BoxCollider>() ?? go.AddComponent<BoxCollider>();
+            var box = Need<BoxCollider>(go);
             box.center = centre;
             box.size = size;
         }
 
         static AudioSource Speaker(GameObject go, float range = 12f)
         {
-            var a = go.GetComponent<AudioSource>() ?? go.AddComponent<AudioSource>();
+            var a = Need<AudioSource>(go);
             a.playOnAwake = false;
             a.spatialBlend = 1f;
             a.rolloffMode = AudioRolloffMode.Linear;
@@ -203,7 +210,7 @@ namespace CoopKitchen
 
         TextMeshPro Text(GameObject go, string text, float size, Vector2 box, Color colour, TextAlignmentOptions align = TextAlignmentOptions.Center)
         {
-            var t = go.GetComponent<TextMeshPro>() ?? go.AddComponent<TextMeshPro>();
+            var t = Need<TextMeshPro>(go);
             t.font = font;
             t.fontSize = size;
             t.rectTransform.sizeDelta = box;
@@ -687,7 +694,7 @@ namespace CoopKitchen
         void Animated(GameObject go, string name, params (string state, AnimationClip clip, bool loop, float speed)[] states)
         {
             if (!controllers.TryGetValue(name, out var controller)) controllers[name] = controller = Controller(name, states);
-            var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
+            var animator = Need<Animator>(go);
             animator.runtimeAnimatorController = controller;
             animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
             animator.applyRootMotion = false;
@@ -983,7 +990,11 @@ namespace CoopKitchen
                     for (int i = 0; i < pixels.Length; i++)
                         if (Mathf.Abs(pixels[i].r - bg.r) + Mathf.Abs(pixels[i].g - bg.g) + Mathf.Abs(pixels[i].b - bg.b) < 6) pixels[i] = new Color32(0, 0, 0, 0);
                         else { pixels[i].a = 255; drawn++; }
-                    if (drawn < pixels.Length / 50) throw new Exception("nothing was drawn");
+                    if (drawn < pixels.Length / 50)
+                    {
+                        File.WriteAllBytes($"Library/PortKit/icon_debug_{model}.png", ImageConversion.EncodeArrayToPNG(pixels, UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_UNorm, (uint)width, (uint)height));
+                        throw new Exception($"nothing was drawn (corner {bg}, {width}x{height})");
+                    }
                     return Resize(pixels, width, height, cell);
         }
 
@@ -1011,6 +1022,11 @@ namespace CoopKitchen
             material.SetTexture(ShaderUtilities.ID_MainTex, sheet);
             AssetDatabase.AddObjectToAsset(material, sprites);
             sprites.material = material;
+            // the current version before the tables are touched: an older one makes TMP "upgrade" the asset from the legacy list (empty here)
+            var so = new SerializedObject(sprites);
+            var version = so.FindProperty("m_Version");
+            if (version != null) version.stringValue = "1.1.0";
+            so.ApplyModifiedPropertiesWithoutUndo();
             for (int v = 0; v < IconNames.Length; v++)
             {
                 int x = (v % columns) * cell, y = (rows - 1 - v / columns) * cell;
@@ -1018,10 +1034,6 @@ namespace CoopKitchen
                 sprites.spriteGlyphTable.Add(glyph);
                 sprites.spriteCharacterTable.Add(new TMP_SpriteCharacter(0xFFFE, sprites, glyph) { name = IconNames[v], scale = 1f });
             }
-            var so = new SerializedObject(sprites);
-            var version = so.FindProperty("m_Version");
-            if (version != null) version.stringValue = "1.1.0";
-            so.ApplyModifiedPropertiesWithoutUndo();
             sprites.UpdateLookupTables();
             EditorUtility.SetDirty(sprites);
             AssetDatabase.SaveAssets();

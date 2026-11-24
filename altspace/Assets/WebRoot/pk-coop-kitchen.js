@@ -3,7 +3,7 @@
  * MIT License, Copyright (c) 2023 Hyago Oliveira, ported to TypeScript as a co-op game on the portkit runtime (MIT).
  * No art, sound or font of the upstream repository is part of this script or its kit.
  */
-/* pk-coop-kitchen.js: portkit runtime with the rules of 'coop-kitchen' (protocol pk1, bindings unhashed). Built file: do not edit. */
+/* pk-coop-kitchen.js: portkit runtime with the rules of 'coop-kitchen' (protocol pk1, bindings f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b). Built file: do not edit. */
 (() => {
   var __defProp = Object.defineProperty;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -10475,1438 +10475,128 @@ ${label}`)));
 
   // bindings.json
   var bindings_default = {
-    provisional: "Written by tools/gen-bindings.ts, not by the kit builder: no kit build yet. PortKit/Kit/Build Prefabs replaces it.",
-    schema: 1,
-    slug: "coop-kitchen",
-    hash: "",
-    root: "coop-kitchen",
-    bundles: {
-      windows: "",
-      android: ""
-    },
-    objects: {
-      logic: {
-        path: "Logic",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      sfx: {
-        path: "Audio",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      floor: {
-        path: "Floor",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      s00: {
-        path: "Items/Slot00",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s01: {
-        path: "Items/Slot01",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s02: {
-        path: "Items/Slot02",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s03: {
-        path: "Items/Slot03",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s04: {
-        path: "Items/Slot04",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s05: {
-        path: "Items/Slot05",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s06: {
-        path: "Items/Slot06",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s07: {
-        path: "Items/Slot07",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s08: {
-        path: "Items/Slot08",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s09: {
-        path: "Items/Slot09",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s10: {
-        path: "Items/Slot10",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s11: {
-        path: "Items/Slot11",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s12: {
-        path: "Items/Slot12",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s13: {
-        path: "Items/Slot13",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s14: {
-        path: "Items/Slot14",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s15: {
-        path: "Items/Slot15",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s16: {
-        path: "Items/Slot16",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s17: {
-        path: "Items/Slot17",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s18: {
-        path: "Items/Slot18",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s19: {
-        path: "Items/Slot19",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s20: {
-        path: "Items/Slot20",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s21: {
-        path: "Items/Slot21",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s22: {
-        path: "Items/Slot22",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s23: {
-        path: "Items/Slot23",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s24: {
-        path: "Items/Slot24",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s25: {
-        path: "Items/Slot25",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s26: {
-        path: "Items/Slot26",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s27: {
-        path: "Items/Slot27",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s28: {
-        path: "Items/Slot28",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s29: {
-        path: "Items/Slot29",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s30: {
-        path: "Items/Slot30",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s31: {
-        path: "Items/Slot31",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s32: {
-        path: "Items/Slot32",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s33: {
-        path: "Items/Slot33",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s34: {
-        path: "Items/Slot34",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s35: {
-        path: "Items/Slot35",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s36: {
-        path: "Items/Slot36",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s37: {
-        path: "Items/Slot37",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s38: {
-        path: "Items/Slot38",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s39: {
-        path: "Items/Slot39",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s40: {
-        path: "Items/Slot40",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s41: {
-        path: "Items/Slot41",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s42: {
-        path: "Items/Slot42",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s43: {
-        path: "Items/Slot43",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s44: {
-        path: "Items/Slot44",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s45: {
-        path: "Items/Slot45",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s46: {
-        path: "Items/Slot46",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      s47: {
-        path: "Items/Slot47",
-        sync: "none",
-        grab: true,
-        click: false,
-        seat: false,
-        active: false
-      },
-      c_Counter_Corner_02: {
-        path: "Counters/Counter_Corner_02",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      c_CabbageCounter_01: {
-        path: "Counters/CabbageCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CabbageCounter_01: {
-        path: "Counters/CabbageCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_BreadCounter_01: {
-        path: "Counters/BreadCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_BreadCounter_01: {
-        path: "Counters/BreadCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_TomatoCounter_01: {
-        path: "Counters/TomatoCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_TomatoCounter_01: {
-        path: "Counters/TomatoCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_MeatCounter_01: {
-        path: "Counters/MeatCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_MeatCounter_01: {
-        path: "Counters/MeatCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_CheeseCounter_01: {
-        path: "Counters/CheeseCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CheeseCounter_01: {
-        path: "Counters/CheeseCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_CutCounter_01: {
-        path: "Counters/CutCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CutCounter_01: {
-        path: "Counters/CutCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      q_CutCounter_01: {
-        path: "Counters/CutCounter_01/CuttingBoard/Knife",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      bar_CutCounter_01: {
-        path: "Counters/CutCounter_01/CuttingBoard/Canvas/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Plate_00: {
-        path: "Counters/Counter_Plate_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Plate_00: {
-        path: "Counters/Counter_Plate_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_StoveCounter_01: {
-        path: "Counters/StoveCounter_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_StoveCounter_01: {
-        path: "Counters/StoveCounter_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      q_StoveCounter_01: {
-        path: "Counters/StoveCounter_01/Knob",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      bar_StoveCounter_01: {
-        path: "Counters/StoveCounter_01/Stove/Canvas/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_01: {
-        path: "Counters/Counter_Normal_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_01: {
-        path: "Counters/Counter_Normal_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Corner_03: {
-        path: "Counters/Counter_Corner_03",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      c_Counter_Normal_08: {
-        path: "Counters/Counter_Normal_08",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_08: {
-        path: "Counters/Counter_Normal_08/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_02: {
-        path: "Counters/Counter_Normal_02",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_02: {
-        path: "Counters/Counter_Normal_02/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_03: {
-        path: "Counters/Counter_Normal_03",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_03: {
-        path: "Counters/Counter_Normal_03/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_07: {
-        path: "Counters/Counter_Normal_07",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_07: {
-        path: "Counters/Counter_Normal_07/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_09: {
-        path: "Counters/Counter_Normal_09",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_09: {
-        path: "Counters/Counter_Normal_09/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_TrashCounter: {
-        path: "Counters/TrashCounter",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_TrashCounter: {
-        path: "Counters/TrashCounter/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_10: {
-        path: "Counters/Counter_Normal_10",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_10: {
-        path: "Counters/Counter_Normal_10/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_06: {
-        path: "Counters/Counter_Normal_06",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_06: {
-        path: "Counters/Counter_Normal_06/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_11: {
-        path: "Counters/Counter_Normal_11",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_11: {
-        path: "Counters/Counter_Normal_11/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_PlateStack: {
-        path: "Counters/Counter_PlateStack",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_PlateStack: {
-        path: "Counters/Counter_PlateStack/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_00: {
-        path: "Counters/Counter_Normal_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_00: {
-        path: "Counters/Counter_Normal_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Delivery: {
-        path: "Counters/Counter_Delivery",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Delivery: {
-        path: "Counters/Counter_Delivery/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Corner_01: {
-        path: "Counters/Counter_Corner_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      c_CutCounter_00: {
-        path: "Counters/CutCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CutCounter_00: {
-        path: "Counters/CutCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      q_CutCounter_00: {
-        path: "Counters/CutCounter_00/CuttingBoard/Knife",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      bar_CutCounter_00: {
-        path: "Counters/CutCounter_00/CuttingBoard/Canvas/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Plate_01: {
-        path: "Counters/Counter_Plate_01",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Plate_01: {
-        path: "Counters/Counter_Plate_01/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_StoveCounter_00: {
-        path: "Counters/StoveCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_StoveCounter_00: {
-        path: "Counters/StoveCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      q_StoveCounter_00: {
-        path: "Counters/StoveCounter_00/Knob",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      bar_StoveCounter_00: {
-        path: "Counters/StoveCounter_00/Stove/Canvas/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Normal_05: {
-        path: "Counters/Counter_Normal_05",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_Counter_Normal_05: {
-        path: "Counters/Counter_Normal_05/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_CabbageCounter_00: {
-        path: "Counters/CabbageCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CabbageCounter_00: {
-        path: "Counters/CabbageCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_BreadCounter_00: {
-        path: "Counters/BreadCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_BreadCounter_00: {
-        path: "Counters/BreadCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_TomatoCounter_00: {
-        path: "Counters/TomatoCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_TomatoCounter_00: {
-        path: "Counters/TomatoCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_MeatCounter_00: {
-        path: "Counters/MeatCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_MeatCounter_00: {
-        path: "Counters/MeatCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_CheeseCounter_00: {
-        path: "Counters/CheeseCounter_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      t_CheeseCounter_00: {
-        path: "Counters/CheeseCounter_00/Top",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      c_Counter_Corner_00: {
-        path: "Counters/Counter_Corner_00",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      deliveryTip: {
-        path: "Counters/Counter_Delivery/Canvas/Tip",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      board: {
-        path: "Board",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      scoreText: {
-        path: "Board/Hud/Score/Current",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      scoreDelta: {
-        path: "Board/Hud/Score/Delta",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      timerText: {
-        path: "Board/Hud/Timer/Text",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      timerFill: {
-        path: "Board/Hud/Timer/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      countDownText: {
-        path: "Board/CountDown/Text",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketName0: {
-        path: "Board/Orders/Ticket0/Name",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketIcons0: {
-        path: "Board/Orders/Ticket0/Icons",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketBar0: {
-        path: "Board/Orders/Ticket0/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketName1: {
-        path: "Board/Orders/Ticket1/Name",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketIcons1: {
-        path: "Board/Orders/Ticket1/Icons",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketBar1: {
-        path: "Board/Orders/Ticket1/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketName2: {
-        path: "Board/Orders/Ticket2/Name",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketIcons2: {
-        path: "Board/Orders/Ticket2/Icons",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      ticketBar2: {
-        path: "Board/Orders/Ticket2/Bar/Fill",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      lobby: {
-        path: "Board/Lobby",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      rosterText: {
-        path: "Board/Lobby/Roster",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      btnPlay: {
-        path: "Board/Lobby/Play",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnTutorial: {
-        path: "Board/Lobby/Tutorial",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnSounds: {
-        path: "Board/Lobby/Sounds",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnCredits: {
-        path: "Board/Lobby/Credits",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnCook: {
-        path: "Board/Lobby/Cook",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      credits: {
-        path: "Board/Credits",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      creditsText: {
-        path: "Board/Credits/Text",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      btnCloseCredits: {
-        path: "Board/Credits/Close",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      sounds: {
-        path: "Board/Sounds",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      musicLabel: {
-        path: "Board/Sounds/Music/Value",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      effectsLabel: {
-        path: "Board/Sounds/Effects/Value",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      btnMusicUp: {
-        path: "Board/Sounds/Music/Up",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnMusicDown: {
-        path: "Board/Sounds/Music/Down",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnEffectsUp: {
-        path: "Board/Sounds/Effects/Up",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnEffectsDown: {
-        path: "Board/Sounds/Effects/Down",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnResetVolumes: {
-        path: "Board/Sounds/Reset",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnSoundsBack: {
-        path: "Board/Sounds/Back",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnPause: {
-        path: "Board/Hud/Pause",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      pausePanel: {
-        path: "Board/PausePanel",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      pauseOptions: {
-        path: "Board/PausePanel/Options",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      pausedBy: {
-        path: "Board/PausePanel/PausedBy",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      btnResume: {
-        path: "Board/PausePanel/Options/Resume",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnRestart: {
-        path: "Board/PausePanel/Options/Restart",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnPauseSounds: {
-        path: "Board/PausePanel/Options/Sounds",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnEndRound: {
-        path: "Board/PausePanel/Options/EndRound",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      confirm: {
-        path: "Board/PausePanel/Confirm",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      btnYes: {
-        path: "Board/PausePanel/Confirm/Yes",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      btnNo: {
-        path: "Board/PausePanel/Confirm/No",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      resFailed: {
-        path: "Board/Results/Failed",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resFailedTotal: {
-        path: "Board/Results/FailedTotal",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resDelivered: {
-        path: "Board/Results/Delivered",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resDeliveredTotal: {
-        path: "Board/Results/DeliveredTotal",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resTips: {
-        path: "Board/Results/Tips",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resTotal: {
-        path: "Board/Results/Total",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      resBest: {
-        path: "Board/Results/Best",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      newHighScore: {
-        path: "Board/Results/NewHighScore",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      btnContinue: {
-        path: "Board/Results/Continue",
-        sync: "none",
-        grab: false,
-        click: true,
-        seat: false
-      },
-      tutorialText: {
-        path: "Board/Tutorial/Description/Text",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false
-      },
-      arrow0: {
-        path: "Arrows/Arrow0",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      },
-      arrow1: {
-        path: "Arrows/Arrow1",
-        sync: "none",
-        grab: false,
-        click: false,
-        seat: false,
-        active: false
-      }
-    },
-    refs: [
-      "sfx",
-      "floor",
-      "c_Counter_Corner_02",
-      "c_CabbageCounter_01",
-      "c_BreadCounter_01",
-      "c_TomatoCounter_01",
-      "c_MeatCounter_01",
-      "c_CheeseCounter_01",
-      "c_CutCounter_01",
-      "q_CutCounter_01",
-      "c_Counter_Plate_00",
-      "c_StoveCounter_01",
-      "q_StoveCounter_01",
-      "c_Counter_Normal_01",
-      "c_Counter_Corner_03",
-      "c_Counter_Normal_08",
-      "c_Counter_Normal_02",
-      "c_Counter_Normal_03",
-      "c_Counter_Normal_07",
-      "c_Counter_Normal_09",
-      "c_TrashCounter",
-      "c_Counter_Normal_10",
-      "c_Counter_Normal_06",
-      "c_Counter_Normal_11",
-      "c_Counter_PlateStack",
-      "c_Counter_Normal_00",
-      "c_Counter_Delivery",
-      "c_Counter_Corner_01",
-      "c_CutCounter_00",
-      "q_CutCounter_00",
-      "c_Counter_Plate_01",
-      "c_StoveCounter_00",
-      "q_StoveCounter_00",
-      "c_Counter_Normal_05",
-      "c_CabbageCounter_00",
-      "c_BreadCounter_00",
-      "c_TomatoCounter_00",
-      "c_MeatCounter_00",
-      "c_CheeseCounter_00",
-      "c_Counter_Corner_00",
-      "deliveryTip",
-      "board",
-      "scoreText",
-      "scoreDelta",
-      "timerText",
-      "countDownText",
-      "ticketName0",
-      "ticketIcons0",
-      "ticketName1",
-      "ticketIcons1",
-      "ticketName2",
-      "ticketIcons2",
-      "lobby",
-      "rosterText",
-      "btnPlay",
-      "btnTutorial",
-      "btnSounds",
-      "btnCredits",
-      "btnCook",
-      "credits",
-      "creditsText",
-      "btnCloseCredits",
-      "sounds",
-      "musicLabel",
-      "effectsLabel",
-      "btnMusicUp",
-      "btnMusicDown",
-      "btnEffectsUp",
-      "btnEffectsDown",
-      "btnResetVolumes",
-      "btnSoundsBack",
-      "btnPause",
-      "pausePanel",
-      "pauseOptions",
-      "pausedBy",
-      "btnResume",
-      "btnRestart",
-      "btnPauseSounds",
-      "btnEndRound",
-      "confirm",
-      "btnYes",
-      "btnNo",
-      "resFailed",
-      "resFailedTotal",
-      "resDelivered",
-      "resDeliveredTotal",
-      "resTips",
-      "resTotal",
-      "resBest",
-      "newHighScore",
-      "btnContinue",
-      "tutorialText"
-    ],
     behaviours: [
       {
-        id: "kitchen",
-        type: "Kitchen",
         fields: {
+          clips: {
+            chop: [
+              {
+                $clip: 4,
+                on: "sfx"
+              },
+              {
+                $clip: 5,
+                on: "sfx"
+              },
+              {
+                $clip: 6,
+                on: "sfx"
+              }
+            ],
+            countdownStart: [
+              {
+                $clip: 14,
+                on: "sfx"
+              }
+            ],
+            drop: [
+              {
+                $clip: 2,
+                on: "sfx"
+              },
+              {
+                $clip: 3,
+                on: "sfx"
+              }
+            ],
+            fail01: [
+              {
+                $clip: 8,
+                on: "sfx"
+              }
+            ],
+            fail02: [
+              {
+                $clip: 9,
+                on: "sfx"
+              }
+            ],
+            newOrder: [
+              {
+                $clip: 0,
+                on: "sfx"
+              }
+            ],
+            pickup: [
+              {
+                $clip: 0,
+                on: "sfx"
+              },
+              {
+                $clip: 1,
+                on: "sfx"
+              }
+            ],
+            success: [
+              {
+                $clip: 12,
+                on: "sfx"
+              },
+              {
+                $clip: 13,
+                on: "sfx"
+              }
+            ],
+            timesUp: [
+              {
+                $clip: 15,
+                on: "sfx"
+              }
+            ],
+            trash: [
+              {
+                $clip: 10,
+                on: "sfx"
+              },
+              {
+                $clip: 11,
+                on: "sfx"
+              }
+            ],
+            tutorialDone: [
+              {
+                $clip: 13,
+                on: "sfx"
+              }
+            ],
+            warning: [
+              {
+                $clip: 7,
+                on: "sfx"
+              }
+            ]
+          },
+          corners: [
+            {
+              $obj: "c_Counter_Corner_02"
+            },
+            {
+              $obj: "c_Counter_Corner_03"
+            },
+            {
+              $obj: "c_Counter_Corner_01"
+            },
+            {
+              $obj: "c_Counter_Corner_00"
+            }
+          ],
+          floor: {
+            $obj: "floor"
+          },
+          gameData: {
+            $beh: "gameData"
+          },
+          kitScale: 0.64,
           match: {
             $beh: "match"
           },
@@ -11916,12 +10606,56 @@ ${label}`)));
           score: {
             $beh: "score"
           },
-          tutorial: {
-            $beh: "tutorial"
-          },
-          gameData: {
-            $beh: "gameData"
-          },
+          slotPaths: [
+            "Items/Slot00",
+            "Items/Slot01",
+            "Items/Slot02",
+            "Items/Slot03",
+            "Items/Slot04",
+            "Items/Slot05",
+            "Items/Slot06",
+            "Items/Slot07",
+            "Items/Slot08",
+            "Items/Slot09",
+            "Items/Slot10",
+            "Items/Slot11",
+            "Items/Slot12",
+            "Items/Slot13",
+            "Items/Slot14",
+            "Items/Slot15",
+            "Items/Slot16",
+            "Items/Slot17",
+            "Items/Slot18",
+            "Items/Slot19",
+            "Items/Slot20",
+            "Items/Slot21",
+            "Items/Slot22",
+            "Items/Slot23",
+            "Items/Slot24",
+            "Items/Slot25",
+            "Items/Slot26",
+            "Items/Slot27",
+            "Items/Slot28",
+            "Items/Slot29",
+            "Items/Slot30",
+            "Items/Slot31",
+            "Items/Slot32",
+            "Items/Slot33",
+            "Items/Slot34",
+            "Items/Slot35",
+            "Items/Slot36",
+            "Items/Slot37",
+            "Items/Slot38",
+            "Items/Slot39",
+            "Items/Slot40",
+            "Items/Slot41",
+            "Items/Slot42",
+            "Items/Slot43",
+            "Items/Slot44",
+            "Items/Slot45",
+            "Items/Slot46",
+            "Items/Slot47"
+          ],
           slots: [
             {
               $obj: "s00"
@@ -12068,844 +10802,683 @@ ${label}`)));
               $obj: "s47"
             }
           ],
-          slotPaths: [
-            "Items/Slot00",
-            "Items/Slot01",
-            "Items/Slot02",
-            "Items/Slot03",
-            "Items/Slot04",
-            "Items/Slot05",
-            "Items/Slot06",
-            "Items/Slot07",
-            "Items/Slot08",
-            "Items/Slot09",
-            "Items/Slot10",
-            "Items/Slot11",
-            "Items/Slot12",
-            "Items/Slot13",
-            "Items/Slot14",
-            "Items/Slot15",
-            "Items/Slot16",
-            "Items/Slot17",
-            "Items/Slot18",
-            "Items/Slot19",
-            "Items/Slot20",
-            "Items/Slot21",
-            "Items/Slot22",
-            "Items/Slot23",
-            "Items/Slot24",
-            "Items/Slot25",
-            "Items/Slot26",
-            "Items/Slot27",
-            "Items/Slot28",
-            "Items/Slot29",
-            "Items/Slot30",
-            "Items/Slot31",
-            "Items/Slot32",
-            "Items/Slot33",
-            "Items/Slot34",
-            "Items/Slot35",
-            "Items/Slot36",
-            "Items/Slot37",
-            "Items/Slot38",
-            "Items/Slot39",
-            "Items/Slot40",
-            "Items/Slot41",
-            "Items/Slot42",
-            "Items/Slot43",
-            "Items/Slot44",
-            "Items/Slot45",
-            "Items/Slot46",
-            "Items/Slot47"
-          ],
-          floor: {
-            $obj: "floor"
-          },
-          corners: [
-            {
-              $obj: "c_Counter_Corner_02"
-            },
-            {
-              $obj: "c_Counter_Corner_03"
-            },
-            {
-              $obj: "c_Counter_Corner_01"
-            },
-            {
-              $obj: "c_Counter_Corner_00"
-            }
-          ],
-          clips: {
-            pickup: [
-              {
-                $clip: 0,
-                on: "sfx"
-              },
-              {
-                $clip: 1,
-                on: "sfx"
-              }
-            ],
-            drop: [
-              {
-                $clip: 2,
-                on: "sfx"
-              },
-              {
-                $clip: 3,
-                on: "sfx"
-              }
-            ],
-            chop: [
-              {
-                $clip: 4,
-                on: "sfx"
-              },
-              {
-                $clip: 5,
-                on: "sfx"
-              },
-              {
-                $clip: 6,
-                on: "sfx"
-              }
-            ],
-            warning: [
-              {
-                $clip: 7,
-                on: "sfx"
-              }
-            ],
-            fail01: [
-              {
-                $clip: 8,
-                on: "sfx"
-              }
-            ],
-            fail02: [
-              {
-                $clip: 9,
-                on: "sfx"
-              }
-            ],
-            trash: [
-              {
-                $clip: 10,
-                on: "sfx"
-              },
-              {
-                $clip: 11,
-                on: "sfx"
-              }
-            ],
-            success: [
-              {
-                $clip: 12,
-                on: "sfx"
-              },
-              {
-                $clip: 13,
-                on: "sfx"
-              }
-            ],
-            newOrder: [
-              {
-                $clip: 0,
-                on: "sfx"
-              }
-            ],
-            countdownStart: [
-              {
-                $clip: 14,
-                on: "sfx"
-              }
-            ],
-            timesUp: [
-              {
-                $clip: 15,
-                on: "sfx"
-              }
-            ],
-            tutorialDone: [
-              {
-                $clip: 13,
-                on: "sfx"
-              }
-            ]
-          },
-          kitScale: 0.64
+          tutorial: {
+            $beh: "tutorial"
+          }
         },
-        object: "logic"
+        id: "kitchen",
+        object: "logic",
+        type: "Kitchen"
       },
       {
+        fields: {
+          kitchen: {
+            $beh: "kitchen"
+          }
+        },
         id: "match",
-        type: "MatchManager",
-        fields: {
-          kitchen: {
-            $beh: "kitchen"
-          }
-        },
-        object: "logic"
+        object: "logic",
+        type: "MatchManager"
       },
       {
+        fields: {},
         id: "score",
-        type: "ScoreManager",
-        object: "logic"
+        object: "logic",
+        type: "ScoreManager"
       },
       {
-        id: "orders",
-        type: "OrderManager",
         fields: {
           kitchen: {
             $beh: "kitchen"
           }
         },
-        object: "logic"
+        id: "orders",
+        object: "logic",
+        type: "OrderManager"
       },
       {
+        fields: {},
         id: "gameData",
-        type: "GameDataManager",
-        object: "logic"
+        object: "logic",
+        type: "GameDataManager"
       },
       {
-        id: "ct_CabbageCounter_01",
-        type: "IngredientCounter",
-        object: "c_CabbageCounter_01",
         fields: {
+          cell: "CabbageCounter_01",
+          data: 1,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CabbageCounter_01",
           top: {
             $obj: "t_CabbageCounter_01"
-          },
-          data: 1
-        }
+          }
+        },
+        id: "ct_CabbageCounter_01",
+        object: "c_CabbageCounter_01",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_BreadCounter_01",
-        type: "IngredientCounter",
-        object: "c_BreadCounter_01",
         fields: {
+          cell: "BreadCounter_01",
+          data: 0,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "BreadCounter_01",
           top: {
             $obj: "t_BreadCounter_01"
-          },
-          data: 0
-        }
+          }
+        },
+        id: "ct_BreadCounter_01",
+        object: "c_BreadCounter_01",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_TomatoCounter_01",
-        type: "IngredientCounter",
-        object: "c_TomatoCounter_01",
         fields: {
+          cell: "TomatoCounter_01",
+          data: 8,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "TomatoCounter_01",
           top: {
             $obj: "t_TomatoCounter_01"
-          },
-          data: 8
-        }
+          }
+        },
+        id: "ct_TomatoCounter_01",
+        object: "c_TomatoCounter_01",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_MeatCounter_01",
-        type: "IngredientCounter",
-        object: "c_MeatCounter_01",
         fields: {
+          cell: "MeatCounter_01",
+          data: 5,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "MeatCounter_01",
           top: {
             $obj: "t_MeatCounter_01"
-          },
-          data: 5
-        }
+          }
+        },
+        id: "ct_MeatCounter_01",
+        object: "c_MeatCounter_01",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_CheeseCounter_01",
-        type: "IngredientCounter",
-        object: "c_CheeseCounter_01",
         fields: {
+          cell: "CheeseCounter_01",
+          data: 3,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CheeseCounter_01",
           top: {
             $obj: "t_CheeseCounter_01"
-          },
-          data: 3
-        }
+          }
+        },
+        id: "ct_CheeseCounter_01",
+        object: "c_CheeseCounter_01",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_CutCounter_01",
-        type: "PreparationCounter",
-        object: "c_CutCounter_01",
         fields: {
+          cell: "CutCounter_01",
           kitchen: {
             $beh: "kitchen"
-          },
-          cell: "CutCounter_01",
-          top: {
-            $obj: "t_CutCounter_01"
           },
           preparator: {
             $beh: "pr_CutCounter_01"
+          },
+          top: {
+            $obj: "t_CutCounter_01"
           }
-        }
+        },
+        id: "ct_CutCounter_01",
+        object: "c_CutCounter_01",
+        type: "PreparationCounter"
       },
       {
-        id: "ct_Counter_Plate_00",
-        type: "Counter",
-        object: "c_Counter_Plate_00",
         fields: {
+          cell: "Counter_Plate_00",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Plate_00",
+          plateStack: false,
+          startsWithPlate: true,
           top: {
             $obj: "t_Counter_Plate_00"
-          },
-          startsWithPlate: true,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Plate_00",
+        object: "c_Counter_Plate_00",
+        type: "Counter"
       },
       {
-        id: "ct_StoveCounter_01",
-        type: "PreparationCounter",
-        object: "c_StoveCounter_01",
         fields: {
+          cell: "StoveCounter_01",
           kitchen: {
             $beh: "kitchen"
-          },
-          cell: "StoveCounter_01",
-          top: {
-            $obj: "t_StoveCounter_01"
           },
           preparator: {
             $beh: "pr_StoveCounter_01"
+          },
+          top: {
+            $obj: "t_StoveCounter_01"
           }
-        }
+        },
+        id: "ct_StoveCounter_01",
+        object: "c_StoveCounter_01",
+        type: "PreparationCounter"
       },
       {
-        id: "ct_Counter_Normal_01",
-        type: "Counter",
-        object: "c_Counter_Normal_01",
         fields: {
+          cell: "Counter_Normal_01",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_01",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_01"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_01",
+        object: "c_Counter_Normal_01",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_08",
-        type: "Counter",
-        object: "c_Counter_Normal_08",
         fields: {
+          cell: "Counter_Normal_08",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_08",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_08"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_08",
+        object: "c_Counter_Normal_08",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_02",
-        type: "Counter",
-        object: "c_Counter_Normal_02",
         fields: {
+          cell: "Counter_Normal_02",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_02",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_02"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_02",
+        object: "c_Counter_Normal_02",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_03",
-        type: "Counter",
-        object: "c_Counter_Normal_03",
         fields: {
+          cell: "Counter_Normal_03",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_03",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_03"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_03",
+        object: "c_Counter_Normal_03",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_07",
-        type: "Counter",
-        object: "c_Counter_Normal_07",
         fields: {
+          cell: "Counter_Normal_07",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_07",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_07"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_07",
+        object: "c_Counter_Normal_07",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_09",
-        type: "Counter",
-        object: "c_Counter_Normal_09",
         fields: {
+          cell: "Counter_Normal_09",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_09",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_09"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_09",
+        object: "c_Counter_Normal_09",
+        type: "Counter"
       },
       {
-        id: "ct_TrashCounter",
-        type: "Trash",
-        object: "c_TrashCounter",
         fields: {
+          cell: "TrashCounter",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "TrashCounter",
           top: {
             $obj: "t_TrashCounter"
           }
-        }
+        },
+        id: "ct_TrashCounter",
+        object: "c_TrashCounter",
+        type: "Trash"
       },
       {
-        id: "ct_Counter_Normal_10",
-        type: "Counter",
-        object: "c_Counter_Normal_10",
         fields: {
+          cell: "Counter_Normal_10",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_10",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_10"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_10",
+        object: "c_Counter_Normal_10",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_06",
-        type: "Counter",
-        object: "c_Counter_Normal_06",
         fields: {
+          cell: "Counter_Normal_06",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_06",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_06"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_06",
+        object: "c_Counter_Normal_06",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_11",
-        type: "Counter",
-        object: "c_Counter_Normal_11",
         fields: {
+          cell: "Counter_Normal_11",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_11",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_11"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_11",
+        object: "c_Counter_Normal_11",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_PlateStack",
-        type: "Counter",
-        object: "c_Counter_PlateStack",
         fields: {
+          cell: "Counter_PlateStack",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_PlateStack",
+          plateStack: true,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_PlateStack"
-          },
-          startsWithPlate: false,
-          plateStack: true
-        }
+          }
+        },
+        id: "ct_Counter_PlateStack",
+        object: "c_Counter_PlateStack",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Normal_00",
-        type: "Counter",
-        object: "c_Counter_Normal_00",
         fields: {
+          cell: "Counter_Normal_00",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_00",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_00"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_00",
+        object: "c_Counter_Normal_00",
+        type: "Counter"
       },
       {
-        id: "ct_Counter_Delivery",
-        type: "DeliveryCounter",
-        object: "c_Counter_Delivery",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          cell: "Counter_Delivery",
-          top: {
-            $obj: "t_Counter_Delivery"
-          },
           canvas: {
             $beh: "deliveryCanvas"
-          }
-        }
-      },
-      {
-        id: "ct_CutCounter_00",
-        type: "PreparationCounter",
-        object: "c_CutCounter_00",
-        fields: {
+          },
+          cell: "Counter_Delivery",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CutCounter_00",
           top: {
-            $obj: "t_CutCounter_00"
+            $obj: "t_Counter_Delivery"
+          }
+        },
+        id: "ct_Counter_Delivery",
+        object: "c_Counter_Delivery",
+        type: "DeliveryCounter"
+      },
+      {
+        fields: {
+          cell: "CutCounter_00",
+          kitchen: {
+            $beh: "kitchen"
           },
           preparator: {
             $beh: "pr_CutCounter_00"
+          },
+          top: {
+            $obj: "t_CutCounter_00"
           }
-        }
+        },
+        id: "ct_CutCounter_00",
+        object: "c_CutCounter_00",
+        type: "PreparationCounter"
       },
       {
-        id: "ct_Counter_Plate_01",
-        type: "Counter",
-        object: "c_Counter_Plate_01",
         fields: {
+          cell: "Counter_Plate_01",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Plate_01",
+          plateStack: false,
+          startsWithPlate: true,
           top: {
             $obj: "t_Counter_Plate_01"
-          },
-          startsWithPlate: true,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Plate_01",
+        object: "c_Counter_Plate_01",
+        type: "Counter"
       },
       {
-        id: "ct_StoveCounter_00",
-        type: "PreparationCounter",
-        object: "c_StoveCounter_00",
         fields: {
+          cell: "StoveCounter_00",
           kitchen: {
             $beh: "kitchen"
-          },
-          cell: "StoveCounter_00",
-          top: {
-            $obj: "t_StoveCounter_00"
           },
           preparator: {
             $beh: "pr_StoveCounter_00"
+          },
+          top: {
+            $obj: "t_StoveCounter_00"
           }
-        }
+        },
+        id: "ct_StoveCounter_00",
+        object: "c_StoveCounter_00",
+        type: "PreparationCounter"
       },
       {
-        id: "ct_Counter_Normal_05",
-        type: "Counter",
-        object: "c_Counter_Normal_05",
         fields: {
+          cell: "Counter_Normal_05",
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "Counter_Normal_05",
+          plateStack: false,
+          startsWithPlate: false,
           top: {
             $obj: "t_Counter_Normal_05"
-          },
-          startsWithPlate: false,
-          plateStack: false
-        }
+          }
+        },
+        id: "ct_Counter_Normal_05",
+        object: "c_Counter_Normal_05",
+        type: "Counter"
       },
       {
-        id: "ct_CabbageCounter_00",
-        type: "IngredientCounter",
-        object: "c_CabbageCounter_00",
         fields: {
+          cell: "CabbageCounter_00",
+          data: 1,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CabbageCounter_00",
           top: {
             $obj: "t_CabbageCounter_00"
-          },
-          data: 1
-        }
+          }
+        },
+        id: "ct_CabbageCounter_00",
+        object: "c_CabbageCounter_00",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_BreadCounter_00",
-        type: "IngredientCounter",
-        object: "c_BreadCounter_00",
         fields: {
+          cell: "BreadCounter_00",
+          data: 0,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "BreadCounter_00",
           top: {
             $obj: "t_BreadCounter_00"
-          },
-          data: 0
-        }
+          }
+        },
+        id: "ct_BreadCounter_00",
+        object: "c_BreadCounter_00",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_TomatoCounter_00",
-        type: "IngredientCounter",
-        object: "c_TomatoCounter_00",
         fields: {
+          cell: "TomatoCounter_00",
+          data: 8,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "TomatoCounter_00",
           top: {
             $obj: "t_TomatoCounter_00"
-          },
-          data: 8
-        }
+          }
+        },
+        id: "ct_TomatoCounter_00",
+        object: "c_TomatoCounter_00",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_MeatCounter_00",
-        type: "IngredientCounter",
-        object: "c_MeatCounter_00",
         fields: {
+          cell: "MeatCounter_00",
+          data: 5,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "MeatCounter_00",
           top: {
             $obj: "t_MeatCounter_00"
-          },
-          data: 5
-        }
+          }
+        },
+        id: "ct_MeatCounter_00",
+        object: "c_MeatCounter_00",
+        type: "IngredientCounter"
       },
       {
-        id: "ct_CheeseCounter_00",
-        type: "IngredientCounter",
-        object: "c_CheeseCounter_00",
         fields: {
+          cell: "CheeseCounter_00",
+          data: 3,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CheeseCounter_00",
           top: {
             $obj: "t_CheeseCounter_00"
-          },
-          data: 3
-        }
+          }
+        },
+        id: "ct_CheeseCounter_00",
+        object: "c_CheeseCounter_00",
+        type: "IngredientCounter"
       },
       {
-        id: "pr_CutCounter_01",
-        type: "CuttingBoard",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
+          allowedStatus: 4,
+          barFill: {
+            $obj: "bar_CutCounter_01"
           },
           cell: "CutCounter_01",
-          path: "Counters/CutCounter_01/CuttingBoard",
-          allowedStatus: 4,
-          preparatedStatus: 2,
-          finalSecondsBooster: 1.25,
           counter: {
             $beh: "ct_CutCounter_01"
           },
-          barFill: {
-            $obj: "bar_CutCounter_01"
-          }
-        },
-        object: "logic"
-      },
-      {
-        id: "pr_StoveCounter_01",
-        type: "Stove",
-        fields: {
+          finalSecondsBooster: 1.25,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "StoveCounter_01",
-          path: "Counters/StoveCounter_01/Stove",
+          path: "Counters/CutCounter_01/CuttingBoard",
+          preparatedStatus: 2
+        },
+        id: "pr_CutCounter_01",
+        object: "logic",
+        type: "CuttingBoard"
+      },
+      {
+        fields: {
           allowedStatus: 1,
-          preparatedStatus: 2,
-          finalSecondsBooster: 1.25,
-          timeBeforeBurn: 2,
+          barFill: {
+            $obj: "bar_StoveCounter_01"
+          },
+          cell: "StoveCounter_01",
           counter: {
             $beh: "ct_StoveCounter_01"
           },
-          barFill: {
-            $obj: "bar_StoveCounter_01"
-          }
-        },
-        object: "logic"
-      },
-      {
-        id: "pr_CutCounter_00",
-        type: "CuttingBoard",
-        fields: {
+          finalSecondsBooster: 1.25,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "CutCounter_00",
-          path: "Counters/CutCounter_00/CuttingBoard",
-          allowedStatus: 4,
+          path: "Counters/StoveCounter_01/Stove",
           preparatedStatus: 2,
-          finalSecondsBooster: 1.25,
+          timeBeforeBurn: 2
+        },
+        id: "pr_StoveCounter_01",
+        object: "logic",
+        type: "Stove"
+      },
+      {
+        fields: {
+          allowedStatus: 4,
+          barFill: {
+            $obj: "bar_CutCounter_00"
+          },
+          cell: "CutCounter_00",
           counter: {
             $beh: "ct_CutCounter_00"
           },
-          barFill: {
-            $obj: "bar_CutCounter_00"
-          }
-        },
-        object: "logic"
-      },
-      {
-        id: "pr_StoveCounter_00",
-        type: "Stove",
-        fields: {
+          finalSecondsBooster: 1.25,
           kitchen: {
             $beh: "kitchen"
           },
-          cell: "StoveCounter_00",
-          path: "Counters/StoveCounter_00/Stove",
+          path: "Counters/CutCounter_00/CuttingBoard",
+          preparatedStatus: 2
+        },
+        id: "pr_CutCounter_00",
+        object: "logic",
+        type: "CuttingBoard"
+      },
+      {
+        fields: {
           allowedStatus: 1,
-          preparatedStatus: 2,
-          finalSecondsBooster: 1.25,
-          timeBeforeBurn: 2,
+          barFill: {
+            $obj: "bar_StoveCounter_00"
+          },
+          cell: "StoveCounter_00",
           counter: {
             $beh: "ct_StoveCounter_00"
           },
-          barFill: {
-            $obj: "bar_StoveCounter_00"
-          }
-        },
-        object: "logic"
-      },
-      {
-        id: "pc_CutCounter_01",
-        type: "PreparationWorldSpaceCanvas",
-        fields: {
+          finalSecondsBooster: 1.25,
           kitchen: {
             $beh: "kitchen"
           },
-          preparator: {
-            $beh: "pr_CutCounter_01"
-          },
-          path: "Counters/CutCounter_01/CuttingBoard/Canvas",
+          path: "Counters/StoveCounter_00/Stove",
+          preparatedStatus: 2,
+          timeBeforeBurn: 2
+        },
+        id: "pr_StoveCounter_00",
+        object: "logic",
+        type: "Stove"
+      },
+      {
+        fields: {
           barFill: {
             $obj: "bar_CutCounter_01"
           },
-          rejectedText: "Cannot \nCut"
-        },
-        object: "logic"
-      },
-      {
-        id: "pc_StoveCounter_01",
-        type: "PreparationWorldSpaceCanvas",
-        fields: {
           kitchen: {
             $beh: "kitchen"
           },
+          path: "Counters/CutCounter_01/CuttingBoard/Canvas",
           preparator: {
-            $beh: "pr_StoveCounter_01"
+            $beh: "pr_CutCounter_01"
           },
-          path: "Counters/StoveCounter_01/Stove/Canvas",
+          rejectedText: "Cannot \nCut"
+        },
+        id: "pc_CutCounter_01",
+        object: "logic",
+        type: "PreparationWorldSpaceCanvas"
+      },
+      {
+        fields: {
           barFill: {
             $obj: "bar_StoveCounter_01"
           },
-          rejectedText: "Cannot \nCook"
-        },
-        object: "logic"
-      },
-      {
-        id: "pc_CutCounter_00",
-        type: "PreparationWorldSpaceCanvas",
-        fields: {
           kitchen: {
             $beh: "kitchen"
           },
+          path: "Counters/StoveCounter_01/Stove/Canvas",
           preparator: {
-            $beh: "pr_CutCounter_00"
+            $beh: "pr_StoveCounter_01"
           },
-          path: "Counters/CutCounter_00/CuttingBoard/Canvas",
+          rejectedText: "Cannot \nCook"
+        },
+        id: "pc_StoveCounter_01",
+        object: "logic",
+        type: "PreparationWorldSpaceCanvas"
+      },
+      {
+        fields: {
           barFill: {
             $obj: "bar_CutCounter_00"
           },
-          rejectedText: "Cannot \nCut"
-        },
-        object: "logic"
-      },
-      {
-        id: "pc_StoveCounter_00",
-        type: "PreparationWorldSpaceCanvas",
-        fields: {
           kitchen: {
             $beh: "kitchen"
           },
+          path: "Counters/CutCounter_00/CuttingBoard/Canvas",
           preparator: {
-            $beh: "pr_StoveCounter_00"
+            $beh: "pr_CutCounter_00"
           },
-          path: "Counters/StoveCounter_00/Stove/Canvas",
+          rejectedText: "Cannot \nCut"
+        },
+        id: "pc_CutCounter_00",
+        object: "logic",
+        type: "PreparationWorldSpaceCanvas"
+      },
+      {
+        fields: {
           barFill: {
             $obj: "bar_StoveCounter_00"
           },
-          rejectedText: "Cannot \nCook"
-        },
-        object: "logic"
-      },
-      {
-        id: "deliveryCanvas",
-        type: "DeliveryCounterCanvas",
-        fields: {
           kitchen: {
             $beh: "kitchen"
           },
+          path: "Counters/StoveCounter_00/Stove/Canvas",
+          preparator: {
+            $beh: "pr_StoveCounter_00"
+          },
+          rejectedText: "Cannot \nCook"
+        },
+        id: "pc_StoveCounter_00",
+        object: "logic",
+        type: "PreparationWorldSpaceCanvas"
+      },
+      {
+        fields: {
           cell: "Counter_Delivery",
+          kitchen: {
+            $beh: "kitchen"
+          },
           path: "Counters/Counter_Delivery/Canvas",
           tip: {
             $comp: "deliveryTip",
@@ -12913,35 +11486,24 @@ ${label}`)));
           },
           tipFormat: "+{0:D2} Tip!"
         },
-        object: "logic"
+        id: "deliveryCanvas",
+        object: "logic",
+        type: "DeliveryCounterCanvas"
       },
       {
-        id: "tickets",
-        type: "OrderTicketGroup",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          board: "board",
-          ticketPaths: [
-            "Board/Orders/Ticket0",
-            "Board/Orders/Ticket1",
-            "Board/Orders/Ticket2"
-          ],
-          names: [
+          bars: [
             {
-              $comp: "ticketName0",
-              kind: "TMP"
+              $obj: "ticketBar0"
             },
             {
-              $comp: "ticketName1",
-              kind: "TMP"
+              $obj: "ticketBar1"
             },
             {
-              $comp: "ticketName2",
-              kind: "TMP"
+              $obj: "ticketBar2"
             }
           ],
+          board: "board",
           icons: [
             {
               $comp: "ticketIcons0",
@@ -12956,28 +11518,31 @@ ${label}`)));
               kind: "TMP"
             }
           ],
-          bars: [
-            {
-              $obj: "ticketBar0"
-            },
-            {
-              $obj: "ticketBar1"
-            },
-            {
-              $obj: "ticketBar2"
-            }
-          ]
-        },
-        object: "logic"
-      },
-      {
-        id: "scoreUi",
-        type: "Score",
-        fields: {
           kitchen: {
             $beh: "kitchen"
           },
-          path: "Board/Hud/Score",
+          names: [
+            {
+              $comp: "ticketName0",
+              kind: "TMP"
+            },
+            {
+              $comp: "ticketName1",
+              kind: "TMP"
+            },
+            {
+              $comp: "ticketName2",
+              kind: "TMP"
+            }
+          ],
+          ticketPaths: ["Board/Orders/Ticket0", "Board/Orders/Ticket1", "Board/Orders/Ticket2"]
+        },
+        id: "tickets",
+        object: "logic",
+        type: "OrderTicketGroup"
+      },
+      {
+        fields: {
           current: {
             $comp: "scoreText",
             kind: "TMP"
@@ -12985,156 +11550,151 @@ ${label}`)));
           delta: {
             $comp: "scoreDelta",
             kind: "TMP"
-          }
+          },
+          kitchen: {
+            $beh: "kitchen"
+          },
+          path: "Board/Hud/Score"
         },
-        object: "logic"
+        id: "scoreUi",
+        object: "logic",
+        type: "Score"
       },
       {
-        id: "timer",
-        type: "Timer",
         fields: {
+          board: "board",
           kitchen: {
             $beh: "kitchen"
           },
           path: "Board/Hud/Timer",
-          board: "board",
+          slider: {
+            $obj: "timerFill"
+          },
           timer: {
             $comp: "timerText",
             kind: "TMP"
-          },
-          slider: {
-            $obj: "timerFill"
           }
         },
-        object: "logic"
+        id: "timer",
+        object: "logic",
+        type: "Timer"
       },
       {
-        id: "countDown",
-        type: "CountDown",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          path: "Board/CountDown",
           board: "board",
           countDown: {
             $comp: "countDownText",
             kind: "TMP"
-          }
+          },
+          kitchen: {
+            $beh: "kitchen"
+          },
+          path: "Board/CountDown"
         },
-        object: "logic"
+        id: "countDown",
+        object: "logic",
+        type: "CountDown"
       },
       {
+        fields: {
+          board: "board",
+          kitchen: {
+            $beh: "kitchen"
+          },
+          path: "Board/TimesUp"
+        },
         id: "timesUp",
-        type: "TimesUp",
-        fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          path: "Board/TimesUp",
-          board: "board"
-        },
-        object: "logic"
+        object: "logic",
+        type: "TimesUp"
       },
       {
-        id: "results",
-        type: "Results",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
+          best: {
+            $comp: "resBest",
+            kind: "TMP"
           },
-          gameData: {
-            $beh: "gameData"
-          },
-          path: "Board/Results",
           failedDeliveries: {
             $comp: "resFailed",
             kind: "TMP"
           },
-          totalFailedDeliveries: {
-            $comp: "resFailedTotal",
-            kind: "TMP"
+          gameData: {
+            $beh: "gameData"
           },
+          kitchen: {
+            $beh: "kitchen"
+          },
+          newHighScore: {
+            $obj: "newHighScore"
+          },
+          path: "Board/Results",
           successfulDeliveries: {
             $comp: "resDelivered",
-            kind: "TMP"
-          },
-          totalSuccessfulDeliveries: {
-            $comp: "resDeliveredTotal",
             kind: "TMP"
           },
           tips: {
             $comp: "resTips",
             kind: "TMP"
           },
+          totalFailedDeliveries: {
+            $comp: "resFailedTotal",
+            kind: "TMP"
+          },
           totalScore: {
             $comp: "resTotal",
             kind: "TMP"
           },
-          best: {
-            $comp: "resBest",
+          totalSuccessfulDeliveries: {
+            $comp: "resDeliveredTotal",
             kind: "TMP"
-          },
-          newHighScore: {
-            $obj: "newHighScore"
           }
         },
-        object: "logic"
+        id: "results",
+        object: "logic",
+        type: "Results"
       },
       {
-        id: "music",
-        type: "BackgroundMusic",
         fields: {
           kitchen: {
             $beh: "kitchen"
           },
           path: "Music"
         },
-        object: "logic"
+        id: "music",
+        object: "logic",
+        type: "BackgroundMusic"
       },
       {
-        id: "soundPopup",
-        type: "SoundPopup",
-        object: "sounds",
         fields: {
+          effectsLabel: {
+            $comp: "effectsLabel",
+            kind: "TMP"
+          },
           gameData: {
             $beh: "gameData"
           },
-          path: "Board/Sounds",
           musicLabel: {
             $comp: "musicLabel",
             kind: "TMP"
           },
-          effectsLabel: {
-            $comp: "effectsLabel",
-            kind: "TMP"
-          }
-        }
+          path: "Board/Sounds"
+        },
+        id: "soundPopup",
+        object: "sounds",
+        type: "SoundPopup"
       },
       {
-        id: "mainMenuOptions",
-        type: "MainMenuOptions",
-        object: "lobby",
         fields: {
           kitchen: {
             $beh: "kitchen"
           },
           tutorialButton: "btnTutorial"
-        }
+        },
+        id: "mainMenuOptions",
+        object: "lobby",
+        type: "MainMenuOptions"
       },
       {
-        id: "mainMenu",
-        type: "MainMenu",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          mainMenuOptions: {
-            $beh: "mainMenuOptions"
-          },
-          soundPopup: {
-            $beh: "soundPopup"
-          },
           credits: {
             $obj: "credits"
           },
@@ -13142,28 +11702,39 @@ ${label}`)));
             $comp: "creditsText",
             kind: "TMP"
           },
+          kitchen: {
+            $beh: "kitchen"
+          },
+          mainMenuOptions: {
+            $beh: "mainMenuOptions"
+          },
           roster: {
             $comp: "rosterText",
             kind: "TMP"
+          },
+          soundPopup: {
+            $beh: "soundPopup"
           }
         },
-        object: "logic"
+        id: "mainMenu",
+        object: "logic",
+        type: "MainMenu"
       },
       {
-        id: "pauseOptions",
-        type: "PauseOptions",
-        object: "pauseOptions",
         fields: {
           kitchen: {
             $beh: "kitchen"
           }
-        }
+        },
+        id: "pauseOptions",
+        object: "pauseOptions",
+        type: "PauseOptions"
       },
       {
-        id: "pauseCanvas",
-        type: "PauseCanvas",
-        object: "pausePanel",
         fields: {
+          confirm: {
+            $obj: "confirm"
+          },
           kitchen: {
             $beh: "kitchen"
           },
@@ -13172,34 +11743,33 @@ ${label}`)));
           },
           soundPopup: {
             $beh: "soundPopup"
-          },
-          confirm: {
-            $obj: "confirm"
           }
-        }
+        },
+        id: "pauseCanvas",
+        object: "pausePanel",
+        type: "PauseCanvas"
       },
       {
-        id: "pauseHandler",
-        type: "PauseHandler",
         fields: {
           kitchen: {
             $beh: "kitchen"
           },
+          pauseButton: "btnPause",
           pauseCanvas: {
             $beh: "pauseCanvas"
           },
-          pauseButton: "btnPause",
           pausedBy: {
             $comp: "pausedBy",
             kind: "TMP"
           }
         },
-        object: "logic"
+        id: "pauseHandler",
+        object: "logic",
+        type: "PauseHandler"
       },
       {
-        id: "tutorialDescription",
-        type: "TutorialDescription",
         fields: {
+          board: "board",
           kitchen: {
             $beh: "kitchen"
           },
@@ -13207,25 +11777,17 @@ ${label}`)));
             $beh: "tutorial"
           },
           path: "Board/Tutorial/Description",
-          board: "board",
           text: {
             $comp: "tutorialText",
             kind: "TMP"
           }
         },
-        object: "logic"
+        id: "tutorialDescription",
+        object: "logic",
+        type: "TutorialDescription"
       },
       {
-        id: "tutorial",
-        type: "TutorialManager",
         fields: {
-          kitchen: {
-            $beh: "kitchen"
-          },
-          description: {
-            $beh: "tutorialDescription"
-          },
-          titlePath: "@Board/Tutorial/Title",
           arrowObjects: [
             {
               $obj: "arrow0"
@@ -13237,349 +11799,1824 @@ ${label}`)));
           deliveryCounter: {
             $beh: "ct_Counter_Delivery"
           },
+          description: {
+            $beh: "tutorialDescription"
+          },
+          kitchen: {
+            $beh: "kitchen"
+          },
           plateCounterCell: "Counter_Plate_00",
-          timeBetweenSteps: 0.4
+          timeBetweenSteps: 0.4,
+          titlePath: "@Board/Tutorial/Title"
         },
-        object: "logic"
+        id: "tutorial",
+        object: "logic",
+        type: "TutorialManager"
       },
       {
-        id: "chef",
-        type: "Chef",
-        perPlayer: true,
         fields: {
           kitchen: {
             $beh: "kitchen"
           }
         },
-        object: "logic"
+        id: "chef",
+        object: "logic",
+        type: "Chef"
       }
     ],
+    bundles: {
+      android: "",
+      windows: ""
+    },
     events: [
       {
-        object: "c_CabbageCounter_01",
-        kind: "click",
         behaviour: "ct_CabbageCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CabbageCounter_01"
       },
       {
-        object: "c_BreadCounter_01",
-        kind: "click",
         behaviour: "ct_BreadCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_BreadCounter_01"
       },
       {
-        object: "c_TomatoCounter_01",
-        kind: "click",
         behaviour: "ct_TomatoCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_TomatoCounter_01"
       },
       {
-        object: "c_MeatCounter_01",
-        kind: "click",
         behaviour: "ct_MeatCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_MeatCounter_01"
       },
       {
-        object: "c_CheeseCounter_01",
-        kind: "click",
         behaviour: "ct_CheeseCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CheeseCounter_01"
       },
       {
-        object: "c_CutCounter_01",
-        kind: "click",
         behaviour: "ct_CutCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CutCounter_01"
       },
       {
-        object: "q_CutCounter_01",
-        kind: "click",
         behaviour: "ct_CutCounter_01",
-        method: "ClickedKnob"
+        kind: "click",
+        method: "ClickedKnob",
+        object: "q_CutCounter_01"
       },
       {
-        object: "c_Counter_Plate_00",
-        kind: "click",
         behaviour: "ct_Counter_Plate_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Plate_00"
       },
       {
-        object: "c_StoveCounter_01",
-        kind: "click",
         behaviour: "ct_StoveCounter_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_StoveCounter_01"
       },
       {
-        object: "q_StoveCounter_01",
-        kind: "click",
         behaviour: "ct_StoveCounter_01",
-        method: "ClickedKnob"
+        kind: "click",
+        method: "ClickedKnob",
+        object: "q_StoveCounter_01"
       },
       {
-        object: "c_Counter_Normal_01",
-        kind: "click",
         behaviour: "ct_Counter_Normal_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_01"
       },
       {
-        object: "c_Counter_Normal_08",
-        kind: "click",
         behaviour: "ct_Counter_Normal_08",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_08"
       },
       {
-        object: "c_Counter_Normal_02",
-        kind: "click",
         behaviour: "ct_Counter_Normal_02",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_02"
       },
       {
-        object: "c_Counter_Normal_03",
-        kind: "click",
         behaviour: "ct_Counter_Normal_03",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_03"
       },
       {
-        object: "c_Counter_Normal_07",
-        kind: "click",
         behaviour: "ct_Counter_Normal_07",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_07"
       },
       {
-        object: "c_Counter_Normal_09",
-        kind: "click",
         behaviour: "ct_Counter_Normal_09",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_09"
       },
       {
-        object: "c_TrashCounter",
-        kind: "click",
         behaviour: "ct_TrashCounter",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_TrashCounter"
       },
       {
-        object: "c_Counter_Normal_10",
-        kind: "click",
         behaviour: "ct_Counter_Normal_10",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_10"
       },
       {
-        object: "c_Counter_Normal_06",
-        kind: "click",
         behaviour: "ct_Counter_Normal_06",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_06"
       },
       {
-        object: "c_Counter_Normal_11",
-        kind: "click",
         behaviour: "ct_Counter_Normal_11",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_11"
       },
       {
-        object: "c_Counter_PlateStack",
-        kind: "click",
         behaviour: "ct_Counter_PlateStack",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_PlateStack"
       },
       {
-        object: "c_Counter_Normal_00",
-        kind: "click",
         behaviour: "ct_Counter_Normal_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_00"
       },
       {
-        object: "c_Counter_Delivery",
-        kind: "click",
         behaviour: "ct_Counter_Delivery",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Delivery"
       },
       {
-        object: "c_CutCounter_00",
-        kind: "click",
         behaviour: "ct_CutCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CutCounter_00"
       },
       {
-        object: "q_CutCounter_00",
-        kind: "click",
         behaviour: "ct_CutCounter_00",
-        method: "ClickedKnob"
+        kind: "click",
+        method: "ClickedKnob",
+        object: "q_CutCounter_00"
       },
       {
-        object: "c_Counter_Plate_01",
-        kind: "click",
         behaviour: "ct_Counter_Plate_01",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Plate_01"
       },
       {
-        object: "c_StoveCounter_00",
-        kind: "click",
         behaviour: "ct_StoveCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_StoveCounter_00"
       },
       {
-        object: "q_StoveCounter_00",
-        kind: "click",
         behaviour: "ct_StoveCounter_00",
-        method: "ClickedKnob"
+        kind: "click",
+        method: "ClickedKnob",
+        object: "q_StoveCounter_00"
       },
       {
-        object: "c_Counter_Normal_05",
-        kind: "click",
         behaviour: "ct_Counter_Normal_05",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_Counter_Normal_05"
       },
       {
-        object: "c_CabbageCounter_00",
-        kind: "click",
         behaviour: "ct_CabbageCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CabbageCounter_00"
       },
       {
-        object: "c_BreadCounter_00",
-        kind: "click",
         behaviour: "ct_BreadCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_BreadCounter_00"
       },
       {
-        object: "c_TomatoCounter_00",
-        kind: "click",
         behaviour: "ct_TomatoCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_TomatoCounter_00"
       },
       {
-        object: "c_MeatCounter_00",
-        kind: "click",
         behaviour: "ct_MeatCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_MeatCounter_00"
       },
       {
-        object: "c_CheeseCounter_00",
-        kind: "click",
         behaviour: "ct_CheeseCounter_00",
-        method: "Clicked"
+        kind: "click",
+        method: "Clicked",
+        object: "c_CheeseCounter_00"
       },
       {
-        object: "btnPlay",
-        kind: "click",
         behaviour: "mainMenuOptions",
-        method: "PlayGame"
+        kind: "click",
+        method: "PlayGame",
+        object: "btnPlay"
       },
       {
-        object: "btnTutorial",
-        kind: "click",
         behaviour: "mainMenuOptions",
-        method: "PlayTutorial"
+        kind: "click",
+        method: "PlayTutorial",
+        object: "btnTutorial"
       },
       {
-        object: "btnSounds",
-        kind: "click",
         behaviour: "mainMenuOptions",
-        method: "RequestOpenSoundOptions"
+        kind: "click",
+        method: "RequestOpenSoundOptions",
+        object: "btnSounds"
       },
       {
-        object: "btnCredits",
-        kind: "click",
         behaviour: "mainMenuOptions",
-        method: "RequestOpenCredits"
+        kind: "click",
+        method: "RequestOpenCredits",
+        object: "btnCredits"
       },
       {
-        object: "btnCook",
-        kind: "click",
         behaviour: "mainMenuOptions",
-        method: "ToggleCook"
+        kind: "click",
+        method: "ToggleCook",
+        object: "btnCook"
       },
       {
-        object: "btnCloseCredits",
-        kind: "click",
         behaviour: "mainMenu",
-        method: "CloseCredits"
+        kind: "click",
+        method: "CloseCredits",
+        object: "btnCloseCredits"
       },
       {
-        object: "btnMusicUp",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "MusicUp"
+        kind: "click",
+        method: "MusicUp",
+        object: "btnMusicUp"
       },
       {
-        object: "btnMusicDown",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "MusicDown"
+        kind: "click",
+        method: "MusicDown",
+        object: "btnMusicDown"
       },
       {
-        object: "btnEffectsUp",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "EffectsUp"
+        kind: "click",
+        method: "EffectsUp",
+        object: "btnEffectsUp"
       },
       {
-        object: "btnEffectsDown",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "EffectsDown"
+        kind: "click",
+        method: "EffectsDown",
+        object: "btnEffectsDown"
       },
       {
-        object: "btnResetVolumes",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "HandleResetButtonClick"
+        kind: "click",
+        method: "HandleResetButtonClick",
+        object: "btnResetVolumes"
       },
       {
-        object: "btnSoundsBack",
-        kind: "click",
         behaviour: "soundPopup",
-        method: "HandleCloseButtonClick"
+        kind: "click",
+        method: "HandleCloseButtonClick",
+        object: "btnSoundsBack"
       },
       {
-        object: "btnPause",
-        kind: "click",
         behaviour: "pauseOptions",
-        method: "Pause"
+        kind: "click",
+        method: "Pause",
+        object: "btnPause"
       },
       {
-        object: "btnResume",
-        kind: "click",
         behaviour: "pauseOptions",
-        method: "Resume"
+        kind: "click",
+        method: "Resume",
+        object: "btnResume"
       },
       {
-        object: "btnRestart",
-        kind: "click",
         behaviour: "pauseOptions",
-        method: "Restart"
+        kind: "click",
+        method: "Restart",
+        object: "btnRestart"
       },
       {
-        object: "btnPauseSounds",
-        kind: "click",
         behaviour: "pauseOptions",
-        method: "Sound"
+        kind: "click",
+        method: "Sound",
+        object: "btnPauseSounds"
       },
       {
-        object: "btnEndRound",
-        kind: "click",
         behaviour: "pauseOptions",
-        method: "Exit"
+        kind: "click",
+        method: "Exit",
+        object: "btnEndRound"
       },
       {
-        object: "btnYes",
-        kind: "click",
         behaviour: "pauseCanvas",
-        method: "Confirmed"
+        kind: "click",
+        method: "Confirmed",
+        object: "btnYes"
       },
       {
-        object: "btnNo",
-        kind: "click",
         behaviour: "pauseCanvas",
-        method: "Declined"
+        kind: "click",
+        method: "Declined",
+        object: "btnNo"
       },
       {
-        object: "btnContinue",
-        kind: "click",
         behaviour: "results",
-        method: "HandleContinueButtonClick"
+        kind: "click",
+        method: "HandleContinueButtonClick",
+        object: "btnContinue"
       }
-    ]
+    ],
+    hash: "f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b",
+    objects: {
+      arrow0: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Arrows/Arrow0",
+        seat: false,
+        sync: "none"
+      },
+      arrow1: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Arrows/Arrow1",
+        seat: false,
+        sync: "none"
+      },
+      bar: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_01/CuttingBoard/Canvas/Bar",
+        seat: false,
+        sync: "none"
+      },
+      bar2: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_01/Stove/Canvas/Bar",
+        seat: false,
+        sync: "none"
+      },
+      bar3: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_00/CuttingBoard/Canvas/Bar",
+        seat: false,
+        sync: "none"
+      },
+      bar4: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_00/Stove/Canvas/Bar",
+        seat: false,
+        sync: "none"
+      },
+      bar_CutCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_00/CuttingBoard/Canvas/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      bar_CutCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_01/CuttingBoard/Canvas/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      bar_StoveCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_00/Stove/Canvas/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      bar_StoveCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_01/Stove/Canvas/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      board: {
+        click: false,
+        grab: false,
+        path: "Board",
+        seat: false,
+        sync: "none"
+      },
+      btnCloseCredits: {
+        click: true,
+        grab: false,
+        path: "Board/Credits/Close",
+        seat: false,
+        sync: "none"
+      },
+      btnContinue: {
+        click: true,
+        grab: false,
+        path: "Board/Results/Continue",
+        seat: false,
+        sync: "none"
+      },
+      btnCook: {
+        click: true,
+        grab: false,
+        path: "Board/Lobby/Cook",
+        seat: false,
+        sync: "none"
+      },
+      btnCredits: {
+        click: true,
+        grab: false,
+        path: "Board/Lobby/Credits",
+        seat: false,
+        sync: "none"
+      },
+      btnEffectsDown: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Effects/Down",
+        seat: false,
+        sync: "none"
+      },
+      btnEffectsUp: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Effects/Up",
+        seat: false,
+        sync: "none"
+      },
+      btnEndRound: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Options/EndRound",
+        seat: false,
+        sync: "none"
+      },
+      btnMusicDown: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Music/Down",
+        seat: false,
+        sync: "none"
+      },
+      btnMusicUp: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Music/Up",
+        seat: false,
+        sync: "none"
+      },
+      btnNo: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Confirm/No",
+        seat: false,
+        sync: "none"
+      },
+      btnPause: {
+        click: true,
+        grab: false,
+        path: "Board/Hud/Pause",
+        seat: false,
+        sync: "none"
+      },
+      btnPauseSounds: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Options/Sounds",
+        seat: false,
+        sync: "none"
+      },
+      btnPlay: {
+        click: true,
+        grab: false,
+        path: "Board/Lobby/Play",
+        seat: false,
+        sync: "none"
+      },
+      btnResetVolumes: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Reset",
+        seat: false,
+        sync: "none"
+      },
+      btnRestart: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Options/Restart",
+        seat: false,
+        sync: "none"
+      },
+      btnResume: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Options/Resume",
+        seat: false,
+        sync: "none"
+      },
+      btnSounds: {
+        click: true,
+        grab: false,
+        path: "Board/Lobby/Sounds",
+        seat: false,
+        sync: "none"
+      },
+      btnSoundsBack: {
+        click: true,
+        grab: false,
+        path: "Board/Sounds/Back",
+        seat: false,
+        sync: "none"
+      },
+      btnTutorial: {
+        click: true,
+        grab: false,
+        path: "Board/Lobby/Tutorial",
+        seat: false,
+        sync: "none"
+      },
+      btnYes: {
+        click: true,
+        grab: false,
+        path: "Board/PausePanel/Confirm/Yes",
+        seat: false,
+        sync: "none"
+      },
+      c_BreadCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/BreadCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_BreadCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/BreadCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_CabbageCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/CabbageCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_CabbageCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/CabbageCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_CheeseCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/CheeseCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_CheeseCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/CheeseCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Corner_00: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Corner_00",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Corner_01: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Corner_01",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Corner_02: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Corner_02",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Corner_03: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Corner_03",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Delivery: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Delivery",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_00: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_00",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_01: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_01",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_02: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_02",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_03: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_03",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_05: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_05",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_06: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_06",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_07: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_07",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_08: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_08",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_09: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_09",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_10: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_10",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Normal_11: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Normal_11",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_PlateStack: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_PlateStack",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Plate_00: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Plate_00",
+        seat: false,
+        sync: "none"
+      },
+      c_Counter_Plate_01: {
+        click: true,
+        grab: false,
+        path: "Counters/Counter_Plate_01",
+        seat: false,
+        sync: "none"
+      },
+      c_CutCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/CutCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_CutCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/CutCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_MeatCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/MeatCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_MeatCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/MeatCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_StoveCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/StoveCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_StoveCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/StoveCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_TomatoCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/TomatoCounter_00",
+        seat: false,
+        sync: "none"
+      },
+      c_TomatoCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/TomatoCounter_01",
+        seat: false,
+        sync: "none"
+      },
+      c_TrashCounter: {
+        click: true,
+        grab: false,
+        path: "Counters/TrashCounter",
+        seat: false,
+        sync: "none"
+      },
+      confirm: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/PausePanel/Confirm",
+        seat: false,
+        sync: "none"
+      },
+      countDownText: {
+        click: false,
+        grab: false,
+        path: "Board/CountDown/Text",
+        seat: false,
+        sync: "none"
+      },
+      credits: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/Credits",
+        seat: false,
+        sync: "none"
+      },
+      creditsText: {
+        click: false,
+        grab: false,
+        path: "Board/Credits/Text",
+        seat: false,
+        sync: "none"
+      },
+      deliveryTip: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Delivery/Canvas/Tip",
+        seat: false,
+        sync: "none"
+      },
+      description: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/Tutorial/Description",
+        seat: false,
+        sync: "none"
+      },
+      effectsLabel: {
+        click: false,
+        grab: false,
+        path: "Board/Sounds/Effects/Value",
+        seat: false,
+        sync: "none"
+      },
+      floor: {
+        click: true,
+        grab: false,
+        path: "Floor",
+        seat: false,
+        sync: "none"
+      },
+      lobby: {
+        click: false,
+        grab: false,
+        path: "Board/Lobby",
+        seat: false,
+        sync: "none"
+      },
+      logic: {
+        click: false,
+        grab: false,
+        path: "Logic",
+        seat: false,
+        sync: "none"
+      },
+      musicLabel: {
+        click: false,
+        grab: false,
+        path: "Board/Sounds/Music/Value",
+        seat: false,
+        sync: "none"
+      },
+      newHighScore: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/Results/NewHighScore",
+        seat: false,
+        sync: "none"
+      },
+      pauseOptions: {
+        click: false,
+        grab: false,
+        path: "Board/PausePanel/Options",
+        seat: false,
+        sync: "none"
+      },
+      pausePanel: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/PausePanel",
+        seat: false,
+        sync: "none"
+      },
+      pausedBy: {
+        click: false,
+        grab: false,
+        path: "Board/PausePanel/PausedBy",
+        seat: false,
+        sync: "none"
+      },
+      q_CutCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/CutCounter_00/CuttingBoard/Knife",
+        seat: false,
+        sync: "none"
+      },
+      q_CutCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/CutCounter_01/CuttingBoard/Knife",
+        seat: false,
+        sync: "none"
+      },
+      q_StoveCounter_00: {
+        click: true,
+        grab: false,
+        path: "Counters/StoveCounter_00/Knob",
+        seat: false,
+        sync: "none"
+      },
+      q_StoveCounter_01: {
+        click: true,
+        grab: false,
+        path: "Counters/StoveCounter_01/Knob",
+        seat: false,
+        sync: "none"
+      },
+      resBest: {
+        click: false,
+        grab: false,
+        path: "Board/Results/Best",
+        seat: false,
+        sync: "none"
+      },
+      resDelivered: {
+        click: false,
+        grab: false,
+        path: "Board/Results/Delivered",
+        seat: false,
+        sync: "none"
+      },
+      resDeliveredTotal: {
+        click: false,
+        grab: false,
+        path: "Board/Results/DeliveredTotal",
+        seat: false,
+        sync: "none"
+      },
+      resFailed: {
+        click: false,
+        grab: false,
+        path: "Board/Results/Failed",
+        seat: false,
+        sync: "none"
+      },
+      resFailedTotal: {
+        click: false,
+        grab: false,
+        path: "Board/Results/FailedTotal",
+        seat: false,
+        sync: "none"
+      },
+      resTips: {
+        click: false,
+        grab: false,
+        path: "Board/Results/Tips",
+        seat: false,
+        sync: "none"
+      },
+      resTotal: {
+        click: false,
+        grab: false,
+        path: "Board/Results/Total",
+        seat: false,
+        sync: "none"
+      },
+      rosterText: {
+        click: false,
+        grab: false,
+        path: "Board/Lobby/Roster",
+        seat: false,
+        sync: "none"
+      },
+      s00: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot00",
+        seat: false,
+        sync: "none"
+      },
+      s01: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot01",
+        seat: false,
+        sync: "none"
+      },
+      s02: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot02",
+        seat: false,
+        sync: "none"
+      },
+      s03: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot03",
+        seat: false,
+        sync: "none"
+      },
+      s04: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot04",
+        seat: false,
+        sync: "none"
+      },
+      s05: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot05",
+        seat: false,
+        sync: "none"
+      },
+      s06: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot06",
+        seat: false,
+        sync: "none"
+      },
+      s07: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot07",
+        seat: false,
+        sync: "none"
+      },
+      s08: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot08",
+        seat: false,
+        sync: "none"
+      },
+      s09: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot09",
+        seat: false,
+        sync: "none"
+      },
+      s10: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot10",
+        seat: false,
+        sync: "none"
+      },
+      s11: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot11",
+        seat: false,
+        sync: "none"
+      },
+      s12: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot12",
+        seat: false,
+        sync: "none"
+      },
+      s13: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot13",
+        seat: false,
+        sync: "none"
+      },
+      s14: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot14",
+        seat: false,
+        sync: "none"
+      },
+      s15: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot15",
+        seat: false,
+        sync: "none"
+      },
+      s16: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot16",
+        seat: false,
+        sync: "none"
+      },
+      s17: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot17",
+        seat: false,
+        sync: "none"
+      },
+      s18: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot18",
+        seat: false,
+        sync: "none"
+      },
+      s19: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot19",
+        seat: false,
+        sync: "none"
+      },
+      s20: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot20",
+        seat: false,
+        sync: "none"
+      },
+      s21: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot21",
+        seat: false,
+        sync: "none"
+      },
+      s22: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot22",
+        seat: false,
+        sync: "none"
+      },
+      s23: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot23",
+        seat: false,
+        sync: "none"
+      },
+      s24: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot24",
+        seat: false,
+        sync: "none"
+      },
+      s25: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot25",
+        seat: false,
+        sync: "none"
+      },
+      s26: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot26",
+        seat: false,
+        sync: "none"
+      },
+      s27: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot27",
+        seat: false,
+        sync: "none"
+      },
+      s28: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot28",
+        seat: false,
+        sync: "none"
+      },
+      s29: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot29",
+        seat: false,
+        sync: "none"
+      },
+      s30: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot30",
+        seat: false,
+        sync: "none"
+      },
+      s31: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot31",
+        seat: false,
+        sync: "none"
+      },
+      s32: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot32",
+        seat: false,
+        sync: "none"
+      },
+      s33: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot33",
+        seat: false,
+        sync: "none"
+      },
+      s34: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot34",
+        seat: false,
+        sync: "none"
+      },
+      s35: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot35",
+        seat: false,
+        sync: "none"
+      },
+      s36: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot36",
+        seat: false,
+        sync: "none"
+      },
+      s37: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot37",
+        seat: false,
+        sync: "none"
+      },
+      s38: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot38",
+        seat: false,
+        sync: "none"
+      },
+      s39: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot39",
+        seat: false,
+        sync: "none"
+      },
+      s40: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot40",
+        seat: false,
+        sync: "none"
+      },
+      s41: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot41",
+        seat: false,
+        sync: "none"
+      },
+      s42: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot42",
+        seat: false,
+        sync: "none"
+      },
+      s43: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot43",
+        seat: false,
+        sync: "none"
+      },
+      s44: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot44",
+        seat: false,
+        sync: "none"
+      },
+      s45: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot45",
+        seat: false,
+        sync: "none"
+      },
+      s46: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot46",
+        seat: false,
+        sync: "none"
+      },
+      s47: {
+        active: false,
+        click: false,
+        grab: true,
+        path: "Items/Slot47",
+        seat: false,
+        sync: "none"
+      },
+      scoreDelta: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/Hud/Score/Delta",
+        seat: false,
+        sync: "none"
+      },
+      scoreText: {
+        click: false,
+        grab: false,
+        path: "Board/Hud/Score/Current",
+        seat: false,
+        sync: "none"
+      },
+      sfx: {
+        click: false,
+        grab: false,
+        path: "Audio",
+        seat: false,
+        sync: "none"
+      },
+      sounds: {
+        active: false,
+        click: false,
+        grab: false,
+        path: "Board/Sounds",
+        seat: false,
+        sync: "none"
+      },
+      t_BreadCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/BreadCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_BreadCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/BreadCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CabbageCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/CabbageCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CabbageCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/CabbageCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CheeseCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/CheeseCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CheeseCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/CheeseCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Delivery: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Delivery/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_00: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_01: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_02: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_02/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_03: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_03/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_05: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_05/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_06: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_06/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_07: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_07/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_08: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_08/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_09: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_09/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_10: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_10/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Normal_11: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Normal_11/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_PlateStack: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_PlateStack/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Plate_00: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Plate_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_Counter_Plate_01: {
+        click: false,
+        grab: false,
+        path: "Counters/Counter_Plate_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CutCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_CutCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/CutCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_MeatCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/MeatCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_MeatCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/MeatCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_StoveCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_StoveCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/StoveCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_TomatoCounter_00: {
+        click: false,
+        grab: false,
+        path: "Counters/TomatoCounter_00/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_TomatoCounter_01: {
+        click: false,
+        grab: false,
+        path: "Counters/TomatoCounter_01/Top",
+        seat: false,
+        sync: "none"
+      },
+      t_TrashCounter: {
+        click: false,
+        grab: false,
+        path: "Counters/TrashCounter/Top",
+        seat: false,
+        sync: "none"
+      },
+      ticketBar0: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket0/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      ticketBar1: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket1/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      ticketBar2: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket2/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      ticketIcons0: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket0/Icons",
+        seat: false,
+        sync: "none"
+      },
+      ticketIcons1: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket1/Icons",
+        seat: false,
+        sync: "none"
+      },
+      ticketIcons2: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket2/Icons",
+        seat: false,
+        sync: "none"
+      },
+      ticketName0: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket0/Name",
+        seat: false,
+        sync: "none"
+      },
+      ticketName1: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket1/Name",
+        seat: false,
+        sync: "none"
+      },
+      ticketName2: {
+        click: false,
+        grab: false,
+        path: "Board/Orders/Ticket2/Name",
+        seat: false,
+        sync: "none"
+      },
+      timerFill: {
+        click: false,
+        grab: false,
+        path: "Board/Hud/Timer/Bar/Fill",
+        seat: false,
+        sync: "none"
+      },
+      timerText: {
+        click: false,
+        grab: false,
+        path: "Board/Hud/Timer/Text",
+        seat: false,
+        sync: "none"
+      },
+      tutorialText: {
+        click: false,
+        grab: false,
+        path: "Board/Tutorial/Description/Text",
+        seat: false,
+        sync: "none"
+      }
+    },
+    refs: [
+      "sfx",
+      "floor",
+      "c_Counter_Corner_02",
+      "c_CabbageCounter_01",
+      "c_BreadCounter_01",
+      "c_TomatoCounter_01",
+      "c_MeatCounter_01",
+      "c_CheeseCounter_01",
+      "c_CutCounter_01",
+      "q_CutCounter_01",
+      "c_Counter_Plate_00",
+      "c_StoveCounter_01",
+      "q_StoveCounter_01",
+      "c_Counter_Normal_01",
+      "c_Counter_Corner_03",
+      "c_Counter_Normal_08",
+      "c_Counter_Normal_02",
+      "c_Counter_Normal_03",
+      "c_Counter_Normal_07",
+      "c_Counter_Normal_09",
+      "c_TrashCounter",
+      "c_Counter_Normal_10",
+      "c_Counter_Normal_06",
+      "c_Counter_Normal_11",
+      "c_Counter_PlateStack",
+      "c_Counter_Normal_00",
+      "c_Counter_Delivery",
+      "c_Counter_Corner_01",
+      "c_CutCounter_00",
+      "q_CutCounter_00",
+      "c_Counter_Plate_01",
+      "c_StoveCounter_00",
+      "q_StoveCounter_00",
+      "c_Counter_Normal_05",
+      "c_CabbageCounter_00",
+      "c_BreadCounter_00",
+      "c_TomatoCounter_00",
+      "c_MeatCounter_00",
+      "c_CheeseCounter_00",
+      "c_Counter_Corner_00",
+      "deliveryTip",
+      "board",
+      "scoreText",
+      "scoreDelta",
+      "timerText",
+      "countDownText",
+      "ticketName0",
+      "ticketIcons0",
+      "ticketName1",
+      "ticketIcons1",
+      "ticketName2",
+      "ticketIcons2",
+      "lobby",
+      "rosterText",
+      "btnPlay",
+      "btnTutorial",
+      "btnSounds",
+      "btnCredits",
+      "btnCook",
+      "credits",
+      "creditsText",
+      "btnCloseCredits",
+      "sounds",
+      "musicLabel",
+      "effectsLabel",
+      "btnMusicUp",
+      "btnMusicDown",
+      "btnEffectsUp",
+      "btnEffectsDown",
+      "btnResetVolumes",
+      "btnSoundsBack",
+      "btnPause",
+      "pausePanel",
+      "pauseOptions",
+      "pausedBy",
+      "btnResume",
+      "btnRestart",
+      "btnPauseSounds",
+      "btnEndRound",
+      "confirm",
+      "btnYes",
+      "btnNo",
+      "resFailed",
+      "resFailedTotal",
+      "resDelivered",
+      "resDeliveredTotal",
+      "resTips",
+      "resTotal",
+      "resBest",
+      "newHighScore",
+      "btnContinue",
+      "tutorialText"
+    ],
+    schema: 1,
+    slug: "coop-kitchen"
   };
 
   // portkit/src/platform/bs.ts
