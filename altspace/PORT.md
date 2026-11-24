@@ -1573,3 +1573,71 @@ Port code is MIT and credits Hyago Oliveira's MIT code. It is published from a f
 not a fork) because the upstream repository carries assets that must not be republished (6.3 D, E). Nothing of the
 upstream's art, models, sounds, textures, fonts or plugins is in `altspace/`; `data/kitchen-data.json` holds data
 values from the upstream's ScriptableObject YAML (numbers, names, icon names) only. Art will be KayKit (CC0).
+
+### 11.7 The kit (Unity phase, 2026-11-24)
+
+The Unity project is `altspace/` itself (made with `portkit/tools/new_project.sh coop-kitchen <this folder>`, Play-mode
+page port 43600). No upstream asset is imported and the portkit importer is not used: the kit is **built from data**
+by `Assets/Kit/Editor/CoopKitchenKitBuilder.cs`.
+
+- **The contract.** `ts/tools/gen-bindings.ts` (`npm run bindings`) writes `Assets/Kit/Editor/kit-contract.json`: every
+  object key and path, the refs, the 60 behaviours with their fields and the 54 events the TypeScript expects. It also
+  seeds `Assets/Kit/Editor/bindings.lock.json` with the behaviour ids the code and tests use (`kitchen`, `ct_<cell>`,
+  ...), so the kit builder's ids are those and not `b1`, `b2`. The builder makes the art at those paths and hands the
+  contract to portkit's `KitStage`; the real `ts/bindings.json` it writes therefore has the same keys, paths and
+  fields as the provisional one, plus its hash. Behaviours without an object of their own (the managers, the
+  per-player `Chef`) sit on one empty object, `Logic`.
+- **Layout.** Every counter cell of the upstream Game scene (`data/kitchen-data.json`, `layouts.game`, 34 cells) at
+  0.64 scale around the ring's centre (0.25, -1.25): a cell is 0.96 m, a counter top 0.90 m. `door` (default west)
+  switches `Counter_Normal_10` off at run time, as `Kitchen.Start` already did.
+- **Gaps worked around in TypeScript (11.5), the Unity side they assume:** held items are drawn at the holder's
+  published head position (nothing in the kit; the pool slots are moved by the page); progress bars are a `Bar/Fill`
+  object whose pivot is the bar's left edge with a `Quad` child half a bar to the right, so scaling `Fill` along x
+  fills from the left (8 bars: 2 boards, 2 stoves, 3 tickets, the timer); the sizzle is `Stove/Pan/SizzleAudio`, an
+  AudioSource with the loop clip, play-on-awake, saved switched off; the tutorial text has no fade (it hides); the
+  highlight (109) stays open.
+- **A change to the TypeScript:** the knife is Q's click target (`q_<cell>` = `CuttingBoard/Knife`) and was also what
+  the board switched on and off, so a cut could not be started once the knife hid under an item. The board now
+  switches `CuttingBoard/Knife/Model`; the object with the click collider stays.
+
+**Art (owner's decision: KayKit).** Models from KayKit Restaurant Bits (Kay Lousberg, CC0), downloaded into
+`C:\workspace\AltspaceGames\_downloads\coop-kitchen\` first (OBJ, MTL and PNG checked by type), and only the 27 used
+copied to `Assets/Kit/Art/KayKit/`. One URP Simple Lit material with the pack's atlas (256 px).
+
+| Upstream | KayKit model | Note |
+|---|---|---|
+| plain counter, plate counter | `kitchencounter_straight_A` | stretched to 0.96 x 0.90 x 0.96 m |
+| plate stack | `kitchencounter_straight_B` + a dark ring | |
+| corner | `kitchencounter_outercorner` | |
+| crate counters (5) | counter + `crate_buns`, `crate_lettuce`, `crate_cheese`, `crate_steak`, `crate_tomatoes` + `crate_lid` | the lid is the upstream door: it opens and closes |
+| cutting board, knife | `cuttingboard`, `knife` | |
+| stove | counter + `stove_single_countertop` + `pan_A`, a red knob (Unity cylinder) on the front for Q | |
+| trash | `jar_C_large`, widened | **closest match**: Restaurant Bits has no bin |
+| delivery counter | `kitchencounter_straight_B` tinted blue, `menu`, a DELIVER sign | |
+| floor | `floor_kitchen` tiles | |
+| Bread | `food_ingredient_bun_bottom` | **closest**: a bottom bun (upstream: a bun that the rest sits on) |
+| Cabbage, Cabbage_Sliced | `food_ingredient_lettuce`, `food_ingredient_lettuce_slice` | **closest**: lettuce for cabbage |
+| Cheese, Cheese_Sliced | `food_ingredient_cheese`, `food_ingredient_cheese_slice` | |
+| Meat, Meat_Cooked, Meat_Burned | `food_ingredient_burger_uncooked`, `_cooked`, `_trash` | |
+| Tomato, Tomato_Sliced | `food_ingredient_tomato`, `food_ingredient_tomato_slice` | |
+| Plate | `plate` | items at 0.674 m per KayKit unit: a plate is 0.64 m, upstream's 1 m at kit scale, so the recipe layouts (`lp`) fit |
+| ingredient icons (sprite tags) | pictures of the ten models above, rendered by the builder into a TextMesh Pro sprite asset (`Assets/Kit/Icons/`), names as upstream's icon files | upstream's icons are not used |
+
+Sounds: Kenney Interface Sounds and Impact Sounds (CC0), the sizzle loop made here; no music (THIRD-PARTY-NOTICES.md).
+Font: Liberation Sans (OFL), TextMesh Pro's default.
+
+**Animations made (the 22 upstream legacy clips are not imported).** Animator controllers written by the builder, one
+state per name the TypeScript sends with `animPlay`, the first state the default; every state's speed follows the
+float parameter `Speed` (1), which `Stove@Burning` sets to 2 (`animFloat`).
+
+| On | States | Motion |
+|---|---|---|
+| each crate counter | `Idle`, `IngredientCounter@Open` (0.5 s) | the lid swings 75 degrees open about its back edge and closes |
+| each cutting board | `CuttingBoard@Idle`, `CuttingBoard@Cutting` (loop, 0.25 s) | the knife model chops (35 degrees up and down) |
+| each stove | `Stove@Idle`, `Stove@Heatting` (0.5 s), `Stove@WaitBurning` (loop 0.33 s), `Stove@Burning` (loop 0.17 s) | the pan jiggles, harder when burning |
+| trash | `Idle`, `Trash@DropItem` (0.52 s) | the bin squashes and springs back |
+| board: countdown, timer, times up, tickets | `CountDown@CountDown`, `Timer@FinalSecondsCountDown`, `TimesUp@Show`, `OrderTicket@Delivered` / `@Failed` (loop) | scale pulses |
+| tutorial arrows | `TutorialArrow@Idle` (loop) | bounces |
+
+The delivery and preparation floating texts ("Need Plate!", "+NN Tip!", "Wrong Plate!", "Cannot Cut") are shown and
+hidden by the page (`Kitchen.Flash`), as before; they have no animation.
