@@ -58,7 +58,8 @@ export class CuttingBoard extends AbstractIngredientPreparator {
 
   override Render(G: number, previousG: number | null): void {
     const st = this.st;
-    this.Host.setActive(`@${this.path}/Knife`, st.knife === 1);
+    // The knife's model is shown and hidden; the knife object itself stays, since it is what a click for Q lands on.
+    this.Host.setActive(`@${this.path}/Knife/Model`, st.knife === 1);
     if (st.anim !== this.shownAnim) {
       this.shownAnim = st.anim;
       this.Host.animPlay(`@${this.path}`, st.anim);

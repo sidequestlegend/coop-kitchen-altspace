@@ -1,5 +1,5 @@
 {
-  "provisional": "Written by tools/gen-bindings.ts, not by the kit builder: no kit exists yet. Replace with the kit builder's output (PORT.md 11).",
+  "provisional": "Written by tools/gen-bindings.ts, not by the kit builder: no kit build yet. PortKit/Kit/Build Prefabs replaces it.",
   "schema": 1,
   "slug": "coop-kitchen",
   "hash": "",
@@ -9,6 +9,13 @@
     "android": ""
   },
   "objects": {
+    "logic": {
+      "path": "Logic",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
     "sfx": {
       "path": "Audio",
       "sync": "none",
@@ -1751,7 +1758,8 @@
           ]
         },
         "kitScale": 0.64
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "match",
@@ -1760,11 +1768,13 @@
         "kitchen": {
           "$beh": "kitchen"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "score",
-      "type": "ScoreManager"
+      "type": "ScoreManager",
+      "object": "logic"
     },
     {
       "id": "orders",
@@ -1773,11 +1783,13 @@
         "kitchen": {
           "$beh": "kitchen"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "gameData",
-      "type": "GameDataManager"
+      "type": "GameDataManager",
+      "object": "logic"
     },
     {
       "id": "ct_CabbageCounter_01",
@@ -2270,7 +2282,8 @@
         "barFill": {
           "$obj": "bar_CutCounter_01"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pr_StoveCounter_01",
@@ -2291,7 +2304,8 @@
         "barFill": {
           "$obj": "bar_StoveCounter_01"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pr_CutCounter_00",
@@ -2311,7 +2325,8 @@
         "barFill": {
           "$obj": "bar_CutCounter_00"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pr_StoveCounter_00",
@@ -2332,7 +2347,8 @@
         "barFill": {
           "$obj": "bar_StoveCounter_00"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pc_CutCounter_01",
@@ -2349,7 +2365,8 @@
           "$obj": "bar_CutCounter_01"
         },
         "rejectedText": "Cannot \nCut"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pc_StoveCounter_01",
@@ -2366,7 +2383,8 @@
           "$obj": "bar_StoveCounter_01"
         },
         "rejectedText": "Cannot \nCook"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pc_CutCounter_00",
@@ -2383,7 +2401,8 @@
           "$obj": "bar_CutCounter_00"
         },
         "rejectedText": "Cannot \nCut"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pc_StoveCounter_00",
@@ -2400,7 +2419,8 @@
           "$obj": "bar_StoveCounter_00"
         },
         "rejectedText": "Cannot \nCook"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "deliveryCanvas",
@@ -2416,7 +2436,8 @@
           "kind": "TMP"
         },
         "tipFormat": "+{0:D2} Tip!"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "tickets",
@@ -2470,7 +2491,8 @@
             "$obj": "ticketBar2"
           }
         ]
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "scoreUi",
@@ -2488,7 +2510,8 @@
           "$comp": "scoreDelta",
           "kind": "TMP"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "timer",
@@ -2506,7 +2529,8 @@
         "slider": {
           "$obj": "timerFill"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "countDown",
@@ -2521,7 +2545,8 @@
           "$comp": "countDownText",
           "kind": "TMP"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "timesUp",
@@ -2532,7 +2557,8 @@
         },
         "path": "Board/TimesUp",
         "board": "board"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "results",
@@ -2576,7 +2602,8 @@
         "newHighScore": {
           "$obj": "newHighScore"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "music",
@@ -2586,7 +2613,8 @@
           "$beh": "kitchen"
         },
         "path": "Music"
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "soundPopup",
@@ -2642,7 +2670,8 @@
           "$comp": "rosterText",
           "kind": "TMP"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "pauseOptions",
@@ -2688,7 +2717,8 @@
           "$comp": "pausedBy",
           "kind": "TMP"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "tutorialDescription",
@@ -2706,7 +2736,8 @@
           "$comp": "tutorialText",
           "kind": "TMP"
         }
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "tutorial",
@@ -2732,7 +2763,8 @@
         },
         "plateCounterCell": "Counter_Plate_00",
         "timeBetweenSteps": 0.4
-      }
+      },
+      "object": "logic"
     },
     {
       "id": "chef",
@@ -2742,7 +2774,8 @@
         "kitchen": {
           "$beh": "kitchen"
         }
-      }
+      },
+      "object": "logic"
     }
   ],
   "events": [

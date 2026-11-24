@@ -85,7 +85,7 @@ test("cutting: 3 s of game time, paused by Q and resumed, the bar stays; Cannot 
   assert.equal(world.behaviour<PreparationWorldSpaceCanvas>(bob, "pc_CutCounter_00").rejectedShown, 1, "Bob sees Cannot Cut");
   await E(world, ann, "CheeseCounter_00");
   await E(world, ann, "CutCounter_00");
-  assert.equal(shown(bob, "@Counters/CutCounter_00/CuttingBoard/Knife"), false, "the knife hides under the cheese");
+  assert.equal(shown(bob, "@Counters/CutCounter_00/CuttingBoard/Knife/Model"), false, "the knife hides under the cheese");
   await click(world, ann, "q_CutCounter_00", "0", 1000);
   assert.ok(board.IsPreparing);
   await click(world, ann, "q_CutCounter_00", "0", 2000); // pause after about 1 s of cutting
