@@ -67,6 +67,7 @@ namespace CoopKitchen
         {
             stage = s;
             made.Clear();
+            controllers.Clear();
             var contract = JObject.Parse(File.ReadAllText(ContractPath));
             var data = JObject.Parse(File.ReadAllText(DataPath));
             font = KitText.DefaultFont();
@@ -685,6 +686,17 @@ namespace CoopKitchen
         /// <summary>An Animator on `go` whose states have the given names; the first is the default. Speed of every state follows the float "Speed" (1).</summary>
         void Animated(GameObject go, string name, params (string state, AnimationClip clip, bool loop, float speed)[] states)
         {
+            if (!controllers.TryGetValue(name, out var controller)) controllers[name] = controller = Controller(name, states);
+            var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
+            animator.runtimeAnimatorController = controller;
+            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+            animator.applyRootMotion = false;
+        }
+
+        readonly Dictionary<string, AnimatorController> controllers = new Dictionary<string, AnimatorController>(StringComparer.Ordinal);
+
+        static AnimatorController Controller(string name, (string state, AnimationClip clip, bool loop, float speed)[] states)
+        {
             Directory.CreateDirectory(AnimationFolder);
             string path = $"{AnimationFolder}/{name}.controller";
             AssetDatabase.DeleteAsset(path);
@@ -713,10 +725,7 @@ namespace CoopKitchen
             machine.defaultState = machine.states[0].state;
             EditorUtility.SetDirty(controller);
             AssetDatabase.SaveAssets();
-            var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
-            animator.runtimeAnimatorController = controller;
-            animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
-            animator.applyRootMotion = false;
+            return controller;
         }
 
         static AnimationCurve Curve(params (float t, float v)[] keys) => new AnimationCurve(keys.Select(k => new Keyframe(k.t, k.v)).ToArray());
