@@ -270,7 +270,7 @@ namespace CoopKitchen
                         break;
                     case "Counter_Delivery":
                         Model("kitchencounter_straight_B", root.transform, Vector3.zero, counterScale, 0f, kayKitBlue);
-                        Model("menu", root.transform, new Vector3(-0.32f, TopY, -0.3f), Vector3.one * 0.5f, 180f, null, "Menu");
+                        Model("menu", root.transform, new Vector3(0.34f, TopY, -0.34f), Vector3.one * 0.5f, 180f, null, "Menu");
                         DeliveryCanvas(name, root);
                         break;
                     case "CutCounter":
@@ -436,7 +436,7 @@ namespace CoopKitchen
                 go.SetActive(false);
             }
             var sign = stage.Create("Sign", root.transform);
-            sign.transform.localPosition = new Vector3(0f, 1.15f, -0.35f);
+            sign.transform.localPosition = new Vector3(-0.1f, 1.02f, -0.42f);
             sign.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
             Text(sign, "<b>DELIVER</b>", 2f, new Vector2(1f, 0.3f), new Color(0.2f, 0.4f, 1f));
         }
@@ -496,15 +496,15 @@ namespace CoopKitchen
             Speaker(board, 16f);
             Cube("Back", board.transform, new Vector3(0f, 0.95f, 0.03f), new Vector3(3.4f, 1.95f, 0.04f), boardBack);
             var title = stage.Create("Title", board.transform);
-            title.transform.localPosition = new Vector3(-1.1f, 1.8f, 0f);
-            Text(title, "<b>Co-op Kitchen</b>", 2.2f, new Vector2(1.2f, 0.25f), new Color(1f, 0.85f, 0.4f), TextAlignmentOptions.Left);
+            title.transform.localPosition = new Vector3(0f, 1.8f, 0f);
+            Text(title, "<b>Co-op Kitchen</b>", 1.8f, new Vector2(2.4f, 0.2f), new Color(1f, 0.85f, 0.4f));
 
             // orders: three tickets across the top
             for (int i = 0; i < 3; i++)
             {
                 string t = $"Board/Orders/Ticket{i}";
                 var ticket = Put(t);
-                ticket.transform.localPosition = new Vector3(-0.55f + i * 0.85f, 1.55f, 0f);
+                ticket.transform.localPosition = new Vector3(-0.9f + i * 0.9f, 1.45f, 0f);
                 Cube("Bg", ticket.transform, new Vector3(0f, 0f, 0.01f), new Vector3(0.8f, 0.42f, 0.01f), panelBack);
                 var name = Put(t + "/Name");
                 name.transform.localPosition = new Vector3(0f, 0.13f, 0f);
@@ -522,14 +522,14 @@ namespace CoopKitchen
             var score = Put("Board/Hud/Score");
             score.transform.localPosition = new Vector3(-1.2f, 1.05f, 0f);
             Text(Put("Board/Hud/Score/Label"), "Score", 1.4f, new Vector2(0.8f, 0.12f), new Color(0.8f, 0.8f, 0.8f)).transform.localPosition = new Vector3(0f, 0.18f, 0f);
-            Text(Put("Board/Hud/Score/Current"), "0", 4f, new Vector2(0.8f, 0.3f), Color.white);
+            Text(Put("Board/Hud/Score/Current"), "0", 3.5f, new Vector2(1.1f, 0.3f), Color.white).textWrappingMode = TextWrappingModes.NoWrap;
             var delta = Put("Board/Hud/Score/Delta");
             delta.transform.localPosition = new Vector3(0f, -0.25f, 0f);
             Text(delta, "", 2f, new Vector2(0.8f, 0.2f), new Color(0.4f, 1f, 0.4f));
             delta.SetActive(false);
             var timer = Put("Board/Hud/Timer");
             timer.transform.localPosition = new Vector3(1.2f, 1.05f, 0f);
-            Text(Put("Board/Hud/Timer/Text"), "02:00", 4f, new Vector2(0.8f, 0.3f), Color.white);
+            Text(Put("Board/Hud/Timer/Text"), "02:00", 3.5f, new Vector2(1.1f, 0.3f), Color.white).textWrappingMode = TextWrappingModes.NoWrap;
             Bar("Board/Hud/Timer/Bar", new Vector3(0f, -0.25f, 0f), 0.7f, new Color(1f, 0.8f, 0.2f));
             Animated(timer, "Timer", ("Idle", Pose(null, timer.transform.localPosition, Vector3.one), false, 1f),
                 ("Timer@FinalSecondsCountDown", Pulse(null, 0.5f, 1.15f, timer.transform.localPosition), false, 1f));
@@ -938,9 +938,9 @@ namespace CoopKitchen
                 preview.camera.backgroundColor = new Color(0f, 0f, 0f, 0f);
                 preview.camera.nearClipPlane = 0.01f;
                 preview.camera.farClipPlane = 20f;
-                preview.lights[0].intensity = 1.3f;
+                preview.lights[0].intensity = 2.2f;
                 preview.lights[0].transform.rotation = Quaternion.Euler(40f, 30f, 0f);
-                preview.ambientColor = new Color(0.45f, 0.45f, 0.45f);
+                preview.ambientColor = new Color(0.7f, 0.7f, 0.7f);
                 for (int v = 0; v < IconNames.Length; v++)
                 {
                     int x = (v % columns) * cell, y = (rows - 1 - v / columns) * cell;

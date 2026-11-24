@@ -56,6 +56,25 @@
   }
   const debug = () => window.__pk1 && window.__pk1.debug && window.__pk1.debug[KEY];
   const probe = (what, path, extra) => cmd("probe " + HOLDER + " " + what + " " + path.replace(/ /g, "%20") + (extra ? " " + extra : ""));
+  /** A probe asked again until it gives what is wanted (state reaches the page a tick before the relay reaches Unity). */
+  async function probeUntil(what, path, ok, ms) {
+    const end = Date.now() + (ms || 4000);
+    for (;;) {
+      const value = await probe(what, path);
+      if (ok(value) || Date.now() > end) return value;
+      await sleep(200);
+    }
+  }
+  /** Is a pool item drawn in Unity: its slot on, the right child on? */
+  async function drawn(id) {
+    const s = debug().slotOf(id);
+    if (s < 0) return "no slot";
+    const k = debug().items()[id].k;
+    const path = "Items/Slot" + String(s).padStart(2, "0");
+    const slotOn = await probeUntil("active", path, (v) => v === "True");
+    const childOn = await probeUntil("active", path + (k < 0 ? "/Plate" : "/V" + k), (v) => v === "True");
+    return slotOn === "True" && childOn === "True" ? "ok" : `slot ${s} ${slotOn}, child ${childOn}`;
+  }
 
   // ---- the kitchen as the page has it ----
   const V = { Bread: 0, Cheese: 3, CheeseSliced: 4, Meat: 5, MeatCooked: 6 };
@@ -121,7 +140,11 @@
   async function single() {
     if (!(await waitStarted())) return;
     check(debug().phase() === "lobby", "a fresh kitchen is in the lobby with two plates on their counters", `${debug().phase()}, plates ${show([on("Counter_Plate_00"), on("Counter_Plate_01")].map((p) => p && p.k))}`);
-    const lobbyShown = await probe("active", "Board/Lobby");
+    const plates = [on("Counter_Plate_00"), on("Counter_Plate_01")];
+    const platesDrawn = [];
+    for (const p of plates) platesDrawn.push(p ? await drawn(p.id) : "none");
+    check(platesDrawn.every((d) => d === "ok"), "both plates are drawn in Unity (pool slots on, their Plate child on)", show(platesDrawn));
+    const lobbyShown = await probeUntil("active", "Board/Lobby", (v) => v === "True");
     check(lobbyShown === "True", "the board shows the lobby", lobbyShown);
 
     await act(() => clickAt("Board/Lobby/Cook", "COOK"), () => debug().roster()[me().uid] !== undefined, "COOK takes a chef's place (board button, real mouse)");
@@ -143,12 +166,10 @@
     // cut the cheese
     await act(() => E("CheeseCounter_00"), () => hand() && hand().k === V.Cheese, "take a cheese from its crate");
     await act(() => E("CutCounter_00"), () => on("CutCounter_00") && on("CutCounter_00").k === V.Cheese && !hand(), "put the cheese on the cutting board");
-    await sleep(800);
-    const knifeHidden = await probe("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model");
+    const knifeHidden = await probeUntil("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model", (v) => v === "False");
     await Q("CutCounter_00");
-    await sleep(1000);
-    const bar = await probe("active", "Counters/CutCounter_00/CuttingBoard/Canvas/Bar");
-    const knifeCutting = await probe("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model");
+    const bar = await probeUntil("active", "Counters/CutCounter_00/CuttingBoard/Canvas/Bar", (v) => v === "True");
+    const knifeCutting = await probeUntil("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model", (v) => v === "True");
     check(knifeHidden === "False" && knifeCutting === "True" && bar === "True", "Q on the knife starts cutting: the knife shows and chops, the bar shows", `knife before ${knifeHidden}, while cutting ${knifeCutting}, bar ${bar}`);
     const fill = await probe("scale", "Counters/CutCounter_00/CuttingBoard/Canvas/Bar/Fill");
     say("INFO", "cutting bar fill scale " + fill);
@@ -157,8 +178,7 @@
     await act(() => E("MeatCounter_00"), () => hand() && hand().k === V.Meat, "take a meat from its crate");
     await act(() => E("StoveCounter_00"), () => on("StoveCounter_00") && on("StoveCounter_00").k === V.Meat && !hand(), "put the meat on the stove");
     await Q("StoveCounter_00");
-    await sleep(1200);
-    const sizzle = await probe("active", "Counters/StoveCounter_00/Stove/Pan/SizzleAudio");
+    const sizzle = await probeUntil("active", "Counters/StoveCounter_00/Stove/Pan/SizzleAudio", (v) => v === "True");
     check(sizzle === "True", "cooking starts: the stove's sizzle loop is switched on (Q on the knob)", sizzle);
 
     // the slice onto the plate
@@ -178,8 +198,14 @@
     const plate = on("Counter_Plate_01");
     const slot = debug().slotOf(plate.id);
     const slotPath = "Items/Slot" + String(slot).padStart(2, "0");
-    const plateShown = await probe("active", slotPath + "/Plate");
-    const plateIcons = await probe("text", slotPath + "/Plate/Icons");
+    let plateShown = "", plateIcons = "";
+    for (let i = 0; i < 16; i++) {
+      plateShown = await probe("active", slotPath + "/Plate");
+      plateIcons = await probe("text", slotPath + "/Plate/Icons");
+      if (plateShown === "True" && (plateIcons.match(/<sprite/g) || []).length === 3) break;
+      if (i === 0) say("INFO", "plate not drawn yet: " + plateShown + " '" + plateIcons + "', slot active " + (await probe("active", slotPath)));
+      await sleep(250);
+    }
     const platePos = await probe("pos", slotPath);
     const topPos = await probe("pos", "Counters/Counter_Plate_01/Top");
     const d = platePos.split(" ").map(Number);
@@ -199,8 +225,7 @@
     await act(() => E("Counter_Plate_01"), () => hand() && hand().k === -1, "pick up the plate");
     await act(() => E("Counter_Delivery"), () => debug().score() > before, "deliver it at the delivery counter", 5000);
     const score = debug().score();
-    await sleep(800);
-    const scoreText = await probe("text", "Board/Hud/Score/Current");
+    const scoreText = await probeUntil("text", "Board/Hud/Score/Current", (v) => v === String(score));
     check(score >= 20 && scoreText === String(score), "the score shows the delivery and its tip (20 + tip), on the board in Unity", `score ${score}, board '${scoreText}'`);
     const tip = await probe("text", "Counters/Counter_Delivery/Canvas/Tip");
     say("INFO", "tip text " + tip);
@@ -208,7 +233,7 @@
 
     // pause and resume
     await act(() => clickAt("Board/Hud/Pause", "Pause"), () => debug().paused(), "Pause pauses the round");
-    const panel = await probe("active", "Board/PausePanel");
+    const panel = await probeUntil("active", "Board/PausePanel", (v) => v === "True");
     check(panel === "True", "the pause panel shows", panel);
     await act(() => clickAt("Board/PausePanel/Options/Resume", "Resume"), () => !debug().paused(), "Resume carries on");
   }
@@ -270,8 +295,8 @@
       check(!!theirs && theirs.score === debug().score(), "the delivery updates the score on the other page too", theirs ? `${theirs.score} there, ${debug().score()} here, their board '${theirs.text}'` : "no word");
       // a pause by the other chef shows here
       const paused = await until(() => debug().paused(), 40000, 200);
-      const panel = await probe("active", "Board/PausePanel");
-      const by = await probe("text", "Board/PausePanel/PausedBy");
+      const panel = await probeUntil("active", "Board/PausePanel", (v) => v === "True");
+      const by = await probeUntil("text", "Board/PausePanel/PausedBy", (v) => v.length > 0);
       check(!!paused && debug().pausedBy() !== me().uid && panel === "True", "a pause by the other chef shows here (pause panel on)", `paused ${paused}, by ${debug().pausedBy()}, panel ${panel}, '${by}'`);
       const resumed = await until(() => !debug().paused(), 40000, 200);
       check(!!resumed, "the other chef's resume arrives here", "");
@@ -304,8 +329,7 @@
       await act(() => E("Counter_Plate_01"), () => (plated("Counter_Plate_01") || []).indexOf(V.MeatCooked) >= 0, "second: plate the meat");
       const word = await until(() => heard.find((m) => m.kind === "score"), 60000, 200);
       const seen = word && (await until(() => debug().score() === word.score, 5000, 100));
-      await sleep(500);
-      const text = await probe("text", "Board/Hud/Score/Current");
+      const text = await probeUntil("text", "Board/Hud/Score/Current", (v) => word && v === String(word.score));
       check(!!seen && text === String(word.score), "the other chef's delivery shows in the score here (state and board)", `${debug().score()} / ${word && word.score}, board '${text}'`);
       send({ kind: "scoreSeen", score: debug().score(), text });
       await act(() => clickAt("Board/Hud/Pause", "Pause"), () => debug().paused(), "second: pause the round");
@@ -327,7 +351,7 @@
   async function afterReload(send) {
     const back = await until(() => debug().phase() === "round" && debug().score() > 0, 30000, 250);
     check(!!back, "after reloading, this page sees the running round and the score (late join)", `${debug().phase()}, score ${debug().score()}`);
-    const text = await probe("text", "Board/Hud/Score/Current");
+    const text = await probeUntil("text", "Board/Hud/Score/Current", (v) => v === String(debug().score()));
     const plate = on("Counter_Plate_00");
     check(text === String(debug().score()) && plate && plate.k === -1, "the reloaded page draws the kitchen as it is: score on the board, a plate on its counter", `board '${text}', plate counter ${show(plate)}`);
     send({ kind: "back", score: debug().score() });
