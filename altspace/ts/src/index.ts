@@ -1,5 +1,5 @@
-// coop-kitchen: the rules of HyagoOliveira/KitchenChaos (MIT, Copyright (c) 2023 Hyago Oliveira) as a co-op game on the
-// portkit runtime. The classes bindings.json names by `type`; the build bundles this with bindings.json into
+// coop-kitchen: a co-op game on the portkit runtime, based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos
+// (MIT, Copyright (c) 2023 Hyago Oliveira). The classes bindings.json names by `type`; the build bundles this with bindings.json into
 // pk-coop-kitchen.js.
 
 import type { GameDefinition, GameInstance } from "../portkit/src/index.ts";
@@ -85,6 +85,11 @@ function debugHooks(instance: GameInstance): Record<string, unknown> {
     pausedBy: () => kitchen().match.PausedBy,
     /** The local player as the instance knows them. */
     me: () => ({ sid: instance.networking.LocalPlayer.sid, uid: instance.networking.LocalPlayer.uid, name: instance.networking.LocalPlayer.displayName }),
+    /** A cutting board's or stove's state: preparing, paused, burning. */
+    prep: (cell: string) => {
+      const p = kitchen().prep[cell];
+      return p ? { p: p.p, ps: p.ps, burn: p.burn !== null } : null;
+    },
     /** The pool slot that shows an item on this page (-1: none). */
     slotOf: (id: string) => kitchen().SlotOf(id),
     /** A kit object's path by its key (bindings.json). */

@@ -30,7 +30,7 @@ import type { AbstractItem } from "./AbstractItem.ts";
 import type { AbstractIngredientPreparator } from "./AbstractIngredientPreparator.ts";
 import { BoxCaster } from "./ActionCode.ts";
 import type { Chef } from "./Chef.ts";
-import type { Counter } from "./Counter.ts";
+import { REACH, type Counter } from "./Counter.ts";
 import type { DeliveryCounter } from "./DeliveryCounter.ts";
 import { Ingredient } from "./Ingredient.ts";
 import type { IngredientData } from "./IngredientData.ts";
@@ -113,6 +113,10 @@ export const HAND = "hand:";
 export const MAX_CHEFS = 8;
 /** Kitchen-wide limit of items (C10). */
 export const POOL_SIZE = 48;
+/** The floor's half width and half depth at upstream scale (the kit builder's floor: 11 by 7 cells of 1.5 m). */
+const FLOOR_HALF = [8.25, 5.25] as const;
+/** How long (s) a grab waits for the referee to put the item in the grabbing chef's hand before it lets go. */
+const GRAB_WAIT = 3;
 const round3 = (v: number) => Math.round(v * 1000) / 1000;
 
 export class Kitchen extends Behaviour implements KitchenItems {
@@ -166,6 +170,11 @@ export class Kitchen extends Behaviour implements KitchenItems {
   private readonly slotOf = new Map<string, number>();
   private readonly slotShown: Array<{ id: string; k: number; at: string; icons: string } | null> = [];
   private readonly grabbedSlot = new Set<number>();
+  /** Grabs waiting for the referee (or confirmed): slot -> the item and when it was grabbed. A grab the referee did not
+   *  give this chef (another chef got there first) is let go, so the hand does not keep a slot nobody draws. */
+  private readonly grabs = new Map<number, { id: string; at: number; ok: boolean }>();
+  /** Where each chef's head was last seen (from their Chef), kept after they leave: a departing chef's item falls there. */
+  private readonly lastHead = new Map<string, number[]>();
   /** The layer pool slots are on: Grabbable (20), or UI (5) with input="click". */
   private slotLayer = 20;
   /** The slot whose item this page's chef holds by a click (not a physical grab), put on Default (0) so that it never
@@ -200,12 +209,12 @@ export class Kitchen extends Behaviour implements KitchenItems {
     }
     this.slots.forEach((slot, index) => {
       this.slotShown.push(null);
-      slot.On("click", (detail) => this.ClickSlot(index, detail));
+      slot.On("click", (detail) => this.Reaches(detail, slot) && this.ClickSlot(index, detail));
       slot.On("grab", () => this.GrabSlot(index));
       slot.On("drop", (detail) => this.DropSlot(index, detail));
     });
-    this.floor?.On("click", (detail) => this.LocalIntent("E", "floor", detail.point ?? null));
-    for (const corner of this.corners) corner.On("click", () => this.LocalIntent("E", "corner", null));
+    this.floor?.On("click", (detail) => this.Reaches(detail, null) && this.LocalIntent("E", "floor", detail.point ?? null));
+    for (const corner of this.corners) corner.On("click", (detail) => this.Reaches(detail, corner) && this.LocalIntent("E", "corner", null));
     this.slotLayer = this.Settings.get("input") === "click" ? 5 : 20;
     for (const slot of this.slots) slot.layer = this.slotLayer;
 
@@ -313,12 +322,32 @@ export class Kitchen extends Behaviour implements KitchenItems {
     this.releasingFrom = from;
   }
 
-  /** Where a dropped item lands: the point the chef chose for this action, else below the holder it left. */
+  /** Where a dropped item lands: the point the chef chose for this action, else below the holder it left, else the
+   *  middle of the kitchen's floor (never the world's origin: the kitchen may stand anywhere). */
   DropPoint(): number[] {
     if (this.dropAt && this.releasingFrom.startsWith(HAND)) return this.dropAt.slice();
     const anchor = this.AnchorOf(this.releasingFrom);
-    const floorY = this.floor?.transform.known ? this.floor.transform.position.y : 0;
-    return anchor ? [round3(anchor.x), round3(floorY), round3(anchor.z)] : [0, round3(floorY), 0];
+    if (anchor) return this.OnFloor([anchor.x, anchor.y, anchor.z]);
+    const centre = this.floor?.transform.known ? this.floor.transform.position : Vector3.zero;
+    return this.OnFloor([centre.x, centre.y, centre.z]);
+  }
+
+  /**
+   * A point on the kitchen's floor below `p`: at the floor's height (a hand lets go in the air, the item falls to the
+   * floor), and inside the floor's footprint (a click names its point, and a modified client could name any point: an
+   * item never lands outside the kitchen). Without the floor's pose, only the height (0) is set.
+   */
+  OnFloor(p: number[]): number[] {
+    const floor = this.floor?.transform;
+    if (!floor?.known) return [round3(p[0]!), 0, round3(p[2]!)];
+    const centre = floor.position;
+    const rotation = floor.rotation;
+    const local = rotation.inverse.rotate(new Vector3(p[0]! - centre.x, 0, p[2]! - centre.z));
+    const hx = FLOOR_HALF[0] * this.kitScale;
+    const hz = FLOOR_HALF[1] * this.kitScale;
+    const clamped = new Vector3(Math.max(-hx, Math.min(hx, local.x)), 0, Math.max(-hz, Math.min(hz, local.z)));
+    const world = centre.add(rotation.rotate(clamped));
+    return [round3(world.x), round3(centre.y), round3(world.z)];
   }
 
   /** The world position a holder shows its item at; null for a hand whose chef cannot be placed. */
@@ -338,8 +367,15 @@ export class Kitchen extends Behaviour implements KitchenItems {
       if (poses) return poses.head.position.add(poses.head.rotation.rotate(new Vector3(0, -0.3, 0.45)));
       return this.Input.Position?.add(new Vector3(0, -0.3, 0)) ?? null;
     }
-    const chef = this.ChefOf(uid);
-    return chef && chef.head ? new Vector3(chef.head[0]!, chef.head[1]! - 0.3, chef.head[2]!) : null;
+    const head = this.HeadOf(uid);
+    return head ? new Vector3(head[0]!, head[1]! - 0.3, head[2]!) : null;
+  }
+
+  /** Where a chef's head is, as their Chef publishes it, else where it was last seen (also after they left). */
+  HeadOf(uid: string): number[] | null {
+    const head = this.ChefOf(uid)?.head ?? null;
+    if (head) return head;
+    return this.lastHead.get(uid) ?? null;
   }
 
   ChefOf(uid: string): Chef | null {
@@ -354,23 +390,47 @@ export class Kitchen extends Behaviour implements KitchenItems {
     const args: unknown[] = [kind, target];
     if (point) args.push(round3(point.x), round3(point.y), round3(point.z));
     else args.push(null, null, null);
-    args.push(release);
+    args.push(release, this.Seen(target));
     this.SendCommand("Intent", ...args);
   }
 
-  /** Runs on the referee (a command): the upstream rule, for the calling chef, against the named target. */
-  Intent(kind: string, target: string, x: number | null, y: number | null, z: number | null, release = false): void {
-    const player = this.Networking.CallingPlayer;
-    if (!player) return;
-    this.IntentFor(player.uid, kind, target, x, y, z, release);
+  /**
+   * What a chef saw of a target when they acted (sent with the intent): the item on a counter (the top of a stack), and
+   * for a cutting board or stove whether it was preparing, paused or burning. Upstream one chef acts on what is in front
+   * of it; here two chefs can act on one counter within one round trip, and the second must not act on what the first
+   * just changed (start-then-pause a board with two Q presses, put an item where the other chef just took one).
+   */
+  Seen(target: string): string {
+    if (!target.startsWith("c:")) return "";
+    const cell = target.slice(2);
+    const stack = this.stacks[cell];
+    const item = stack && stack.length ? stack[stack.length - 1]! : (this.holders[cell] ?? "");
+    const prep = this.prep[cell];
+    return prep ? `${item}|${prep.p}${prep.ps}${prep.burn !== null ? 1 : 0}` : item;
   }
 
-  /** The intent of the chef with user id `uid` (Intent, and rules tests that have no room). */
-  IntentFor(uid: string, kind: string, target: string, x: number | null = null, y: number | null = null, z: number | null = null, release = false): void {
+  /** Runs on the referee (a command): the upstream rule, for the calling chef, against the named target. */
+  Intent(kind: string, target: string, x: number | null, y: number | null, z: number | null, release = false, seen: string | null = null): void {
+    const player = this.Networking.CallingPlayer;
+    if (!player || typeof kind !== "string" || typeof target !== "string") return;
+    const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
+    this.IntentFor(player.uid, kind, target, n(x), n(y), n(z), release === true, typeof seen === "string" ? seen : null);
+  }
+
+  /**
+   * The intent of the chef with user id `uid` (Intent, and rules tests that have no room). `seen`: what the chef saw of
+   * the target (Seen); when the target has changed since, the intent is stale and nothing happens, except that an item a
+   * VR hand has already let go of falls to the floor (C9). Null: not checked (rules tests).
+   */
+  IntentFor(uid: string, kind: string, target: string, x: number | null = null, y: number | null = null, z: number | null = null, release = false, seen: string | null = null): void {
     if (this.roster[uid] === undefined || !this.match.AcceptsInput()) return;
+    if (seen !== null && seen !== this.Seen(target)) {
+      if (kind === "E" && release && target !== "floor") this.IntentFor(uid, "E", "floor", x, y, z, true, null);
+      return;
+    }
     const handler = this.Handler(uid);
     handler.detector = new BoxCaster(this.TargetObject(target));
-    this.dropAt = x !== null && y !== null && z !== null ? [x, y, z] : this.FloorBelowChef(uid);
+    this.dropAt = x !== null && y !== null && z !== null ? this.OnFloor([x, y, z]) : this.FloorBelowChef(uid);
     try {
       if (kind === "E") {
         const held = handler.holder.CurrentItem;
@@ -385,10 +445,10 @@ export class Kitchen extends Behaviour implements KitchenItems {
     this.CommitAll();
   }
 
+  /** The floor below where the chef's head is or was last seen (null when it never was). */
   private FloorBelowChef(uid: string): number[] | null {
-    const chef = this.ChefOf(uid);
-    const floorY = this.floor?.transform.known ? this.floor.transform.position.y : 0;
-    return chef?.head ? [round3(chef.head[0]!), round3(floorY), round3(chef.head[2]!)] : null;
+    const head = this.HeadOf(uid);
+    return head ? this.OnFloor(head) : null;
   }
 
   /** What a target names, as the box cast would hit it: a counter, a loose item, a corner (a hit with nothing), or nothing. */
@@ -475,8 +535,10 @@ export class Kitchen extends Behaviour implements KitchenItems {
   // ---- the referee's clock ------------------------------------------------------------------------------------
 
   override Update(): void {
+    this.NoteHeads();
     if (this.Networking.IsReferee) this.RefereeTick();
     this.Render();
+    this.CheckGrabs();
     const now = this.Time.time;
     for (const [target, until] of [...this.flashes]) {
       if (now < until) continue;
@@ -486,6 +548,37 @@ export class Kitchen extends Behaviour implements KitchenItems {
   }
 
   private readonly flashes = new Map<string, number>();
+
+  /** Remembers where each chef's head was last published: a Chef goes with its player, the position must not. */
+  private NoteHeads(): void {
+    for (const chef of this.PlayerBehaviours<Chef>("Chef")) {
+      const uid = chef.Player?.uid;
+      if (uid && chef.head) this.lastHead.set(uid, chef.head.slice());
+    }
+  }
+
+  /**
+   * VR: a grab sends E for the grabbed item; if the referee gives the item to another chef (or nobody) instead, this
+   * hand lets go, so it does not hold a slot nobody draws. Also lets go when an item this hand held leaves it some other
+   * way (a reset of the kitchen).
+   */
+  private CheckGrabs(): void {
+    if (!this.grabs.size) return;
+    const me = HAND + this.Networking.LocalPlayer.uid;
+    const now = this.Time.time;
+    for (const [slot, grab] of [...this.grabs]) {
+      if (this.holders[me] === grab.id) {
+        grab.ok = true;
+        continue;
+      }
+      const where = this.items[grab.id] ? this.WhereIs(grab.id) : "gone";
+      const elsewhere = where === "gone" || (where.startsWith("holder:" + HAND) && where !== "holder:" + me);
+      if (!grab.ok && !elsewhere && now - grab.at < GRAB_WAIT) continue;
+      this.grabs.delete(slot);
+      this.grabbedSlot.delete(slot);
+      this.slots[slot]?.ReleaseGrab();
+    }
+  }
 
   /** Shows a kit object (a floating text) for a while on this client: the upstream's one-shot text animations. */
   Flash(target: string, seconds: number, others: string[] = []): void {
@@ -538,7 +631,12 @@ export class Kitchen extends Behaviour implements KitchenItems {
     this.SendCustomNetworkEvent(NetworkEventTarget.All, "OnFx", name, args);
   }
 
+  /** An effect from the referee. Any client can send the event; only the current referee's are played (a modified
+   *  client cannot make everyone hear sounds or see "+NN Tip!"). */
   OnFx(name: string, args: unknown[]): void {
+    const from = this.Networking.CallingSession;
+    const referee = this.Networking.Master;
+    if (!from || !referee || from.sid !== referee.sid || typeof name !== "string") return;
     for (const handler of (this.fxHandlers.get(name) ?? []).slice()) handler(...(Array.isArray(args) ? args : []));
   }
 
@@ -681,6 +779,12 @@ export class Kitchen extends Behaviour implements KitchenItems {
     return "i:" + id;
   }
 
+  /** A click counts within a chef's reach of the point clicked (C2; Counter.interactReach for counters, knives, knobs). */
+  private Reaches(detail: HostEventDetail, object: GameObject | null): boolean {
+    const point = detail.point ?? (object?.transform.known ? object.transform.position : null);
+    return !point || this.Input.InReach(point, REACH);
+  }
+
   private ClickSlot(slot: number, detail: HostEventDetail): void {
     const id = this.SlotItem(slot);
     if (!id) return;
@@ -702,12 +806,14 @@ export class Kitchen extends Behaviour implements KitchenItems {
       return;
     }
     this.grabbedSlot.add(slot);
+    this.grabs.set(slot, { id, at: this.Time.time, ok: false });
     this.LocalIntent("E", target, null);
   }
 
   /** VR: letting go is E on what is under the hand: a counter top within reach, a loose plate, else the floor (C9). */
   private DropSlot(slot: number, _detail: HostEventDetail): void {
     this.grabbedSlot.delete(slot);
+    this.grabs.delete(slot);
     const id = this.SlotItem(slot);
     const me = this.Networking.LocalPlayer.uid;
     if (!id || this.holders[HAND + me] !== id) return;

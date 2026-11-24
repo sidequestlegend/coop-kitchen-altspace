@@ -5,8 +5,11 @@
 //   ../Assets/Kit/Editor/kit-contract.json   read by CoopKitchenKitBuilder.cs, which builds the kit (KayKit art, CC0) with
 //                                            an object at every path and hands the contract to the portkit KitStage, so
 //                                            the real bindings.json it writes has exactly these keys, paths and fields
-//   ../Assets/Kit/Editor/bindings.lock.json  the behaviour ids below seeded into the kit's lock (the builder's ids would
-//                                            otherwise be b1, b2, ...; tests and debug hooks name "kitchen", "ct_<cell>")
+//                                            Each behaviour carries its id (tests and debug hooks name "kitchen",
+//                                            "ct_<cell>"), which the builder asks portkit's KitStage for
+//                                            (`Behaviour(go, type, fields, perPlayer, id)`); the kit's lock keeps it.
+//                                            The contract also carries the credits text (src/MainMenu.ts CREDITS), so
+//                                            the kit and the script show one text.
 //   bindings.json                            written only while there is no kit build yet (marked "provisional")
 //
 //   node tools/gen-bindings.ts
@@ -14,6 +17,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { CREDITS } from "../src/MainMenu.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const data = JSON.parse(readFileSync(join(here, "..", "data", "kitchen-data.json"), "utf8"));
@@ -293,22 +297,8 @@ for (const b of behaviours) if (b.object === undefined) b.object = "logic";
 const EOL = String.fromCharCode(10);
 const editor = join(here, "..", "..", "Assets", "Kit", "Editor");
 mkdirSync(editor, { recursive: true });
-const contract = { schema: 1, slug: "coop-kitchen", generatedBy: "ts/tools/gen-bindings.ts", objects, refs, behaviours, events };
+const contract = { schema: 1, slug: "coop-kitchen", generatedBy: "ts/tools/gen-bindings.ts", credits: CREDITS, objects, refs, behaviours, events };
 writeFileSync(join(editor, "kit-contract.json"), JSON.stringify(contract, null, 2) + EOL);
-
-// Seed the lock: "<object key>#<type>#<ordinal>" -> id, ordinals counted in the order the builder adds them (this order).
-const lockPath = join(editor, "bindings.lock.json");
-const lock = existsSync(lockPath) ? JSON.parse(readFileSync(lockPath, "utf8")) : { schema: 1, nextBehaviour: 1, objects: {}, behaviours: {} };
-const ordinals = new Map<string, number>();
-for (const b of behaviours) {
-  const stem = `${b.object}#${b.type}`;
-  const n = ordinals.get(stem) ?? 0;
-  ordinals.set(stem, n + 1);
-  lock.behaviours[`${stem}#${n}`] = b.id;
-}
-for (const [key, o] of Object.entries(objects)) lock.objects[o.path] = key;
-const sorted = (o: Record<string, string>) => Object.fromEntries(Object.keys(o).sort().map((k) => [k, o[k]!]));
-writeFileSync(lockPath, JSON.stringify({ schema: 1, nextBehaviour: lock.nextBehaviour ?? 1, objects: sorted(lock.objects), behaviours: sorted(lock.behaviours) }, null, 2) + EOL);
 
 const existing = existsSync(out) ? JSON.parse(readFileSync(out, "utf8")) : null;
 if (!existing || existing.provisional) {

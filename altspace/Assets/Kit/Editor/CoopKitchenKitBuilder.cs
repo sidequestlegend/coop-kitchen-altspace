@@ -45,7 +45,7 @@ namespace CoopKitchen
             "A co-op cooking game for up to four chefs (eight with the chefs setting): orders come in, chefs take bread, meat, " +
             "cheese, cabbage and tomato from the crates, cut and cook them, build the dish on a plate and deliver it for points " +
             "and tips before the round ends. Click counters, knives and stove knobs (or grab and let go of items in VR). " +
-            "Rules from HyagoOliveira/KitchenChaos (MIT, Copyright (c) 2023 Hyago Oliveira), made co-op; models from KayKit " +
+            "Based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT), made co-op; models from KayKit " +
             "Restaurant Bits by Kay Lousberg (CC0); sounds from Kenney (CC0). The credits panel on the board lists every licence.";
         public override string SnippetPosition => "0 0 0";
         /// <summary>PORT.md 8.2 (defaults reproduce upstream).</summary>
@@ -69,6 +69,7 @@ namespace CoopKitchen
             made.Clear();
             controllers.Clear();
             var contract = JObject.Parse(File.ReadAllText(ContractPath));
+            creditsText = (string)contract["credits"] ?? throw new Exception("kit-contract.json has no credits: run npm run bindings");
             var data = JObject.Parse(File.ReadAllText(DataPath));
             font = KitText.DefaultFont();
             PrepareImports();
@@ -87,6 +88,9 @@ namespace CoopKitchen
 
             ApplyContract(contract);
         }
+
+        /// <summary>The credits panel's text: the script's (src/MainMenu.ts CREDITS), carried by the contract, so both say the same.</summary>
+        string creditsText = "";
 
         // ------------------------------------------------------------------ the contract: keys, refs, behaviours, events
 
@@ -114,7 +118,9 @@ namespace CoopKitchen
             foreach (JObject b in (JArray)contract["behaviours"])
             {
                 var go = byKey[(string)b["object"] ?? "logic"];
-                tokens[(string)b["id"]] = stage.Behaviour(go, (string)b["type"], (JObject)(b["fields"] ?? new JObject()).DeepClone());
+                // the contract names each behaviour's id (tests and the script's hooks use them) and whether it is per player
+                tokens[(string)b["id"]] = stage.Behaviour(go, (string)b["type"], (JObject)(b["fields"] ?? new JObject()).DeepClone(),
+                    perPlayer: (bool?)b["perPlayer"] ?? false, id: (string)b["id"]);
             }
             foreach (JObject e in (JArray)contract["events"])
                 stage.Event(byKey[(string)e["object"]], (string)e["kind"], tokens[(string)e["behaviour"]], (string)e["method"]);
@@ -297,6 +303,7 @@ namespace CoopKitchen
                         {
                             Model("kitchencounter_straight_A", root.transform, Vector3.zero, counterScale);
                             Crate(name, root, crate);
+                            CrateIcon(root, prefab);
                             top.transform.localPosition = new Vector3(0f, TopY + 0.34f, 0f);
                             height = TopY + 0.34f;
                         }
@@ -323,6 +330,21 @@ namespace CoopKitchen
             Model("crate_lid", hinge.transform, new Vector3(0f, 0f, 1f * s), Vector3.one * s);
             Animated(root, "Crate", ("Idle", Turn("Lid", 0f, 0f, 0f, 0.1f), false, 1f),
                 ("IngredientCounter@Open", Turn("Lid", 0f, -75f, 0f, 0.5f), false, 1f));
+        }
+
+        static readonly Dictionary<string, int> CrateVariant = new Dictionary<string, int>
+        {
+            ["BreadCounter"] = 0, ["CabbageCounter"] = 1, ["CheeseCounter"] = 3, ["MeatCounter"] = 5, ["TomatoCounter"] = 8,
+        };
+
+        /// <summary>Checklist 138: the crate shows its ingredient's icon (upstream: a sprite on the crate's door, IngredientCounter.UpdateIcon);
+        /// here on the counter's front, facing the kitchen, from the board's icon sprites.</summary>
+        void CrateIcon(GameObject root, string prefab)
+        {
+            var icon = stage.Create("Icons", root.transform);
+            icon.transform.localPosition = new Vector3(0f, 0.6f, Cell / 2f + 0.004f);
+            icon.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);       // a TextMeshPro reads from its -Z side; the kitchen is at +Z
+            Text(icon, $"<sprite name=\"{IconNames[CrateVariant[prefab]]}\">", 3.2f, new Vector2(0.45f, 0.4f), Color.white);
         }
 
         void CuttingBoard(string name, GameObject root)
@@ -564,9 +586,9 @@ namespace CoopKitchen
             var credits = Put("Board/Credits");
             credits.transform.localPosition = new Vector3(0f, 0.95f, -0.08f);
             Cube("Bg", credits.transform, new Vector3(0f, 0f, 0.01f), new Vector3(3.2f, 1.8f, 0.01f), panelBack);
-            var creditsText = Put("Board/Credits/Text");
-            creditsText.transform.localPosition = new Vector3(0f, 0.1f, 0f);
-            Text(creditsText, CreditsText, 0.9f, new Vector2(3.0f, 1.5f), Color.white, TextAlignmentOptions.TopLeft);
+            var creditsGo = Put("Board/Credits/Text");
+            creditsGo.transform.localPosition = new Vector3(0f, 0.1f, 0f);
+            Text(creditsGo, creditsText, 0.85f, new Vector2(3.0f, 1.5f), Color.white, TextAlignmentOptions.TopLeft);
             Button("Board/Credits/Close", new Vector3(0f, -0.75f, 0f), new Vector2(0.6f, 0.15f), "Close");
 
             // sounds (two local volumes)
@@ -678,15 +700,6 @@ namespace CoopKitchen
             var sfx = Put("Audio");
             Speaker(sfx, 12f);
         }
-
-        const string CreditsText =
-            "<b>Co-op Kitchen</b> (working title)\n" +
-            "Rules and original code: <b>KitchenChaos</b> by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos, MIT License, Copyright (c) 2023 Hyago Oliveira. " +
-            "Made co-op for Altspace; port source github.com/sidequestlegend/coop-kitchen-altspace (MIT), with the portkit runtime (MIT).\n" +
-            "Models: <b>KayKit Restaurant Bits</b> by Kay Lousberg, www.kaylousberg.com, CC0 1.0.\n" +
-            "Sounds: <b>Kenney</b> Interface Sounds and Impact Sounds, www.kenney.nl, CC0 1.0. Sizzle: made for this port (CC0).\n" +
-            "Font: Liberation Sans (SIL Open Font License 1.1).\n" +
-            "No art, sound or music of the upstream project is used. Not affiliated with any commercial cooking game.";
 
         // ------------------------------------------------------------------ animations (Animator states named as the script sends them)
 

@@ -246,28 +246,47 @@ test("V9 orders: cadence, cap, expiry, removal, plate returns, tips; and the fix
       for (const e of ours.filter((x) => x[0] === "created")) assert.equal(e[4], theirs.find((t) => t[0] === "created" && t[2] === e[2])![4], "waiting time");
       continue;
     }
-    // with deliveries: the same orders are delivered, for the same tips. A tip can differ by 1 where the seconds left
-    // times the multiplier lands on a whole number: upstream's waiting time is 0.05 s subtracted 400 times in 32-bit
-    // floats (39.99999 or 40.00001 where the port has exactly 40); V3 checks the formula itself exactly.
-    const tipsOf = (rows: string[][]) => rows.filter((e) => e[0] === "try" && e[3] === "True").map((e) => [e[2], Number(e[4])] as const);
-    const close = (a: ReadonlyArray<readonly [string | undefined, number]>, b: ReadonlyArray<readonly [string | undefined, number]>) => {
-      assert.deepEqual(a.map((x) => x[0]), b.map((x) => x[0]));
-      a.forEach((x, i) => assert.ok(Math.abs(x[1] - b[i]![1]) <= 1, `tip ${x[1]} against upstream ${b[i]![1]}`));
-    };
+    // with deliveries: the whole log, event for event, against the upstream's log with the one deliberate difference
+    // (128: an order in its last second is not delivered again) applied to it as written below. Kinds, order ids,
+    // recipes, waiting times and delivered-or-not must be equal; times within the upstream's drift; a tip may differ
+    // by 1 where the seconds left times the multiplier lands on a whole number: upstream's waiting time is 0.05 s
+    // subtracted 400 times in 32-bit floats (39.99999 or 40.00001 where the port has exactly 40); V3 checks the formula
+    // itself exactly. Events in the last second before the scenario's end are left out (a deadline on the boundary).
+    const until = num(scenario.until);
+    const near = (r: string[], what: string, t: number) => r[0] === what && Math.abs(Number(r[1]) - t) < 0.2;
+    let expected = theirs;
     if (index === 1) {
-      // upstream pays order 1 twice (20 and 20.5); the port pays once and the second plate is a wrong plate
-      const theirTips = tipsOf(theirs);
-      assert.deepEqual(theirTips.map((x) => x[0]), ["0", "0", "4", "3"]);
-      close(tipsOf(ours), [theirTips[0]!, theirTips[2]!, theirTips[3]!]);
-      assert.equal(ours.filter((e) => e[0] === "removed" && e[2] === "1").length, 1, "removed once");
-      assert.equal(ours.filter((e) => e[0] === "plate").length, theirs.filter((e) => e[0] === "plate").length, "a plate back for every plate handed in");
+      // upstream pays order 1 again at 20.5 (it is being removed) and removes it twice; the port takes that plate as a
+      // wrong plate (a plate still comes back for it) and removes order 1 once
+      assert.ok(theirs.some((r) => near(r, "delivered", 20.5)) && theirs.some((r) => near(r, "removed", 21.5)), "upstream's double payment is in the vectors");
+      expected = theirs
+        .filter((r) => !near(r, "delivered", 20.5) && !near(r, "removed", 21.5))
+        .map((r) => (near(r, "try", 20.5) ? ["try", r[1]!, r[2]!, "False", "0"] : r));
+    } else if (index === 2) {
+      // upstream pays order 2 again at 30.3; the port delivers order 3 (open since 30.1) there. Order 3 is then gone at
+      // 61.5, where the port delivers order 4; and with one order fewer listed from 31.3 on, the port's sixth order
+      // comes 15 s after the fifth (75), where upstream's waits for room first (62.55 + 15).
+      const cut = theirs.findIndex((r) => near(r, "delivered", 30.35));
+      assert.equal(theirs[cut]![2], "2", "upstream pays order 2 twice");
+      expected = [
+        ...theirs.slice(0, cut),
+        ["delivered", "30.3", "3"], ["try", "30.3", "0", "True", "6"],
+        ["removed", "31", "2"], ["removed", "31.3", "3"], ["plate", "34"], ["plate", "34.3"],
+        ["created", "45", "4", "0", "60"], ["created", "60", "5", "0", "60"],
+        ["delivered", "61.5", "4"], ["try", "61.5", "0", "True", "5"], ["removed", "62.5", "4"], ["plate", "65.5"],
+        ["created", "75", "6", "0", "60"],
+      ];
     }
-    if (index === 2) {
-      // at 30.3 upstream pays order 2 (delivered at 30) again; the port delivers order 3, open since 30.1
-      const at303 = (rows: string[][]) => rows.find((e) => e[0] === "delivered" && Math.abs(Number(e[1]) - 30.3) < 0.1);
-      assert.equal(at303(theirs)![2], "2");
-      assert.equal(at303(ours)![2], "3");
-      assert.equal(ours.find((e) => e[0] === "try" && e[1] === "8")![3], "False", "an order already removed is not delivered");
-    }
+    const inWindow = (rows: string[][]) => rows.filter((r) => Number(r[1]) < until - 1);
+    const a = inWindow(ours);
+    const b = inWindow(expected);
+    const shape = (r: string[]) => (r[0] === "try" ? [r[0], r[2], r[3]] : r[0] === "created" ? [r[0], r[2], r[3], r[4]] : [r[0], r[2]]);
+    assert.deepEqual(a.map(shape), b.map(shape), `scenario ${index}: the same events in the same order`);
+    a.forEach((r, i) => {
+      const id = Number(r[0] === "try" || r[0] === "plate" ? 1 : r[2]);
+      assert.ok(Math.abs(Number(r[1]) - Number(b[i]![1])) <= 0.06 * (1 + id) + 1e-6, `scenario ${index}: ${r.join(" ")} against ${b[i]!.join(" ")}`);
+      if (r[0] === "try") assert.ok(Math.abs(Number(r[4]) - Number(b[i]![4])) <= 1, `scenario ${index}: tip ${r[4]} against ${b[i]![4]}`);
+    });
+    assert.equal(ours.filter((e) => e[0] === "plate").length, theirs.filter((e) => e[0] === "plate").length, "a plate back for every plate handed in");
   }
 });

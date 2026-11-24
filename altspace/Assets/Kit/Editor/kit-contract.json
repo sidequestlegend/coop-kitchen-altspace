@@ -2,6 +2,7 @@
   "schema": 1,
   "slug": "coop-kitchen",
   "generatedBy": "ts/tools/gen-bindings.ts",
+  "credits": "<b>Co-op Kitchen</b> (working title)\n\nBased on code by <color=yellow>Hyago Oliveira</color>, github.com/HyagoOliveira/KitchenChaos (MIT), Copyright (c) 2023 Hyago Oliveira; made co-op for Altspace with the portkit runtime (MIT).\n\nModels: <color=yellow>KayKit Restaurant Bits</color> by Kay Lousberg, www.kaylousberg.com (CC0 1.0).\nSounds: <color=yellow>Kenney</color> Interface Sounds and Impact Sounds, www.kenney.nl (CC0 1.0); the sizzle made for this port (CC0 1.0).\nFont: Liberation Sans, Copyright (c) 2012 Red Hat, Inc. (SIL Open Font License 1.1).\n\nNo art, sound or music of the upstream project is used. Not affiliated with or endorsed by the upstream author or any commercial cooking game. Full licence texts: THIRD-PARTY-NOTICES.md in the kit.",
   "objects": {
     "logic": {
       "path": "Logic",

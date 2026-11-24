@@ -107,10 +107,44 @@
     say("INFO", "click " + (what || path), r);
     return r.startsWith("ok");
   }
-  /** E on a counter: a click on its front (never under an item). */
-  const E = (cell) => clickAt("Counters/" + cell + "/Front", "E " + cell);
-  /** Q on a cutting board (its knife) or a stove (its knob). */
-  const Q = (cell) => clickAt(cell.indexOf("Stove") === 0 ? "Counters/" + cell + "/Knob" : "Counters/" + cell + "/CuttingBoard/Knife", "Q " + cell);
+  const xyz = (text) => text.split(" ").map(Number);
+  /**
+   * Stands the desktop player in front of a counter, `metres` from its front face (a chef's reach is 2 m from the head
+   * or hands: Counter.interactReach). InputSim's `place` moves the player's feet; the page's own TeleportTo tells the
+   * runtime where the player now is (player-teleported), whether or not a pose follows.
+   */
+  async function goTo(cell, metres) {
+    const front = xyz(await probe("pos", "Counters/" + cell + "/Front"));
+    const root = xyz(await probe("pos", "Counters/" + cell));
+    let dx = front[0] - root[0];
+    let dz = front[2] - root[2];
+    const len = Math.hypot(dx, dz) || 1;
+    dx /= len;
+    dz /= len;
+    const d = metres === undefined ? 0.5 : metres;
+    const x = front[0] + dx * d;
+    const z = front[2] + dz * d;
+    const placed = await cmd("place " + x.toFixed(3) + " 0 " + z.toFixed(3));
+    try {
+      const BS = window.BS;
+      BS.Scene.GetInstance().TeleportTo(new BS.Vector3(x, 0, z), (Math.atan2(-dx, -dz) * 180) / Math.PI, false);
+    } catch (e) {
+      say("INFO", "TeleportTo: " + e);
+    }
+    await sleep(400);
+    return placed;
+  }
+  /** E on a counter: a click on its front (never under an item), standing at it. */
+  const E = async (cell) => {
+    await goTo(cell);
+    return clickAt("Counters/" + cell + "/Front", "E " + cell);
+  };
+  const qPath = (cell) => (cell.indexOf("Stove") === 0 ? "Counters/" + cell + "/Knob" : "Counters/" + cell + "/CuttingBoard/Knife");
+  /** Q on a cutting board (its knife) or a stove (its knob), standing at it. */
+  const Q = async (cell) => {
+    await goTo(cell);
+    return clickAt(qPath(cell), "Q " + cell);
+  };
   /** One action, then wait for what it must lead to. */
   async function act(action, wanted, what, ms) {
     for (let attempt = 0; attempt < 2; attempt++) {
@@ -162,6 +196,17 @@
     check(!!first && first.r === 2 && ticket === "X Burger", "the first order is an X Burger (seed 1) and its ticket shows", `${show(first)}, ticket '${ticket}'`);
     const icons = await probe("text", "Board/Orders/Ticket0/Icons");
     check(icons.indexOf("<sprite") >= 0, "the ticket's ingredient icons reached Unity", icons);
+    const crateIcon = await probe("text", "Counters/CheeseCounter_00/Icons");
+    check(crateIcon.indexOf('<sprite name="CheeseBlock">') >= 0, "the cheese crate shows its ingredient's icon (checklist 138)", crateIcon);
+    const credits = await probe("text", "Board/Credits/Text");
+    check(credits.indexOf("Based on code by") >= 0 && credits.indexOf("HyagoOliveira/KitchenChaos (MIT)") >= 0 && credits.indexOf("Kenney") >= 0 && !/code ?monkey/i.test(credits),
+      "the credits panel carries the script's text: the MIT attribution, KayKit, Kenney, the font", credits.slice(0, 120) + "...");
+
+    // reach (C2): from 3 m away a click on the crate does nothing; at the crate it counts
+    await goTo("CheeseCounter_00", 3);
+    await clickAt("Counters/CheeseCounter_00/Front", "E CheeseCounter_00 from 3 m");
+    const tooFar = await until(() => hand(), 3000, 100);
+    check(!tooFar, "a click on a crate 3 m away does nothing (a chef reaches 2 m)", "hand " + show(hand()));
 
     // cut the cheese
     await act(() => E("CheeseCounter_00"), () => hand() && hand().k === V.Cheese, "take a cheese from its crate");
@@ -230,6 +275,24 @@
     const tip = await probe("text", "Counters/Counter_Delivery/Canvas/Tip");
     say("INFO", "tip text " + tip);
     await cmd("shot delivered 0 1.7 0 5.6 2.0 0 60");
+
+    // a drop on the floor: the item lies on the floor where clicked (finding 5: never at hand height)
+    await act(() => E("BreadCounter_00"), () => hand() && hand().k === V.Bread, "take bread for the floor");
+    const front = xyz(await probe("pos", "Counters/BreadCounter_00/Front"));
+    const root = xyz(await probe("pos", "Counters/BreadCounter_00"));
+    const dir = [front[0] - root[0], front[2] - root[2]];
+    const dl = Math.hypot(dir[0], dir[1]) || 1;
+    const spot = [front[0] + (dir[0] / dl) * 1.0, 0.0, front[2] + (dir[1] / dl) * 1.0];
+    const bread = hand().id;
+    await cmd("look " + spot.join(" "));
+    await sleep(150);
+    say("INFO", "click floor " + (await cmd("click " + spot.join(" "))));
+    const dropped = await until(() => !hand() && debug().items()[bread] && debug().items()[bread].pos, 4000, 100);
+    const pos = dropped ? debug().items()[bread].pos : null;
+    const breadSlot = "Items/Slot" + String(debug().slotOf(bread)).padStart(2, "0");
+    const drawnAt = xyz(await probeUntil("pos", breadSlot, (v) => Math.abs(xyz(v)[1]) < 0.05 && Math.hypot(xyz(v)[0] - spot[0], xyz(v)[2] - spot[2]) < 0.3));
+    check(!!pos && pos[1] === 0 && Math.hypot(pos[0] - spot[0], pos[2] - spot[2]) < 0.3 && Math.abs(drawnAt[1]) < 0.05,
+      "a floor click drops the held item on the floor where clicked (state and Unity)", `state ${show(pos)}, drawn at ${drawnAt.join(" ")}`);
 
     // pause and resume
     await act(() => clickAt("Board/Hud/Pause", "Pause"), () => debug().paused(), "Pause pauses the round");
@@ -300,6 +363,11 @@
       check(!!paused && debug().pausedBy() !== me().uid && panel === "True", "a pause by the other chef shows here (pause panel on)", `paused ${paused}, by ${debug().pausedBy()}, panel ${panel}, '${by}'`);
       const resumed = await until(() => !debug().paused(), 40000, 200);
       check(!!resumed, "the other chef's resume arrives here", "");
+      // PORT.md 9.5: both chefs act on one board in the same moment
+      await act(() => E("CheeseCounter_01"), () => hand() && hand().k === V.Cheese, "lead: take a cheese for the race");
+      await act(() => E("CutCounter_01"), () => on("CutCounter_01") && on("CutCounter_01").k === V.Cheese && !hand(), "lead: put it on the second board");
+      await race("Q", Date.now() + 7000, send);
+      await race("E", Date.now() + 9000, send);
       // the other page reloads: it must come back to the same kitchen
       const word = await until(() => heard.find((m) => m.kind === "back"), 120000, 250);
       check(!!word && word.score === debug().score(), "after reloading, the other page sees the score (late join)", word ? `${word.score} / ${debug().score()}` : "no word");
@@ -335,6 +403,12 @@
       await act(() => clickAt("Board/Hud/Pause", "Pause"), () => debug().paused(), "second: pause the round");
       await sleep(3000);
       await act(() => clickAt("Board/PausePanel/Options/Resume", "Resume"), () => !debug().paused(), "second: resume (the chef who paused)");
+      // PORT.md 9.5: both chefs act on one board in the same moment (the lead names the moment)
+      for (const kind of ["Q", "E"]) {
+        const word = await until(() => heard.find((m) => m.kind === "race" + kind), 90000, 100);
+        if (!check(!!word, "second: the lead names the moment for the " + kind + " race", "")) break;
+        await race(kind, word.at, null);
+      }
       await sleep(1500);
       try {
         sessionStorage.setItem("kitchenTestReloaded", "1");
@@ -345,6 +419,35 @@
       await sleep(500);
       location.reload();
       await sleep(60000);
+    }
+  }
+
+  /**
+   * Both chefs press Q (or E) on CutCounter_01 at the same wall-clock moment `at` (both players run on this machine). Q:
+   * the board holds a whole cheese; the cut must start and the second press, sent before it saw the start, must not
+   * pause it. E: the board holds the slice and both hands are empty; exactly one chef gets it. The lead sends the moment.
+   */
+  async function race(kind, at, send) {
+    if (send) send({ kind: "race" + kind, at });
+    await goTo("CutCounter_01");
+    const path = kind === "Q" ? qPath("CutCounter_01") : "Counters/CutCounter_01/Front";
+    const pos = await probe("pos", path);
+    await cmd("look " + pos);
+    const wait = at - Date.now();
+    if (wait > 0) await sleep(wait);
+    const r = await cmd("click " + pos);
+    say("INFO", kind + " race click at " + (Date.now() - at) + " ms past the moment: " + r);
+    if (kind === "Q") {
+      await sleep(2000);
+      const p = debug().prep("CutCounter_01");
+      check(!!p && p.p === 1 && p.ps === 0, "two chefs press Q on one board at once: it cuts, and the second press does not pause it", show(p));
+      const sliced = await until(() => on("CutCounter_01") && on("CutCounter_01").k === V.CheeseSliced, 8000, 200);
+      check(!!sliced, "the race's cheese is cut", show(on("CutCounter_01")));
+    } else {
+      await sleep(3000);
+      const holders = debug().holders();
+      const hands = Object.keys(holders).filter((k) => k.indexOf("hand:") === 0 && debug().items()[holders[k]] && debug().items()[holders[k]].k === V.CheeseSliced);
+      check(hands.length === 1 && !on("CutCounter_01"), "two chefs press E on one board at once: exactly one takes the slice", show(hands));
     }
   }
 

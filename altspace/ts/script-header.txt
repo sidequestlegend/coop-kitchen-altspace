@@ -1,3 +1,28 @@
-coop-kitchen for Altspace: the rules of KitchenChaos by Hyago Oliveira (https://github.com/HyagoOliveira/KitchenChaos),
-MIT License, Copyright (c) 2023 Hyago Oliveira, ported to TypeScript as a co-op game on the portkit runtime (MIT).
-No art, sound or font of the upstream repository is part of this script or its kit.
+coop-kitchen for Altspace (Co-op Kitchen, working title): a co-op cooking game based on code by Hyago Oliveira,
+github.com/HyagoOliveira/KitchenChaos (MIT), ported to TypeScript on the portkit runtime.
+No art, sound, music or font of the upstream repository is part of this script or its kit; the kit's
+THIRD-PARTY-NOTICES.md names every file it uses and its licence.
+
+The upstream code's licence, which covers the game rules translated in this file:
+
+MIT License
+
+Copyright (c) 2023 Hyago Oliveira
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

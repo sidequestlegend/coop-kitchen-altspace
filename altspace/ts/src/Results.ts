@@ -59,12 +59,14 @@ export class Results extends Behaviour {
     const res = m.res!;
     const data = this.gameData.settings.Data;
     const me = this.Networking.LocalPlayer.uid;
-    const mine = res.mode === "game" && this.kitchen.IsChef(me) && data.Checked.indexOf(m.round) < 0;
+    // Keyed by the round's start time, not its number: the number starts again at 1 in a fresh room, and a later
+    // session's round 1 must still be compared with the high score.
+    const mine = res.mode === "game" && this.kitchen.IsChef(me) && data.Checked.indexOf(m.id) < 0;
     // (uint)score > HighScore
     this.isNewHighScore = mine && Math.trunc(res.score) > data.HighScore;
     this.newHighScore?.SetActive(this.isNewHighScore);
     if (!mine) return;
-    data.Checked = [...data.Checked.slice(-19), m.round];
+    data.Checked = [...data.Checked.slice(-19), m.id];
     if (this.isNewHighScore) data.HighScore = Math.trunc(res.score);
     this.gameData.settings.Save();
   }

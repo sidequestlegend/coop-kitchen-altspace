@@ -8,8 +8,9 @@
 // reaches it (Tick), and writes it in the same tick; a new referee carries on from the same numbers.
 //
 // Pause (checklist 86) is shared: it stops this kitchen's clock for everyone in it. Any chef may pause during a round's
-// countdown or the round; resuming needs the chef who paused, or the referee, or (if the one who paused has left) any
-// chef. Restart and End round need a chef and are offered while paused, as upstream's pause panel.
+// countdown or the round; resuming, and Restart and End round (offered while paused, as upstream's pause panel), need
+// the chef who paused, or the referee, or (if the one who paused has left) any chef: one chef cannot end or restart a
+// round during another chef's pause.
 
 import { Behaviour, type Player } from "../portkit/src/index.ts";
 import { invoke, type PauseSettings } from "./ActionCode.ts";
@@ -22,8 +23,11 @@ export type Phase = "lobby" | "countdown" | "round" | "timesup" | "results" | "t
 export interface MatchRec {
   phase: Phase;
   mode: "game" | "tutorial";
-  /** Counts rounds and tutorials started, so a client can tell one results screen from the next. */
+  /** Counts rounds and tutorials started in this room's state (it starts again at 1 in a fresh room). */
   round: number;
+  /** When this round or tutorial started (server milliseconds): names one results screen for good, so a device
+   *  compares a round's score with its saved high score once, in this session or any later one. */
+  id: number;
   /** G at which the countdown starts (0.2 s after PLAY). */
   t0: number;
   /** The round's length in seconds. */
@@ -60,7 +64,7 @@ export class MatchManager extends Behaviour implements PauseSettings {
   readonly OnResumed: Array<() => void> = [];
 
   static Lobby(round: number, best: number): MatchRec {
-    return { phase: "lobby", mode: "game", round, t0: 0, len: 120, rs: null, ff: 0, end: null, clock: { e: 0, f: 0 }, by: "", best, res: null };
+    return { phase: "lobby", mode: "game", round, id: 0, t0: 0, len: 120, rs: null, ff: 0, end: null, clock: { e: 0, f: 0 }, by: "", best, res: null };
   }
 
   override Start(): void {
@@ -178,13 +182,18 @@ export class MatchManager extends Behaviour implements PauseSettings {
     this.kitchen.CommitAll();
   }
 
+  /** May this player act on the pause panel (Resume, Restart, End round)? The chef who paused, the referee, or any chef
+   *  once the one who paused has left the room. */
+  private MayUsePausePanel(who: Player): boolean {
+    if (!this.Paused) return false;
+    const pauserHere = this.Networking.GetPlayers().some((p) => p.uid === this.match.by);
+    return who.uid === this.match.by || who.isMaster || (!pauserHere && this.kitchen.IsChef(who.uid));
+  }
+
   /** Resume (PauseCanvas.HandleResumeClicked). */
   RequestResume(): void {
     const who = this.Caller();
-    if (!who || !this.Paused) return;
-    const pauserHere = this.Networking.GetPlayers().some((p) => p.uid === this.match.by);
-    const allowed = who.uid === this.match.by || who.isMaster || (!pauserHere && this.kitchen.IsChef(who.uid));
-    if (!allowed) return;
+    if (!who || !this.MayUsePausePanel(who)) return;
     this.Resume();
     this.kitchen.CommitAll();
   }
@@ -192,14 +201,14 @@ export class MatchManager extends Behaviour implements PauseSettings {
   /** Restart, confirmed (PauseCanvas.HandleRestartConfirmed: the Game scene again). */
   Restart(): void {
     const who = this.Caller();
-    if (!who || !this.kitchen.IsChef(who.uid) || !this.Paused) return;
+    if (!who || !this.MayUsePausePanel(who)) return;
     this.StartMatch("game");
   }
 
   /** Exit, confirmed (PauseCanvas.HandleExitConfirmed: back to the main menu). */
   EndRound(): void {
     const who = this.Caller();
-    if (!who || !this.kitchen.IsChef(who.uid) || !this.Paused) return;
+    if (!who || !this.MayUsePausePanel(who)) return;
     this.ResetToLobby();
     this.kitchen.CommitAll();
   }
@@ -231,6 +240,7 @@ export class MatchManager extends Behaviour implements PauseSettings {
     const keep = this.match;
     this.settings.SetRoundLength(this.RoundSetting());
     this.match = MatchManager.Lobby(keep.round + 1, keep.best);
+    this.match.id = this.Networking.GetServerTimeInMilliseconds();
     this.match.mode = mode;
     this.match.len = this.settings.TimeLimit.Time;
     this.match.clock = GameClock.Start(this.Networking.GetServerTimeInSeconds());

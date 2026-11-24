@@ -9,7 +9,8 @@ export interface AudioData {
 export interface GameData {
   HighScore: number;
   Audio: AudioData;
-  /** Rounds whose results were already compared with the high score (so a reload does not count one twice). */
+  /** Rounds (by start time, MatchRec.id) whose results were already compared with the high score, so a reload does
+   *  not count one twice. */
   Checked: number[];
   CreationTime: number;
   LastUpdateTime: number;

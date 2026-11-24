@@ -1345,6 +1345,7 @@
       },
       "id": "chef",
       "object": "logic",
+      "perPlayer": true,
       "type": "Chef"
     }
   ],
@@ -1678,7 +1679,7 @@
       "object": "btnContinue"
     }
   ],
-  "hash": "f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b",
+  "hash": "4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55",
   "objects": {
     "arrow0": {
       "active": false,

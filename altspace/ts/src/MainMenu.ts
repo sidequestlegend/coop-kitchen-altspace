@@ -1,6 +1,6 @@
 // Upstream: Assets/Scripts/UI/Menus/MainMenu.cs. The main menu's buttons, the credits popup and the sounds popup (3, 4).
-// On the board: the lobby panel, shown between rounds; the credits name the upstream's author and licence (no art of
-// the upstream is used). Also the roster line: who is cooking.
+// On the board: the lobby panel, shown between rounds; the credits name the upstream's author and licence and every
+// licensed file the kit uses (no art of the upstream is used). Also the roster line: who is cooking.
 
 import { Behaviour, type GameObject, type TextRef } from "../portkit/src/index.ts";
 import { CanvasViewer } from "./ActionCode.ts";
@@ -10,10 +10,21 @@ import type { SoundPopup } from "./SoundPopup.ts";
 
 export const CHEF_COLOURS = ["Blue", "Green", "Red", "Yellow", "Orange", "Purple", "Pink", "White"];
 
+/**
+ * The credits panel's text: the one source of it. The kit builder puts the same text into the kit (it reads it from
+ * Assets/Kit/Editor/kit-contract.json, which tools/gen-bindings.ts writes from here), and Start sets it again. The MIT
+ * licence asks for the upstream's copyright and permission notice; the notice is in the script's banner and the kit's
+ * notices, and the panel names the author, the repository and the licence.
+ */
 export const CREDITS =
-  "Rules and original code: <color=yellow>Hyago Oliveira</color> (github.com/HyagoOliveira/KitchenChaos, MIT License, Copyright (c) 2023 Hyago Oliveira)\n\n" +
-  "Kitchen art: <color=yellow>KayKit</color> by Kay Lousberg (CC0)\n\n" +
-  "Port to Altspace: AltspaceGames";
+  "<b>Co-op Kitchen</b> (working title)\n\n" +
+  "Based on code by <color=yellow>Hyago Oliveira</color>, github.com/HyagoOliveira/KitchenChaos (MIT), " +
+  "Copyright (c) 2023 Hyago Oliveira; made co-op for Altspace with the portkit runtime (MIT).\n\n" +
+  "Models: <color=yellow>KayKit Restaurant Bits</color> by Kay Lousberg, www.kaylousberg.com (CC0 1.0).\n" +
+  "Sounds: <color=yellow>Kenney</color> Interface Sounds and Impact Sounds, www.kenney.nl (CC0 1.0); the sizzle made for this port (CC0 1.0).\n" +
+  "Font: Liberation Sans, Copyright (c) 2012 Red Hat, Inc. (SIL Open Font License 1.1).\n\n" +
+  "No art, sound or music of the upstream project is used. Not affiliated with or endorsed by the upstream author " +
+  "or any commercial cooking game. Full licence texts: THIRD-PARTY-NOTICES.md in the kit.";
 
 export class MainMenu extends Behaviour {
   kitchen!: Kitchen;

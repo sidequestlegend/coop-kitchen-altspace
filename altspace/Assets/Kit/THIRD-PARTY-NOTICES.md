@@ -1,25 +1,30 @@
 # Co-op Kitchen: third-party notices
 
 Co-op Kitchen (working title; snippet `coop-kitchen`, script `pk-coop-kitchen.js`, kit bundles `coop-kitchen`) is a
-co-op port of KitchenChaos to Altspace. Port source: https://github.com/sidequestlegend/coop-kitchen-altspace (branch
-`main`, folder `altspace/`). A copy of this file is inside every kit bundle (`Assets/Kit/THIRD-PARTY-NOTICES.md`).
+co-op cooking game for Altspace, based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT). Port
+source: https://github.com/sidequestlegend/coop-kitchen-altspace (branch `main`, folder `altspace/`). A copy of this
+file is inside every kit bundle (`Assets/Kit/THIRD-PARTY-NOTICES.md`), with the full licence texts it names
+(`Assets/Kit/Licenses/` and the files named LICENSE beside the models and sounds).
 
 No art, model, texture, animation, sound, music, font or plugin of the upstream repository is used anywhere in this
 port. The kitchen is built from data (counter positions and gameplay values read from the upstream's scene and
 ScriptableObject YAML) and dressed with the openly licensed files below.
 
-## KitchenChaos: code and data
+## Upstream code and data: Hyago Oliveira (MIT)
 
-- Source: https://github.com/HyagoOliveira/KitchenChaos (commit `4a73a26`)
-- Author: Hyago Oliveira. Licence: MIT License, Copyright (c) 2023 Hyago Oliveira (`LICENSE` at this repository's root)
+- Based on code by Hyago Oliveira, github.com/HyagoOliveira/KitchenChaos (MIT), at commit `4a73a26`.
+- Licence: MIT License, Copyright (c) 2023 Hyago Oliveira. Full text: `Licenses/KitchenChaos-LICENSE.txt` (the
+  upstream's `LICENSE`, unchanged); also `LICENSE` at this port's repository root, and at the top of the script.
 - What of it is here: the gameplay scripts are translated to TypeScript in `altspace/ts/src/` and bundled into
   `pk-coop-kitchen.js`; `altspace/ts/data/kitchen-data.json` holds the data values (counter layout, ingredient,
   recipe, order, match and score settings, icon names). Changes from upstream: `altspace/PORT.md`, sections 10 and 11.
+- This port is not affiliated with or endorsed by the upstream author.
 
 ## portkit runtime
 
-- `altspace/ts/portkit/` and `altspace/Packages/com.altspacegames.portkit/`: MIT (`LICENSE` in each). The runtime is
-  bundled into the script.
+- `altspace/ts/portkit/` and `altspace/Packages/com.altspacegames.portkit/`: MIT License, Copyright (c) 2026 the
+  portkit authors. Full text: `Licenses/portkit-LICENSE.txt`. The runtime is bundled into the script, which carries
+  the same notice.
 
 ## Models: KayKit Restaurant Bits
 
@@ -27,8 +32,9 @@ ScriptableObject YAML) and dressed with the openly licensed files below.
 - Downloaded 2026-11-24 from the official repository https://github.com/KayKit-Game-Assets/KayKit-Restaurant-Bits-1.0
   (branch `main`; also at https://kaylousberg.itch.io/restaurant-bits)
 - Licence: Creative Commons Zero, CC0 1.0 (http://creativecommons.org/publicdomain/zero/1.0/), as stated by the
-  pack's `LICENSE.txt` (kept as `Assets/Kit/Art/KayKit/LICENSE-KayKit-Restaurant-Bits.txt`) and its README. Credit
-  is not required; it is given here and on the in-world credits panel.
+  pack's `LICENSE.txt` (kept as `Assets/Kit/Art/KayKit/LICENSE-KayKit-Restaurant-Bits.txt`) and its README. The CC0
+  1.0 legal code: `Licenses/CC0-1.0-legalcode.txt`. Credit is not required; it is given here and on the in-world
+  credits panel.
 - Files used (OBJ, with the pack's one atlas texture `restaurantbits_texture.png`, reduced to 256 px):
   `kitchencounter_straight_A`, `kitchencounter_straight_B`, `kitchencounter_outercorner`, `stove_single_countertop`,
   `pan_A`, `cuttingboard`, `knife`, `plate`, `crate_lid`, `crate_buns`, `crate_lettuce`, `crate_cheese`, `crate_steak`,
@@ -44,7 +50,8 @@ ScriptableObject YAML) and dressed with the openly licensed files below.
 - "Interface Sounds (1.0)" and "Impact Sounds (1.0)" by **Kenney**, www.kenney.nl, downloaded 2026-11-24 from
   https://kenney.nl/assets/interface-sounds and https://kenney.nl/assets/impact-sounds
 - Licence: Creative Commons Zero, CC0 1.0, as stated by each pack's `License.txt` (kept as
-  `Assets/Kit/Audio/LICENSE-Kenney-Interface-Sounds.txt` and `LICENSE-Kenney-Impact-Sounds.txt`) and the pages.
+  `Assets/Kit/Audio/LICENSE-Kenney-Interface-Sounds.txt` and `LICENSE-Kenney-Impact-Sounds.txt`) and the pages. The
+  CC0 1.0 legal code: `Licenses/CC0-1.0-legalcode.txt`.
 - Files used, renamed by their part in the game:
 
 | In the kit | From | Replaces upstream's |
@@ -71,12 +78,19 @@ setting and the Sounds panel's music volume stay, acting on a silent source.
 ## Font
 
 - Liberation Sans (TextMesh Pro's default font asset, `LiberationSans SDF`, imported by the SDK setup from Unity's
-  TextMesh Pro essentials): SIL Open Font License 1.1. Copyright (c) 2012 Red Hat, Inc., with Reserved Font Name
-  "Liberation". https://openfontlicense.org/
+  TextMesh Pro essentials): SIL Open Font License 1.1. "Digitized data copyright (c) 2010 Google Corporation with
+  Reserved Font Arimo, Tinos and Cousine. Copyright (c) 2012 Red Hat, Inc. with Reserved Font Name Liberation."
+  Full text: `LiberationSans - OFL.txt`, which the kit build adds to every bundle (https://openfontlicense.org/).
+
+## Licence texts in the kit
+
+`Licenses/KitchenChaos-LICENSE.txt` (MIT), `Licenses/portkit-LICENSE.txt` (MIT), `Licenses/CC0-1.0-legalcode.txt`
+(CC0 1.0), `Art/KayKit/LICENSE-KayKit-Restaurant-Bits.txt`, `Audio/LICENSE-Kenney-Interface-Sounds.txt`,
+`Audio/LICENSE-Kenney-Impact-Sounds.txt`, and `LiberationSans - OFL.txt` (OFL 1.1).
 
 ## Not used (listed so nobody adds them by mistake)
 
-Upstream's `Assets/Meshes`, `Assets/_Assets` (Code Monkey's course art and sounds, no published reuse terms found),
-`Assets/Plugins/CodeAssist` (Asset Store), `Assets/Prefabs/Players/Models` (a chef character set of unknown origin),
-its 22 legacy animation clips (the kit has its own Animator states with the same names), `TutorialArrow.png`, the
-button glyph sheet, the logo.
+Upstream's `Assets/Meshes` and `Assets/_Assets` (the course art and sounds the upstream README credits to a third
+party; no published reuse terms found), `Assets/Plugins/CodeAssist` (Asset Store), `Assets/Prefabs/Players/Models` (a
+chef character set of unknown origin), its 22 legacy animation clips (the kit has its own Animator states with the
+same names), `TutorialArrow.png`, the button glyph sheet, the logo.

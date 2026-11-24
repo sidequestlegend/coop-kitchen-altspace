@@ -13,7 +13,17 @@ import type { ItemHolder } from "./ItemHolder.ts";
 import { ItemHolderStack } from "./ItemHolderStack.ts";
 import type { Kitchen } from "./Kitchen.ts";
 
+/**
+ * A chef's reach in metres, measured from the nearest of their head and hands to the point clicked (C2). Upstream a chef
+ * acts on what a 0.5 m box cast 0.8 m ahead of it hits; here a player's hands are the pointer, so a click on a counter,
+ * a knife, a knob, an item or the floor counts within an arm's length and a step: 2 m from the head reaches the far
+ * edge of a counter top (0.96 m deep, 0.9 m high) from where one stands at it, and the floor about 1 m ahead.
+ */
+export const REACH = 2;
+
 export class Counter extends Behaviour implements IItemHolder, IItemCollector {
+  /** Clicks on counters (E), knives and knobs (Q) count within a chef's reach (the runtime checks it before Clicked). */
+  static override interactReach = REACH;
   // ---- from bindings.json ----
   kitchen!: Kitchen;
   /** The cell's name in the upstream scene (CutCounter_00); also its holder's key. */
