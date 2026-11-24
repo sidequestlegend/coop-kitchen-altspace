@@ -1347,11 +1347,12 @@ intent round-trip time on Quest, frame time with a full pool, audio fall-off.
 
 ---
 
-## 11. Port status (2026-11-24, TypeScript rules; no Unity yet)
+## 11. Port status (2026-11-24: rules in TypeScript, kit built, rungs 0 to 4 pass in the editor)
 
-The rules are ported to TypeScript on the portkit runtime under `ts/` and tested in Node on the fake room. No kit,
-bundle or Unity project exists yet: `ts/bindings.json` is **provisional**, written by `ts/tools/gen-bindings.ts` from
-the upstream scene layout (it says so in its `provisional` member), not by a kit builder. Commands, from
+The rules are ported to TypeScript on the portkit runtime under `ts/` and tested in Node on the fake room. The kit is
+built from data by `Assets/Kit/Editor/CoopKitchenKitBuilder.cs` (11.7) and `ts/bindings.json` is now the kit builder's
+(hash `f93517c85d18ae6ae3c5a1b53c97a9905ba8f23b`); `ts/tools/gen-bindings.ts` writes the contract it follows. Rungs 0
+to 4 pass in the Unity editor (`TESTS.md`: Node 29/29, kit check PASS, Play mode one player 32/0, two players 41/0). Commands, from
 `altspace/ts`: `npm test` (typecheck, lint, 29 tests), `npm run build`, `npm run golden` (dotnet 8, needs the upstream
 clone), `npm run data` (regenerates `data/kitchen-data.json` from the upstream YAML), `npm run bindings`.
 
@@ -1561,7 +1562,8 @@ sound that only a kit can show (rungs 2 to 4). C: changed by design (10.1). X: l
 | No hover event reaches the page | the highlight (109) is not done: open |
 | portkit's new generic `ts/golden/UnityStubs.cs` returns the original from `Instantiate` and has no ActionCode, AwaitableCoroutine or nested-coroutine runner | the game keeps its own `golden/UnityStubs.cs` |
 | `RulesBench` has no calling player and its `Storage` throws | `Kitchen.IntentFor(uid, ...)` beside `Intent`; `GameDataManager` falls back to an in-memory save |
-| No kit yet | provisional `bindings.json` from `tools/gen-bindings.ts`; its object paths are the contract the kit builder is asked to meet |
+| (closed) No kit yet | the kit is built (11.7); `tools/gen-bindings.ts` now writes the contract the kit builder follows, and seeds its lock with the behaviour ids |
+| Found in Play mode: the local chef's held item is drawn in front of their head, in the way of every desktop click (a click on it grabbed its pool slot and dropped the item) | `Kitchen.ts`: the slot of the item the local chef holds by a click, and of the ingredients on a plate they hold, goes to the Default layer (0) while held; a physical grab keeps its layer |
 | Closed by the portkit re-sync (c7abead..1118ef0) | `networkCallable` lists on Kitchen and MatchManager; music pitch and volume through `audioPitch` / `audioVolume`; the effects volume through `PlayOneShot`'s volume scale; `GameObject.ReleaseGrab()` |
 
 Unproven until the app (rung 5): grab and release on pooled kit objects, intent latency on Quest, how a held item
@@ -1641,3 +1643,20 @@ float parameter `Speed` (1), which `Stove@Burning` sets to 2 (`animFloat`).
 
 The delivery and preparation floating texts ("Need Plate!", "+NN Tip!", "Wrong Plate!", "Cannot Cut") are shown and
 hidden by the page (`Kitchen.Flash`), as before; they have no animation.
+
+**Play mode (rungs 3 and 4) showed in Unity, beyond the Node tests:** 3 (COOK, PLAY on the board), 16, 17, 20 (crates
+and counters by real clicks), 30 to 34 and 36 (plating an X Burger; the plate drawn with its three ingredients), 37
+(plate icons as sprite text), 38 and 40 (Q on the knife; the knife chops, the bar shows), 46 and 47 (Q on the knob;
+the sizzle loop switched on), 59 and 75 (a delivery and its tip), 70 (the ticket's name and icons), 76 (the score on
+the board), 86 (the pause panel, and a pause by one chef on the other's board), and late join by reload. Counts in
+11.3 are unchanged (T 89, I 30, C 6, X 11, O 1); 11 of the 30 I items are now seen in Play mode (4 of them only in
+part: no test reads an Animator state or hears a sound).
+
+**Still unverified** (only the app or a headset can show them, rung 5): hand grabs and releases on the pool slots,
+laser clicks, held items as others see them, latency on Quest, frame time with 48 items, the sounds, the Animator
+motions as seen; and in Play mode the burn sequence, tutorial, expiry, time up, results, trash, floor, Sounds and
+Credits panels, which only the Node scenarios cover.
+
+**Cosmetic, known:** the board's panels all stand switched on in the prefab (the script shows one at a time), so the
+kit photo shows them overlapping; the score label touches the first ticket's bar; plate icons face one way (a
+billboard needs the camera, which the graph allow list does not reach).

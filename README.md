@@ -17,7 +17,8 @@ The game's own name is still to be chosen (proposals in `altspace/PORT.md`, sect
   textures, fonts or plugins is in this repository.** `altspace/ts/data/kitchen-data.json` holds data values read
   from the upstream's ScriptableObject YAML (ingredient, recipe, order and timing values, counter positions, icon
   names) with `altspace/ts/tools/gen-data.ts`.
-- The kit's art is to be KayKit by Kay Lousberg (CC0).
+- The kit's art is KayKit Restaurant Bits by Kay Lousberg (CC0); sounds from Kenney (CC0). Every source and licence is
+  in `altspace/THIRD-PARTY-NOTICES.md`.
 
 ## Layout
 
@@ -27,7 +28,9 @@ altspace/ts/src/          one TypeScript file per upstream gameplay file, plus G
 altspace/ts/test/         Node tests on portkit's fake room, and the golden-vector comparison
 altspace/ts/golden/       the upstream C# harness (dotnet 8) that wrote vectors/upstream.json; needs the upstream
                           clone to run again (MSBuild property Upstream, default ../../../Assets/Scripts)
-altspace/ts/bindings.json PROVISIONAL (written by tools/gen-bindings.ts; no kit exists yet)
+altspace/ts/bindings.json written by the kit builder (Assets/Kit/Editor/CoopKitchenKitBuilder.cs) from the contract
+                          tools/gen-bindings.ts writes (Assets/Kit/Editor/kit-contract.json)
+altspace/                 the Unity project (kit builder, KayKit models, Kenney sounds); TESTS.md: rungs 0 to 4
 ```
 
 ```
