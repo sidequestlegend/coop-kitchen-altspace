@@ -1,0 +1,4 @@
+node_modules/
+dist/
+golden/bin/
+golden/obj/

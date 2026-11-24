@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Golden vectors: KitchenChaos's own gameplay C# (MIT, Hyago Oliveira), unchanged, compiled with dotnet against the
+       stand-ins in UnityStubs.cs (never in Unity), driven by Harness.cs. `npm run golden` writes ../vectors/upstream.json.
+       The upstream sources are read from the upstream clone (property Upstream); a repository without it keeps the
+       checked-in vectors. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>CS0108;CS0114;CS0162;CS0168;CS0169;CS0219;CS0414;CS0649;CS0067;CS8981;CS0109</NoWarn>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <Upstream Condition="'$(Upstream)' == ''">../../../Assets/Scripts</Upstream>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="UnityStubs.cs" />
+    <Compile Include="Harness.cs" />
+    <Compile Include="$(Upstream)/_Globals/EditorPaths.cs;$(Upstream)/_Globals/Managers.cs;$(Upstream)/_Globals/Interfaces/*.cs" />
+    <Compile Include="$(Upstream)/Utils/RandomUtils.cs" />
+    <Compile Include="$(Upstream)/Items/Ingredients/IngredientName.cs;$(Upstream)/Items/Ingredients/IngredientStatus.cs;$(Upstream)/Items/Ingredients/IngredientData.cs;$(Upstream)/Items/Ingredients/IngredientDataCollection.cs;$(Upstream)/Items/Ingredients/IngredientSettings.cs;$(Upstream)/Items/Ingredients/Ingredient.cs" />
+    <Compile Include="$(Upstream)/Items/AbstractItem.cs;$(Upstream)/Items/Interfaces/*.cs;$(Upstream)/Physics/CollectableBody.cs" />
+    <Compile Include="$(Upstream)/Items/ItemHolder.cs;$(Upstream)/Items/ItemHolderStack.cs;$(Upstream)/Items/Plate.cs;$(Upstream)/Items/Trash.cs;$(Upstream)/Items/ItemHandler.cs" />
+    <Compile Include="$(Upstream)/Recipes/PlatedIngredient.cs;$(Upstream)/Recipes/RecipeData.cs;$(Upstream)/Recipes/RecipeSettings.cs" />
+    <Compile Include="$(Upstream)/Score/ScoreSettings.cs" />
+    <Compile Include="$(Upstream)/Orders/Order.cs;$(Upstream)/Orders/OrderSettings.cs;$(Upstream)/Orders/OrderManager.cs" />
+    <Compile Include="$(Upstream)/Matches/TimeDown.cs;$(Upstream)/Matches/TimeLimit.cs;$(Upstream)/Matches/MatchSettings.cs;$(Upstream)/Matches/MatchManager.cs" />
+    <Compile Include="$(Upstream)/Counters/*.cs;$(Upstream)/Counters/Preparation/*.cs" />
+    <Compile Include="$(Upstream)/UI/Ingredients/IngredientIcon.cs;$(Upstream)/UI/Ingredients/IngredientIcons.cs;$(Upstream)/UI/Counters/DeliveryCounterCanvas.cs" />
+  </ItemGroup>
+</Project>

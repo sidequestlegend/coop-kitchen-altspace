@@ -1,0 +1,953 @@
+{
+  "source": "HyagoOliveira/KitchenChaos @ 4a73a26 (MIT, Copyright (c) 2023 Hyago Oliveira): Assets/Settings/**, prefab fields, scene layouts",
+  "generatedBy": "tools/gen-data.ts",
+  "enums": {
+    "IngredientName": {
+      "None": 0,
+      "Bread": 1,
+      "Cabbage": 2,
+      "Cheese": 3,
+      "Tomato": 4,
+      "Meat": 5
+    },
+    "IngredientStatus": {
+      "None": 0,
+      "Raw": 1,
+      "Ready": 2,
+      "Burned": 3,
+      "Cuttable": 4
+    }
+  },
+  "ingredients": [
+    {
+      "index": 0,
+      "asset": "Bread",
+      "name": 1,
+      "status": 2,
+      "preparationTime": 0,
+      "icon": "Bread",
+      "prefab": "Bread"
+    },
+    {
+      "index": 1,
+      "asset": "Cabbage",
+      "name": 2,
+      "status": 4,
+      "preparationTime": 3,
+      "icon": "Cabbage",
+      "prefab": "Cabbage"
+    },
+    {
+      "index": 2,
+      "asset": "Cabbage_Sliced",
+      "name": 2,
+      "status": 2,
+      "preparationTime": 0,
+      "icon": "CabbageSlices",
+      "prefab": "Cabbage_Sliced"
+    },
+    {
+      "index": 3,
+      "asset": "Cheese",
+      "name": 3,
+      "status": 4,
+      "preparationTime": 3,
+      "icon": "CheeseBlock",
+      "prefab": "Cheese"
+    },
+    {
+      "index": 4,
+      "asset": "Cheese_Sliced",
+      "name": 3,
+      "status": 2,
+      "preparationTime": 1,
+      "icon": "CheeseSlice",
+      "prefab": "Cheese_Sliced"
+    },
+    {
+      "index": 5,
+      "asset": "Meat",
+      "name": 5,
+      "status": 1,
+      "preparationTime": 6,
+      "icon": "MeatPattyUncooked",
+      "prefab": "Meat"
+    },
+    {
+      "index": 6,
+      "asset": "Meat_Cooked",
+      "name": 5,
+      "status": 2,
+      "preparationTime": 0,
+      "icon": "MeatPattyCooked",
+      "prefab": "Meat_Cooked"
+    },
+    {
+      "index": 7,
+      "asset": "Meat_Burned",
+      "name": 5,
+      "status": 3,
+      "preparationTime": 0,
+      "icon": "MeatPattyBurned",
+      "prefab": "Meat_Burned"
+    },
+    {
+      "index": 8,
+      "asset": "Tomato",
+      "name": 4,
+      "status": 4,
+      "preparationTime": 4,
+      "icon": "Tomato",
+      "prefab": "Tomato"
+    },
+    {
+      "index": 9,
+      "asset": "Tomato_Sliced",
+      "name": 4,
+      "status": 2,
+      "preparationTime": 0,
+      "icon": "TomatoSlice",
+      "prefab": "Tomato_Sliced"
+    }
+  ],
+  "collections": [
+    {
+      "asset": "_Tomatos",
+      "name": 4,
+      "ingredients": [
+        8,
+        9
+      ]
+    },
+    {
+      "asset": "_Cheeses",
+      "name": 3,
+      "ingredients": [
+        3,
+        4
+      ]
+    },
+    {
+      "asset": "_Meats",
+      "name": 5,
+      "ingredients": [
+        6,
+        5,
+        7
+      ]
+    },
+    {
+      "asset": "_Breads",
+      "name": 1,
+      "ingredients": [
+        0
+      ]
+    },
+    {
+      "asset": "_Cabbages",
+      "name": 2,
+      "ingredients": [
+        1,
+        2
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "asset": "Burger",
+      "name": "Burger",
+      "plated": [
+        {
+          "variant": 0,
+          "position": [
+            0,
+            0.026,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 6,
+          "position": [
+            0.048,
+            0.296,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "chance": 35,
+      "tipMultiplier": 0.1
+    },
+    {
+      "asset": "SaladBurger",
+      "name": "Salad Burger",
+      "plated": [
+        {
+          "variant": 0,
+          "position": [
+            0,
+            0.026,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 6,
+          "position": [
+            0.048,
+            0.296,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 2,
+          "position": [
+            0.085,
+            0.366,
+            -0.173
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 9,
+          "position": [
+            0.146,
+            0.369,
+            0.117
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "chance": 15,
+      "tipMultiplier": 0.15
+    },
+    {
+      "asset": "XBurger",
+      "name": "X Burger",
+      "plated": [
+        {
+          "variant": 0,
+          "position": [
+            0,
+            0.026,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 4,
+          "position": [
+            -0.008,
+            0.22,
+            0.052
+          ],
+          "rotation": [
+            0,
+            49.17986,
+            0
+          ]
+        },
+        {
+          "variant": 6,
+          "position": [
+            0.048,
+            0.296,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "chance": 25,
+      "tipMultiplier": 0.12
+    },
+    {
+      "asset": "XSalad",
+      "name": "Salad Burger",
+      "plated": [
+        {
+          "variant": 0,
+          "position": [
+            0,
+            0.026,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 4,
+          "position": [
+            -0.008,
+            0.22,
+            0.052
+          ],
+          "rotation": [
+            0,
+            49.17986,
+            0
+          ]
+        },
+        {
+          "variant": 2,
+          "position": [
+            0.085,
+            0.28,
+            -0.173
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 9,
+          "position": [
+            0.146,
+            0.32,
+            0.117
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "chance": 15,
+      "tipMultiplier": 0.18
+    },
+    {
+      "asset": "XSaladBurger",
+      "name": "X Salad Burger",
+      "plated": [
+        {
+          "variant": 0,
+          "position": [
+            0,
+            0.026,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 4,
+          "position": [
+            -0.008,
+            0.22,
+            0.052
+          ],
+          "rotation": [
+            0,
+            49.17986,
+            0
+          ]
+        },
+        {
+          "variant": 6,
+          "position": [
+            0.048,
+            0.296,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 2,
+          "position": [
+            0.085,
+            0.366,
+            -0.173
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "variant": 9,
+          "position": [
+            0.146,
+            0.369,
+            0.117
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "chance": 10,
+      "tipMultiplier": 0.2
+    }
+  ],
+  "order": {
+    "maxOrders": 3,
+    "additionalTimePerIngredient": 30,
+    "timeByNewOrder": 15,
+    "timeToRemoveAfterFail": 1,
+    "timeToRemoveAfterDelivery": 1,
+    "timeToReturnPlate": 4
+  },
+  "match": {
+    "countDown": 3,
+    "timeLimit": 120,
+    "finalSeconds": 20,
+    "startDelay": 0.2
+  },
+  "score": {
+    "deliveredOrdersMultiplier": 20,
+    "failedOrdersMultiplier": 10
+  },
+  "preparators": {
+    "cuttingBoard": {
+      "allowedStatus": 4,
+      "preparatedStatus": 2,
+      "finalSecondsBooster": 1.25
+    },
+    "stove": {
+      "allowedStatus": 1,
+      "preparatedStatus": 2,
+      "finalSecondsBooster": 1.25,
+      "timeBeforeBurn": 2
+    }
+  },
+  "tutorial": {
+    "timeBetweenSteps": 0.4,
+    "showOrderRecipe": 2,
+    "timeToRead": 3
+  },
+  "ui": {
+    "tipFormat": "+{0:D2} Tip!",
+    "tutorialFadeSpeed": 1.2
+  },
+  "layouts": {
+    "game": [
+      {
+        "name": "Counter_Corner_02",
+        "prefab": "Counter_Corner",
+        "x": -7.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "CabbageCounter_01",
+        "prefab": "CabbageCounter",
+        "x": -5.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "BreadCounter_01",
+        "prefab": "BreadCounter",
+        "x": -4.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "TomatoCounter_01",
+        "prefab": "TomatoCounter",
+        "x": -2.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "MeatCounter_01",
+        "prefab": "MeatCounter",
+        "x": -1.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "CheeseCounter_01",
+        "prefab": "CheeseCounter",
+        "x": 0.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "CutCounter_01",
+        "prefab": "CutCounter",
+        "x": 1.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Plate_00",
+        "prefab": "Counter_Plate",
+        "x": 3.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "StoveCounter_01",
+        "prefab": "StoveCounter",
+        "x": 4.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_01",
+        "prefab": "Counter_Normal",
+        "x": 6.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Corner_03",
+        "prefab": "Counter_Corner",
+        "x": 7.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_08",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_02",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_03",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -3.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_07",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -3.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_09",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -2,
+        "yaw": 90
+      },
+      {
+        "name": "TrashCounter",
+        "prefab": "Trash",
+        "x": 7.75,
+        "z": -2,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_10",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -0.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_06",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -0.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_11",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": 1,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_PlateStack",
+        "prefab": "Counter_PlateStack",
+        "x": 7.75,
+        "z": 1,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_00",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": 2.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Delivery",
+        "prefab": "Counter_Delivery",
+        "x": 7.75,
+        "z": 2.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Corner_01",
+        "prefab": "Counter_Corner",
+        "x": -7.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "CutCounter_00",
+        "prefab": "CutCounter",
+        "x": -5.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Plate_01",
+        "prefab": "Counter_Plate",
+        "x": -4.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "StoveCounter_00",
+        "prefab": "StoveCounter",
+        "x": -2.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Normal_05",
+        "prefab": "Counter_Normal",
+        "x": -1.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "CabbageCounter_00",
+        "prefab": "CabbageCounter",
+        "x": 0.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "BreadCounter_00",
+        "prefab": "BreadCounter",
+        "x": 1.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "TomatoCounter_00",
+        "prefab": "TomatoCounter",
+        "x": 3.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "MeatCounter_00",
+        "prefab": "MeatCounter",
+        "x": 4.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "CheeseCounter_00",
+        "prefab": "CheeseCounter",
+        "x": 6.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Corner_00",
+        "prefab": "Counter_Corner",
+        "x": 7.75,
+        "z": 4,
+        "yaw": -180
+      }
+    ],
+    "tutorial": [
+      {
+        "name": "Counter_Corner_02",
+        "prefab": "Counter_Corner",
+        "x": -7.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_01",
+        "prefab": "Counter_Normal",
+        "x": -5.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_03",
+        "prefab": "Counter_Normal",
+        "x": -4.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_04",
+        "prefab": "Counter_Normal",
+        "x": -2.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_16",
+        "prefab": "Counter_Normal",
+        "x": -1.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_17",
+        "prefab": "Counter_Normal",
+        "x": 0.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_18",
+        "prefab": "Counter_Normal",
+        "x": 1.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_19",
+        "prefab": "Counter_Normal",
+        "x": 3.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_20",
+        "prefab": "Counter_Normal",
+        "x": 4.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Plate",
+        "prefab": "Counter_Plate",
+        "x": 6.25,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Corner_03",
+        "prefab": "Counter_Corner",
+        "x": 7.75,
+        "z": -6.5,
+        "yaw": 0
+      },
+      {
+        "name": "Counter_Normal_13",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_21",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_12",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -3.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_08",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -3.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_09",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -2,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_07",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -2,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_10",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": -0.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Normal_06",
+        "prefab": "Counter_Normal",
+        "x": 7.75,
+        "z": -0.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_11",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": 1,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_PlateStack",
+        "prefab": "Counter_PlateStack",
+        "x": 7.75,
+        "z": 1,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Normal_00",
+        "prefab": "Counter_Normal",
+        "x": -7.25,
+        "z": 2.5,
+        "yaw": 90
+      },
+      {
+        "name": "Counter_Delivery_Tutorial",
+        "prefab": "Counter_Delivery_Tutorial",
+        "x": 7.75,
+        "z": 2.5,
+        "yaw": -90
+      },
+      {
+        "name": "Counter_Corner_01",
+        "prefab": "Counter_Corner",
+        "x": -7.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "CutCounter_00",
+        "prefab": "CutCounter",
+        "x": -5.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Normal_02",
+        "prefab": "Counter_Normal",
+        "x": -4.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "StoveCounter_00",
+        "prefab": "StoveCounter",
+        "x": -2.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Normal_05",
+        "prefab": "Counter_Normal",
+        "x": -1.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Normal_14",
+        "prefab": "Counter_Normal",
+        "x": 0.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "BreadCounter",
+        "prefab": "BreadCounter",
+        "x": 1.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "MeatCounter",
+        "prefab": "MeatCounter",
+        "x": 3.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "CheeseCounter",
+        "prefab": "CheeseCounter",
+        "x": 4.75,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Normal_15",
+        "prefab": "Counter_Normal",
+        "x": 6.25,
+        "z": 4,
+        "yaw": -180
+      },
+      {
+        "name": "Counter_Corner_00",
+        "prefab": "Counter_Corner",
+        "x": 7.75,
+        "z": 4,
+        "yaw": -180
+      }
+    ]
+  }
+}

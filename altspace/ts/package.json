@@ -1,0 +1,26 @@
+{
+  "name": "coop-kitchen-rules",
+  "version": "0.0.0",
+  "private": true,
+  "description": "The rules of coop-kitchen (a co-op port of HyagoOliveira/KitchenChaos, MIT) on the portkit runtime. portkit/ is a copy of the shared kit (tools/sync.sh).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "node --disable-warning=ExperimentalWarning portkit/tools/lint.ts src portkit/src",
+    "unit": "node --disable-warning=ExperimentalWarning --test \"test/*.test.ts\"",
+    "test": "npm run typecheck && npm run lint && npm run unit",
+    "build": "node --disable-warning=ExperimentalWarning portkit/tools/build.ts --game . --out ../Assets/WebRoot",
+    "data": "node --disable-warning=ExperimentalWarning tools/gen-data.ts",
+    "bindings": "node --disable-warning=ExperimentalWarning tools/gen-bindings.ts",
+    "golden": "dotnet run --project golden -c Release -- vectors/upstream.json"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2"
+  },
+  "license": "MIT"
+}

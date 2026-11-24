@@ -1,0 +1,3074 @@
+{
+  "provisional": "Written by tools/gen-bindings.ts, not by the kit builder: no kit exists yet. Replace with the kit builder's output (PORT.md 11).",
+  "schema": 1,
+  "slug": "coop-kitchen",
+  "hash": "",
+  "root": "coop-kitchen",
+  "bundles": {
+    "windows": "",
+    "android": ""
+  },
+  "objects": {
+    "sfx": {
+      "path": "Audio",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "floor": {
+      "path": "Floor",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "s00": {
+      "path": "Items/Slot00",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s01": {
+      "path": "Items/Slot01",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s02": {
+      "path": "Items/Slot02",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s03": {
+      "path": "Items/Slot03",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s04": {
+      "path": "Items/Slot04",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s05": {
+      "path": "Items/Slot05",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s06": {
+      "path": "Items/Slot06",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s07": {
+      "path": "Items/Slot07",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s08": {
+      "path": "Items/Slot08",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s09": {
+      "path": "Items/Slot09",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s10": {
+      "path": "Items/Slot10",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s11": {
+      "path": "Items/Slot11",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s12": {
+      "path": "Items/Slot12",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s13": {
+      "path": "Items/Slot13",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s14": {
+      "path": "Items/Slot14",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s15": {
+      "path": "Items/Slot15",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s16": {
+      "path": "Items/Slot16",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s17": {
+      "path": "Items/Slot17",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s18": {
+      "path": "Items/Slot18",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s19": {
+      "path": "Items/Slot19",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s20": {
+      "path": "Items/Slot20",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s21": {
+      "path": "Items/Slot21",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s22": {
+      "path": "Items/Slot22",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s23": {
+      "path": "Items/Slot23",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s24": {
+      "path": "Items/Slot24",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s25": {
+      "path": "Items/Slot25",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s26": {
+      "path": "Items/Slot26",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s27": {
+      "path": "Items/Slot27",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s28": {
+      "path": "Items/Slot28",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s29": {
+      "path": "Items/Slot29",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s30": {
+      "path": "Items/Slot30",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s31": {
+      "path": "Items/Slot31",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s32": {
+      "path": "Items/Slot32",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s33": {
+      "path": "Items/Slot33",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s34": {
+      "path": "Items/Slot34",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s35": {
+      "path": "Items/Slot35",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s36": {
+      "path": "Items/Slot36",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s37": {
+      "path": "Items/Slot37",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s38": {
+      "path": "Items/Slot38",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s39": {
+      "path": "Items/Slot39",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s40": {
+      "path": "Items/Slot40",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s41": {
+      "path": "Items/Slot41",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s42": {
+      "path": "Items/Slot42",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s43": {
+      "path": "Items/Slot43",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s44": {
+      "path": "Items/Slot44",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s45": {
+      "path": "Items/Slot45",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s46": {
+      "path": "Items/Slot46",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "s47": {
+      "path": "Items/Slot47",
+      "sync": "none",
+      "grab": true,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "c_Counter_Corner_02": {
+      "path": "Counters/Counter_Corner_02",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "c_CabbageCounter_01": {
+      "path": "Counters/CabbageCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CabbageCounter_01": {
+      "path": "Counters/CabbageCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_BreadCounter_01": {
+      "path": "Counters/BreadCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_BreadCounter_01": {
+      "path": "Counters/BreadCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_TomatoCounter_01": {
+      "path": "Counters/TomatoCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_TomatoCounter_01": {
+      "path": "Counters/TomatoCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_MeatCounter_01": {
+      "path": "Counters/MeatCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_MeatCounter_01": {
+      "path": "Counters/MeatCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_CheeseCounter_01": {
+      "path": "Counters/CheeseCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CheeseCounter_01": {
+      "path": "Counters/CheeseCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_CutCounter_01": {
+      "path": "Counters/CutCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CutCounter_01": {
+      "path": "Counters/CutCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "q_CutCounter_01": {
+      "path": "Counters/CutCounter_01/CuttingBoard/Knife",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "bar_CutCounter_01": {
+      "path": "Counters/CutCounter_01/CuttingBoard/Canvas/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Plate_00": {
+      "path": "Counters/Counter_Plate_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Plate_00": {
+      "path": "Counters/Counter_Plate_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_StoveCounter_01": {
+      "path": "Counters/StoveCounter_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_StoveCounter_01": {
+      "path": "Counters/StoveCounter_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "q_StoveCounter_01": {
+      "path": "Counters/StoveCounter_01/Knob",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "bar_StoveCounter_01": {
+      "path": "Counters/StoveCounter_01/Stove/Canvas/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_01": {
+      "path": "Counters/Counter_Normal_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_01": {
+      "path": "Counters/Counter_Normal_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Corner_03": {
+      "path": "Counters/Counter_Corner_03",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "c_Counter_Normal_08": {
+      "path": "Counters/Counter_Normal_08",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_08": {
+      "path": "Counters/Counter_Normal_08/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_02": {
+      "path": "Counters/Counter_Normal_02",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_02": {
+      "path": "Counters/Counter_Normal_02/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_03": {
+      "path": "Counters/Counter_Normal_03",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_03": {
+      "path": "Counters/Counter_Normal_03/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_07": {
+      "path": "Counters/Counter_Normal_07",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_07": {
+      "path": "Counters/Counter_Normal_07/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_09": {
+      "path": "Counters/Counter_Normal_09",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_09": {
+      "path": "Counters/Counter_Normal_09/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_TrashCounter": {
+      "path": "Counters/TrashCounter",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_TrashCounter": {
+      "path": "Counters/TrashCounter/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_10": {
+      "path": "Counters/Counter_Normal_10",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_10": {
+      "path": "Counters/Counter_Normal_10/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_06": {
+      "path": "Counters/Counter_Normal_06",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_06": {
+      "path": "Counters/Counter_Normal_06/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_11": {
+      "path": "Counters/Counter_Normal_11",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_11": {
+      "path": "Counters/Counter_Normal_11/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_PlateStack": {
+      "path": "Counters/Counter_PlateStack",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_PlateStack": {
+      "path": "Counters/Counter_PlateStack/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_00": {
+      "path": "Counters/Counter_Normal_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_00": {
+      "path": "Counters/Counter_Normal_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Delivery": {
+      "path": "Counters/Counter_Delivery",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Delivery": {
+      "path": "Counters/Counter_Delivery/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Corner_01": {
+      "path": "Counters/Counter_Corner_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "c_CutCounter_00": {
+      "path": "Counters/CutCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CutCounter_00": {
+      "path": "Counters/CutCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "q_CutCounter_00": {
+      "path": "Counters/CutCounter_00/CuttingBoard/Knife",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "bar_CutCounter_00": {
+      "path": "Counters/CutCounter_00/CuttingBoard/Canvas/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Plate_01": {
+      "path": "Counters/Counter_Plate_01",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Plate_01": {
+      "path": "Counters/Counter_Plate_01/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_StoveCounter_00": {
+      "path": "Counters/StoveCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_StoveCounter_00": {
+      "path": "Counters/StoveCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "q_StoveCounter_00": {
+      "path": "Counters/StoveCounter_00/Knob",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "bar_StoveCounter_00": {
+      "path": "Counters/StoveCounter_00/Stove/Canvas/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Normal_05": {
+      "path": "Counters/Counter_Normal_05",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_Counter_Normal_05": {
+      "path": "Counters/Counter_Normal_05/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_CabbageCounter_00": {
+      "path": "Counters/CabbageCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CabbageCounter_00": {
+      "path": "Counters/CabbageCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_BreadCounter_00": {
+      "path": "Counters/BreadCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_BreadCounter_00": {
+      "path": "Counters/BreadCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_TomatoCounter_00": {
+      "path": "Counters/TomatoCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_TomatoCounter_00": {
+      "path": "Counters/TomatoCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_MeatCounter_00": {
+      "path": "Counters/MeatCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_MeatCounter_00": {
+      "path": "Counters/MeatCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_CheeseCounter_00": {
+      "path": "Counters/CheeseCounter_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "t_CheeseCounter_00": {
+      "path": "Counters/CheeseCounter_00/Top",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "c_Counter_Corner_00": {
+      "path": "Counters/Counter_Corner_00",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "deliveryTip": {
+      "path": "Counters/Counter_Delivery/Canvas/Tip",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "board": {
+      "path": "Board",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "scoreText": {
+      "path": "Board/Hud/Score/Current",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "scoreDelta": {
+      "path": "Board/Hud/Score/Delta",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "timerText": {
+      "path": "Board/Hud/Timer/Text",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "timerFill": {
+      "path": "Board/Hud/Timer/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "countDownText": {
+      "path": "Board/CountDown/Text",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketName0": {
+      "path": "Board/Orders/Ticket0/Name",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketIcons0": {
+      "path": "Board/Orders/Ticket0/Icons",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketBar0": {
+      "path": "Board/Orders/Ticket0/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketName1": {
+      "path": "Board/Orders/Ticket1/Name",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketIcons1": {
+      "path": "Board/Orders/Ticket1/Icons",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketBar1": {
+      "path": "Board/Orders/Ticket1/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketName2": {
+      "path": "Board/Orders/Ticket2/Name",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketIcons2": {
+      "path": "Board/Orders/Ticket2/Icons",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "ticketBar2": {
+      "path": "Board/Orders/Ticket2/Bar/Fill",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "lobby": {
+      "path": "Board/Lobby",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "rosterText": {
+      "path": "Board/Lobby/Roster",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "btnPlay": {
+      "path": "Board/Lobby/Play",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnTutorial": {
+      "path": "Board/Lobby/Tutorial",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnSounds": {
+      "path": "Board/Lobby/Sounds",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnCredits": {
+      "path": "Board/Lobby/Credits",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnCook": {
+      "path": "Board/Lobby/Cook",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "credits": {
+      "path": "Board/Credits",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "creditsText": {
+      "path": "Board/Credits/Text",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "btnCloseCredits": {
+      "path": "Board/Credits/Close",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "sounds": {
+      "path": "Board/Sounds",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "musicLabel": {
+      "path": "Board/Sounds/Music/Value",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "effectsLabel": {
+      "path": "Board/Sounds/Effects/Value",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "btnMusicUp": {
+      "path": "Board/Sounds/Music/Up",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnMusicDown": {
+      "path": "Board/Sounds/Music/Down",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnEffectsUp": {
+      "path": "Board/Sounds/Effects/Up",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnEffectsDown": {
+      "path": "Board/Sounds/Effects/Down",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnResetVolumes": {
+      "path": "Board/Sounds/Reset",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnSoundsBack": {
+      "path": "Board/Sounds/Back",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnPause": {
+      "path": "Board/Hud/Pause",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "pausePanel": {
+      "path": "Board/PausePanel",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "pauseOptions": {
+      "path": "Board/PausePanel/Options",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "pausedBy": {
+      "path": "Board/PausePanel/PausedBy",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "btnResume": {
+      "path": "Board/PausePanel/Options/Resume",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnRestart": {
+      "path": "Board/PausePanel/Options/Restart",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnPauseSounds": {
+      "path": "Board/PausePanel/Options/Sounds",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnEndRound": {
+      "path": "Board/PausePanel/Options/EndRound",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "confirm": {
+      "path": "Board/PausePanel/Confirm",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "btnYes": {
+      "path": "Board/PausePanel/Confirm/Yes",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "btnNo": {
+      "path": "Board/PausePanel/Confirm/No",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "resFailed": {
+      "path": "Board/Results/Failed",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resFailedTotal": {
+      "path": "Board/Results/FailedTotal",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resDelivered": {
+      "path": "Board/Results/Delivered",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resDeliveredTotal": {
+      "path": "Board/Results/DeliveredTotal",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resTips": {
+      "path": "Board/Results/Tips",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resTotal": {
+      "path": "Board/Results/Total",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "resBest": {
+      "path": "Board/Results/Best",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "newHighScore": {
+      "path": "Board/Results/NewHighScore",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "btnContinue": {
+      "path": "Board/Results/Continue",
+      "sync": "none",
+      "grab": false,
+      "click": true,
+      "seat": false
+    },
+    "tutorialText": {
+      "path": "Board/Tutorial/Description/Text",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false
+    },
+    "arrow0": {
+      "path": "Arrows/Arrow0",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    },
+    "arrow1": {
+      "path": "Arrows/Arrow1",
+      "sync": "none",
+      "grab": false,
+      "click": false,
+      "seat": false,
+      "active": false
+    }
+  },
+  "refs": [
+    "sfx",
+    "floor",
+    "c_Counter_Corner_02",
+    "c_CabbageCounter_01",
+    "c_BreadCounter_01",
+    "c_TomatoCounter_01",
+    "c_MeatCounter_01",
+    "c_CheeseCounter_01",
+    "c_CutCounter_01",
+    "q_CutCounter_01",
+    "c_Counter_Plate_00",
+    "c_StoveCounter_01",
+    "q_StoveCounter_01",
+    "c_Counter_Normal_01",
+    "c_Counter_Corner_03",
+    "c_Counter_Normal_08",
+    "c_Counter_Normal_02",
+    "c_Counter_Normal_03",
+    "c_Counter_Normal_07",
+    "c_Counter_Normal_09",
+    "c_TrashCounter",
+    "c_Counter_Normal_10",
+    "c_Counter_Normal_06",
+    "c_Counter_Normal_11",
+    "c_Counter_PlateStack",
+    "c_Counter_Normal_00",
+    "c_Counter_Delivery",
+    "c_Counter_Corner_01",
+    "c_CutCounter_00",
+    "q_CutCounter_00",
+    "c_Counter_Plate_01",
+    "c_StoveCounter_00",
+    "q_StoveCounter_00",
+    "c_Counter_Normal_05",
+    "c_CabbageCounter_00",
+    "c_BreadCounter_00",
+    "c_TomatoCounter_00",
+    "c_MeatCounter_00",
+    "c_CheeseCounter_00",
+    "c_Counter_Corner_00",
+    "deliveryTip",
+    "board",
+    "scoreText",
+    "scoreDelta",
+    "timerText",
+    "countDownText",
+    "ticketName0",
+    "ticketIcons0",
+    "ticketName1",
+    "ticketIcons1",
+    "ticketName2",
+    "ticketIcons2",
+    "lobby",
+    "rosterText",
+    "btnPlay",
+    "btnTutorial",
+    "btnSounds",
+    "btnCredits",
+    "btnCook",
+    "credits",
+    "creditsText",
+    "btnCloseCredits",
+    "sounds",
+    "musicLabel",
+    "effectsLabel",
+    "btnMusicUp",
+    "btnMusicDown",
+    "btnEffectsUp",
+    "btnEffectsDown",
+    "btnResetVolumes",
+    "btnSoundsBack",
+    "btnPause",
+    "pausePanel",
+    "pauseOptions",
+    "pausedBy",
+    "btnResume",
+    "btnRestart",
+    "btnPauseSounds",
+    "btnEndRound",
+    "confirm",
+    "btnYes",
+    "btnNo",
+    "resFailed",
+    "resFailedTotal",
+    "resDelivered",
+    "resDeliveredTotal",
+    "resTips",
+    "resTotal",
+    "resBest",
+    "newHighScore",
+    "btnContinue",
+    "tutorialText"
+  ],
+  "behaviours": [
+    {
+      "id": "kitchen",
+      "type": "Kitchen",
+      "fields": {
+        "match": {
+          "$beh": "match"
+        },
+        "orders": {
+          "$beh": "orders"
+        },
+        "score": {
+          "$beh": "score"
+        },
+        "tutorial": {
+          "$beh": "tutorial"
+        },
+        "gameData": {
+          "$beh": "gameData"
+        },
+        "slots": [
+          {
+            "$obj": "s00"
+          },
+          {
+            "$obj": "s01"
+          },
+          {
+            "$obj": "s02"
+          },
+          {
+            "$obj": "s03"
+          },
+          {
+            "$obj": "s04"
+          },
+          {
+            "$obj": "s05"
+          },
+          {
+            "$obj": "s06"
+          },
+          {
+            "$obj": "s07"
+          },
+          {
+            "$obj": "s08"
+          },
+          {
+            "$obj": "s09"
+          },
+          {
+            "$obj": "s10"
+          },
+          {
+            "$obj": "s11"
+          },
+          {
+            "$obj": "s12"
+          },
+          {
+            "$obj": "s13"
+          },
+          {
+            "$obj": "s14"
+          },
+          {
+            "$obj": "s15"
+          },
+          {
+            "$obj": "s16"
+          },
+          {
+            "$obj": "s17"
+          },
+          {
+            "$obj": "s18"
+          },
+          {
+            "$obj": "s19"
+          },
+          {
+            "$obj": "s20"
+          },
+          {
+            "$obj": "s21"
+          },
+          {
+            "$obj": "s22"
+          },
+          {
+            "$obj": "s23"
+          },
+          {
+            "$obj": "s24"
+          },
+          {
+            "$obj": "s25"
+          },
+          {
+            "$obj": "s26"
+          },
+          {
+            "$obj": "s27"
+          },
+          {
+            "$obj": "s28"
+          },
+          {
+            "$obj": "s29"
+          },
+          {
+            "$obj": "s30"
+          },
+          {
+            "$obj": "s31"
+          },
+          {
+            "$obj": "s32"
+          },
+          {
+            "$obj": "s33"
+          },
+          {
+            "$obj": "s34"
+          },
+          {
+            "$obj": "s35"
+          },
+          {
+            "$obj": "s36"
+          },
+          {
+            "$obj": "s37"
+          },
+          {
+            "$obj": "s38"
+          },
+          {
+            "$obj": "s39"
+          },
+          {
+            "$obj": "s40"
+          },
+          {
+            "$obj": "s41"
+          },
+          {
+            "$obj": "s42"
+          },
+          {
+            "$obj": "s43"
+          },
+          {
+            "$obj": "s44"
+          },
+          {
+            "$obj": "s45"
+          },
+          {
+            "$obj": "s46"
+          },
+          {
+            "$obj": "s47"
+          }
+        ],
+        "slotPaths": [
+          "Items/Slot00",
+          "Items/Slot01",
+          "Items/Slot02",
+          "Items/Slot03",
+          "Items/Slot04",
+          "Items/Slot05",
+          "Items/Slot06",
+          "Items/Slot07",
+          "Items/Slot08",
+          "Items/Slot09",
+          "Items/Slot10",
+          "Items/Slot11",
+          "Items/Slot12",
+          "Items/Slot13",
+          "Items/Slot14",
+          "Items/Slot15",
+          "Items/Slot16",
+          "Items/Slot17",
+          "Items/Slot18",
+          "Items/Slot19",
+          "Items/Slot20",
+          "Items/Slot21",
+          "Items/Slot22",
+          "Items/Slot23",
+          "Items/Slot24",
+          "Items/Slot25",
+          "Items/Slot26",
+          "Items/Slot27",
+          "Items/Slot28",
+          "Items/Slot29",
+          "Items/Slot30",
+          "Items/Slot31",
+          "Items/Slot32",
+          "Items/Slot33",
+          "Items/Slot34",
+          "Items/Slot35",
+          "Items/Slot36",
+          "Items/Slot37",
+          "Items/Slot38",
+          "Items/Slot39",
+          "Items/Slot40",
+          "Items/Slot41",
+          "Items/Slot42",
+          "Items/Slot43",
+          "Items/Slot44",
+          "Items/Slot45",
+          "Items/Slot46",
+          "Items/Slot47"
+        ],
+        "floor": {
+          "$obj": "floor"
+        },
+        "corners": [
+          {
+            "$obj": "c_Counter_Corner_02"
+          },
+          {
+            "$obj": "c_Counter_Corner_03"
+          },
+          {
+            "$obj": "c_Counter_Corner_01"
+          },
+          {
+            "$obj": "c_Counter_Corner_00"
+          }
+        ],
+        "clips": {
+          "pickup": [
+            {
+              "$clip": 0,
+              "on": "sfx"
+            },
+            {
+              "$clip": 1,
+              "on": "sfx"
+            }
+          ],
+          "drop": [
+            {
+              "$clip": 2,
+              "on": "sfx"
+            },
+            {
+              "$clip": 3,
+              "on": "sfx"
+            }
+          ],
+          "chop": [
+            {
+              "$clip": 4,
+              "on": "sfx"
+            },
+            {
+              "$clip": 5,
+              "on": "sfx"
+            },
+            {
+              "$clip": 6,
+              "on": "sfx"
+            }
+          ],
+          "warning": [
+            {
+              "$clip": 7,
+              "on": "sfx"
+            }
+          ],
+          "fail01": [
+            {
+              "$clip": 8,
+              "on": "sfx"
+            }
+          ],
+          "fail02": [
+            {
+              "$clip": 9,
+              "on": "sfx"
+            }
+          ],
+          "trash": [
+            {
+              "$clip": 10,
+              "on": "sfx"
+            },
+            {
+              "$clip": 11,
+              "on": "sfx"
+            }
+          ],
+          "success": [
+            {
+              "$clip": 12,
+              "on": "sfx"
+            },
+            {
+              "$clip": 13,
+              "on": "sfx"
+            }
+          ],
+          "newOrder": [
+            {
+              "$clip": 0,
+              "on": "sfx"
+            }
+          ],
+          "countdownStart": [
+            {
+              "$clip": 14,
+              "on": "sfx"
+            }
+          ],
+          "timesUp": [
+            {
+              "$clip": 15,
+              "on": "sfx"
+            }
+          ],
+          "tutorialDone": [
+            {
+              "$clip": 13,
+              "on": "sfx"
+            }
+          ]
+        },
+        "kitScale": 0.64
+      }
+    },
+    {
+      "id": "match",
+      "type": "MatchManager",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        }
+      }
+    },
+    {
+      "id": "score",
+      "type": "ScoreManager"
+    },
+    {
+      "id": "orders",
+      "type": "OrderManager",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        }
+      }
+    },
+    {
+      "id": "gameData",
+      "type": "GameDataManager"
+    },
+    {
+      "id": "ct_CabbageCounter_01",
+      "type": "IngredientCounter",
+      "object": "c_CabbageCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CabbageCounter_01",
+        "top": {
+          "$obj": "t_CabbageCounter_01"
+        },
+        "data": 1
+      }
+    },
+    {
+      "id": "ct_BreadCounter_01",
+      "type": "IngredientCounter",
+      "object": "c_BreadCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "BreadCounter_01",
+        "top": {
+          "$obj": "t_BreadCounter_01"
+        },
+        "data": 0
+      }
+    },
+    {
+      "id": "ct_TomatoCounter_01",
+      "type": "IngredientCounter",
+      "object": "c_TomatoCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "TomatoCounter_01",
+        "top": {
+          "$obj": "t_TomatoCounter_01"
+        },
+        "data": 8
+      }
+    },
+    {
+      "id": "ct_MeatCounter_01",
+      "type": "IngredientCounter",
+      "object": "c_MeatCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "MeatCounter_01",
+        "top": {
+          "$obj": "t_MeatCounter_01"
+        },
+        "data": 5
+      }
+    },
+    {
+      "id": "ct_CheeseCounter_01",
+      "type": "IngredientCounter",
+      "object": "c_CheeseCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CheeseCounter_01",
+        "top": {
+          "$obj": "t_CheeseCounter_01"
+        },
+        "data": 3
+      }
+    },
+    {
+      "id": "ct_CutCounter_01",
+      "type": "PreparationCounter",
+      "object": "c_CutCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CutCounter_01",
+        "top": {
+          "$obj": "t_CutCounter_01"
+        },
+        "preparator": {
+          "$beh": "pr_CutCounter_01"
+        }
+      }
+    },
+    {
+      "id": "ct_Counter_Plate_00",
+      "type": "Counter",
+      "object": "c_Counter_Plate_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Plate_00",
+        "top": {
+          "$obj": "t_Counter_Plate_00"
+        },
+        "startsWithPlate": true,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_StoveCounter_01",
+      "type": "PreparationCounter",
+      "object": "c_StoveCounter_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "StoveCounter_01",
+        "top": {
+          "$obj": "t_StoveCounter_01"
+        },
+        "preparator": {
+          "$beh": "pr_StoveCounter_01"
+        }
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_01",
+      "type": "Counter",
+      "object": "c_Counter_Normal_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_01",
+        "top": {
+          "$obj": "t_Counter_Normal_01"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_08",
+      "type": "Counter",
+      "object": "c_Counter_Normal_08",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_08",
+        "top": {
+          "$obj": "t_Counter_Normal_08"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_02",
+      "type": "Counter",
+      "object": "c_Counter_Normal_02",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_02",
+        "top": {
+          "$obj": "t_Counter_Normal_02"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_03",
+      "type": "Counter",
+      "object": "c_Counter_Normal_03",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_03",
+        "top": {
+          "$obj": "t_Counter_Normal_03"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_07",
+      "type": "Counter",
+      "object": "c_Counter_Normal_07",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_07",
+        "top": {
+          "$obj": "t_Counter_Normal_07"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_09",
+      "type": "Counter",
+      "object": "c_Counter_Normal_09",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_09",
+        "top": {
+          "$obj": "t_Counter_Normal_09"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_TrashCounter",
+      "type": "Trash",
+      "object": "c_TrashCounter",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "TrashCounter",
+        "top": {
+          "$obj": "t_TrashCounter"
+        }
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_10",
+      "type": "Counter",
+      "object": "c_Counter_Normal_10",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_10",
+        "top": {
+          "$obj": "t_Counter_Normal_10"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_06",
+      "type": "Counter",
+      "object": "c_Counter_Normal_06",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_06",
+        "top": {
+          "$obj": "t_Counter_Normal_06"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_11",
+      "type": "Counter",
+      "object": "c_Counter_Normal_11",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_11",
+        "top": {
+          "$obj": "t_Counter_Normal_11"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_PlateStack",
+      "type": "Counter",
+      "object": "c_Counter_PlateStack",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_PlateStack",
+        "top": {
+          "$obj": "t_Counter_PlateStack"
+        },
+        "startsWithPlate": false,
+        "plateStack": true
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_00",
+      "type": "Counter",
+      "object": "c_Counter_Normal_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_00",
+        "top": {
+          "$obj": "t_Counter_Normal_00"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_Counter_Delivery",
+      "type": "DeliveryCounter",
+      "object": "c_Counter_Delivery",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Delivery",
+        "top": {
+          "$obj": "t_Counter_Delivery"
+        },
+        "canvas": {
+          "$beh": "deliveryCanvas"
+        }
+      }
+    },
+    {
+      "id": "ct_CutCounter_00",
+      "type": "PreparationCounter",
+      "object": "c_CutCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CutCounter_00",
+        "top": {
+          "$obj": "t_CutCounter_00"
+        },
+        "preparator": {
+          "$beh": "pr_CutCounter_00"
+        }
+      }
+    },
+    {
+      "id": "ct_Counter_Plate_01",
+      "type": "Counter",
+      "object": "c_Counter_Plate_01",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Plate_01",
+        "top": {
+          "$obj": "t_Counter_Plate_01"
+        },
+        "startsWithPlate": true,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_StoveCounter_00",
+      "type": "PreparationCounter",
+      "object": "c_StoveCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "StoveCounter_00",
+        "top": {
+          "$obj": "t_StoveCounter_00"
+        },
+        "preparator": {
+          "$beh": "pr_StoveCounter_00"
+        }
+      }
+    },
+    {
+      "id": "ct_Counter_Normal_05",
+      "type": "Counter",
+      "object": "c_Counter_Normal_05",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Normal_05",
+        "top": {
+          "$obj": "t_Counter_Normal_05"
+        },
+        "startsWithPlate": false,
+        "plateStack": false
+      }
+    },
+    {
+      "id": "ct_CabbageCounter_00",
+      "type": "IngredientCounter",
+      "object": "c_CabbageCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CabbageCounter_00",
+        "top": {
+          "$obj": "t_CabbageCounter_00"
+        },
+        "data": 1
+      }
+    },
+    {
+      "id": "ct_BreadCounter_00",
+      "type": "IngredientCounter",
+      "object": "c_BreadCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "BreadCounter_00",
+        "top": {
+          "$obj": "t_BreadCounter_00"
+        },
+        "data": 0
+      }
+    },
+    {
+      "id": "ct_TomatoCounter_00",
+      "type": "IngredientCounter",
+      "object": "c_TomatoCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "TomatoCounter_00",
+        "top": {
+          "$obj": "t_TomatoCounter_00"
+        },
+        "data": 8
+      }
+    },
+    {
+      "id": "ct_MeatCounter_00",
+      "type": "IngredientCounter",
+      "object": "c_MeatCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "MeatCounter_00",
+        "top": {
+          "$obj": "t_MeatCounter_00"
+        },
+        "data": 5
+      }
+    },
+    {
+      "id": "ct_CheeseCounter_00",
+      "type": "IngredientCounter",
+      "object": "c_CheeseCounter_00",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CheeseCounter_00",
+        "top": {
+          "$obj": "t_CheeseCounter_00"
+        },
+        "data": 3
+      }
+    },
+    {
+      "id": "pr_CutCounter_01",
+      "type": "CuttingBoard",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CutCounter_01",
+        "path": "Counters/CutCounter_01/CuttingBoard",
+        "allowedStatus": 4,
+        "preparatedStatus": 2,
+        "finalSecondsBooster": 1.25,
+        "counter": {
+          "$beh": "ct_CutCounter_01"
+        },
+        "barFill": {
+          "$obj": "bar_CutCounter_01"
+        }
+      }
+    },
+    {
+      "id": "pr_StoveCounter_01",
+      "type": "Stove",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "StoveCounter_01",
+        "path": "Counters/StoveCounter_01/Stove",
+        "allowedStatus": 1,
+        "preparatedStatus": 2,
+        "finalSecondsBooster": 1.25,
+        "timeBeforeBurn": 2,
+        "counter": {
+          "$beh": "ct_StoveCounter_01"
+        },
+        "barFill": {
+          "$obj": "bar_StoveCounter_01"
+        }
+      }
+    },
+    {
+      "id": "pr_CutCounter_00",
+      "type": "CuttingBoard",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "CutCounter_00",
+        "path": "Counters/CutCounter_00/CuttingBoard",
+        "allowedStatus": 4,
+        "preparatedStatus": 2,
+        "finalSecondsBooster": 1.25,
+        "counter": {
+          "$beh": "ct_CutCounter_00"
+        },
+        "barFill": {
+          "$obj": "bar_CutCounter_00"
+        }
+      }
+    },
+    {
+      "id": "pr_StoveCounter_00",
+      "type": "Stove",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "StoveCounter_00",
+        "path": "Counters/StoveCounter_00/Stove",
+        "allowedStatus": 1,
+        "preparatedStatus": 2,
+        "finalSecondsBooster": 1.25,
+        "timeBeforeBurn": 2,
+        "counter": {
+          "$beh": "ct_StoveCounter_00"
+        },
+        "barFill": {
+          "$obj": "bar_StoveCounter_00"
+        }
+      }
+    },
+    {
+      "id": "pc_CutCounter_01",
+      "type": "PreparationWorldSpaceCanvas",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "preparator": {
+          "$beh": "pr_CutCounter_01"
+        },
+        "path": "Counters/CutCounter_01/CuttingBoard/Canvas",
+        "barFill": {
+          "$obj": "bar_CutCounter_01"
+        },
+        "rejectedText": "Cannot \nCut"
+      }
+    },
+    {
+      "id": "pc_StoveCounter_01",
+      "type": "PreparationWorldSpaceCanvas",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "preparator": {
+          "$beh": "pr_StoveCounter_01"
+        },
+        "path": "Counters/StoveCounter_01/Stove/Canvas",
+        "barFill": {
+          "$obj": "bar_StoveCounter_01"
+        },
+        "rejectedText": "Cannot \nCook"
+      }
+    },
+    {
+      "id": "pc_CutCounter_00",
+      "type": "PreparationWorldSpaceCanvas",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "preparator": {
+          "$beh": "pr_CutCounter_00"
+        },
+        "path": "Counters/CutCounter_00/CuttingBoard/Canvas",
+        "barFill": {
+          "$obj": "bar_CutCounter_00"
+        },
+        "rejectedText": "Cannot \nCut"
+      }
+    },
+    {
+      "id": "pc_StoveCounter_00",
+      "type": "PreparationWorldSpaceCanvas",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "preparator": {
+          "$beh": "pr_StoveCounter_00"
+        },
+        "path": "Counters/StoveCounter_00/Stove/Canvas",
+        "barFill": {
+          "$obj": "bar_StoveCounter_00"
+        },
+        "rejectedText": "Cannot \nCook"
+      }
+    },
+    {
+      "id": "deliveryCanvas",
+      "type": "DeliveryCounterCanvas",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "cell": "Counter_Delivery",
+        "path": "Counters/Counter_Delivery/Canvas",
+        "tip": {
+          "$comp": "deliveryTip",
+          "kind": "TMP"
+        },
+        "tipFormat": "+{0:D2} Tip!"
+      }
+    },
+    {
+      "id": "tickets",
+      "type": "OrderTicketGroup",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "board": "board",
+        "ticketPaths": [
+          "Board/Orders/Ticket0",
+          "Board/Orders/Ticket1",
+          "Board/Orders/Ticket2"
+        ],
+        "names": [
+          {
+            "$comp": "ticketName0",
+            "kind": "TMP"
+          },
+          {
+            "$comp": "ticketName1",
+            "kind": "TMP"
+          },
+          {
+            "$comp": "ticketName2",
+            "kind": "TMP"
+          }
+        ],
+        "icons": [
+          {
+            "$comp": "ticketIcons0",
+            "kind": "TMP"
+          },
+          {
+            "$comp": "ticketIcons1",
+            "kind": "TMP"
+          },
+          {
+            "$comp": "ticketIcons2",
+            "kind": "TMP"
+          }
+        ],
+        "bars": [
+          {
+            "$obj": "ticketBar0"
+          },
+          {
+            "$obj": "ticketBar1"
+          },
+          {
+            "$obj": "ticketBar2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scoreUi",
+      "type": "Score",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "path": "Board/Hud/Score",
+        "current": {
+          "$comp": "scoreText",
+          "kind": "TMP"
+        },
+        "delta": {
+          "$comp": "scoreDelta",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "timer",
+      "type": "Timer",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "path": "Board/Hud/Timer",
+        "board": "board",
+        "timer": {
+          "$comp": "timerText",
+          "kind": "TMP"
+        },
+        "slider": {
+          "$obj": "timerFill"
+        }
+      }
+    },
+    {
+      "id": "countDown",
+      "type": "CountDown",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "path": "Board/CountDown",
+        "board": "board",
+        "countDown": {
+          "$comp": "countDownText",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "timesUp",
+      "type": "TimesUp",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "path": "Board/TimesUp",
+        "board": "board"
+      }
+    },
+    {
+      "id": "results",
+      "type": "Results",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "gameData": {
+          "$beh": "gameData"
+        },
+        "path": "Board/Results",
+        "failedDeliveries": {
+          "$comp": "resFailed",
+          "kind": "TMP"
+        },
+        "totalFailedDeliveries": {
+          "$comp": "resFailedTotal",
+          "kind": "TMP"
+        },
+        "successfulDeliveries": {
+          "$comp": "resDelivered",
+          "kind": "TMP"
+        },
+        "totalSuccessfulDeliveries": {
+          "$comp": "resDeliveredTotal",
+          "kind": "TMP"
+        },
+        "tips": {
+          "$comp": "resTips",
+          "kind": "TMP"
+        },
+        "totalScore": {
+          "$comp": "resTotal",
+          "kind": "TMP"
+        },
+        "best": {
+          "$comp": "resBest",
+          "kind": "TMP"
+        },
+        "newHighScore": {
+          "$obj": "newHighScore"
+        }
+      }
+    },
+    {
+      "id": "music",
+      "type": "BackgroundMusic",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "path": "Music"
+      }
+    },
+    {
+      "id": "soundPopup",
+      "type": "SoundPopup",
+      "object": "sounds",
+      "fields": {
+        "gameData": {
+          "$beh": "gameData"
+        },
+        "path": "Board/Sounds",
+        "musicLabel": {
+          "$comp": "musicLabel",
+          "kind": "TMP"
+        },
+        "effectsLabel": {
+          "$comp": "effectsLabel",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "mainMenuOptions",
+      "type": "MainMenuOptions",
+      "object": "lobby",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "tutorialButton": "btnTutorial"
+      }
+    },
+    {
+      "id": "mainMenu",
+      "type": "MainMenu",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "mainMenuOptions": {
+          "$beh": "mainMenuOptions"
+        },
+        "soundPopup": {
+          "$beh": "soundPopup"
+        },
+        "credits": {
+          "$obj": "credits"
+        },
+        "creditsText": {
+          "$comp": "creditsText",
+          "kind": "TMP"
+        },
+        "roster": {
+          "$comp": "rosterText",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "pauseOptions",
+      "type": "PauseOptions",
+      "object": "pauseOptions",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        }
+      }
+    },
+    {
+      "id": "pauseCanvas",
+      "type": "PauseCanvas",
+      "object": "pausePanel",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "pauseOptions": {
+          "$beh": "pauseOptions"
+        },
+        "soundPopup": {
+          "$beh": "soundPopup"
+        },
+        "confirm": {
+          "$obj": "confirm"
+        }
+      }
+    },
+    {
+      "id": "pauseHandler",
+      "type": "PauseHandler",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "pauseCanvas": {
+          "$beh": "pauseCanvas"
+        },
+        "pauseButton": "btnPause",
+        "pausedBy": {
+          "$comp": "pausedBy",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "tutorialDescription",
+      "type": "TutorialDescription",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "manager": {
+          "$beh": "tutorial"
+        },
+        "path": "Board/Tutorial/Description",
+        "board": "board",
+        "text": {
+          "$comp": "tutorialText",
+          "kind": "TMP"
+        }
+      }
+    },
+    {
+      "id": "tutorial",
+      "type": "TutorialManager",
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        },
+        "description": {
+          "$beh": "tutorialDescription"
+        },
+        "titlePath": "@Board/Tutorial/Title",
+        "arrowObjects": [
+          {
+            "$obj": "arrow0"
+          },
+          {
+            "$obj": "arrow1"
+          }
+        ],
+        "deliveryCounter": {
+          "$beh": "ct_Counter_Delivery"
+        },
+        "plateCounterCell": "Counter_Plate_00",
+        "timeBetweenSteps": 0.4
+      }
+    },
+    {
+      "id": "chef",
+      "type": "Chef",
+      "perPlayer": true,
+      "fields": {
+        "kitchen": {
+          "$beh": "kitchen"
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "object": "c_CabbageCounter_01",
+      "kind": "click",
+      "behaviour": "ct_CabbageCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_BreadCounter_01",
+      "kind": "click",
+      "behaviour": "ct_BreadCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_TomatoCounter_01",
+      "kind": "click",
+      "behaviour": "ct_TomatoCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_MeatCounter_01",
+      "kind": "click",
+      "behaviour": "ct_MeatCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_CheeseCounter_01",
+      "kind": "click",
+      "behaviour": "ct_CheeseCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_CutCounter_01",
+      "kind": "click",
+      "behaviour": "ct_CutCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "q_CutCounter_01",
+      "kind": "click",
+      "behaviour": "ct_CutCounter_01",
+      "method": "ClickedKnob"
+    },
+    {
+      "object": "c_Counter_Plate_00",
+      "kind": "click",
+      "behaviour": "ct_Counter_Plate_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_StoveCounter_01",
+      "kind": "click",
+      "behaviour": "ct_StoveCounter_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "q_StoveCounter_01",
+      "kind": "click",
+      "behaviour": "ct_StoveCounter_01",
+      "method": "ClickedKnob"
+    },
+    {
+      "object": "c_Counter_Normal_01",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_08",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_08",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_02",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_02",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_03",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_03",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_07",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_07",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_09",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_09",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_TrashCounter",
+      "kind": "click",
+      "behaviour": "ct_TrashCounter",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_10",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_10",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_06",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_06",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_11",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_11",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_PlateStack",
+      "kind": "click",
+      "behaviour": "ct_Counter_PlateStack",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Normal_00",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_Counter_Delivery",
+      "kind": "click",
+      "behaviour": "ct_Counter_Delivery",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_CutCounter_00",
+      "kind": "click",
+      "behaviour": "ct_CutCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "q_CutCounter_00",
+      "kind": "click",
+      "behaviour": "ct_CutCounter_00",
+      "method": "ClickedKnob"
+    },
+    {
+      "object": "c_Counter_Plate_01",
+      "kind": "click",
+      "behaviour": "ct_Counter_Plate_01",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_StoveCounter_00",
+      "kind": "click",
+      "behaviour": "ct_StoveCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "q_StoveCounter_00",
+      "kind": "click",
+      "behaviour": "ct_StoveCounter_00",
+      "method": "ClickedKnob"
+    },
+    {
+      "object": "c_Counter_Normal_05",
+      "kind": "click",
+      "behaviour": "ct_Counter_Normal_05",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_CabbageCounter_00",
+      "kind": "click",
+      "behaviour": "ct_CabbageCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_BreadCounter_00",
+      "kind": "click",
+      "behaviour": "ct_BreadCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_TomatoCounter_00",
+      "kind": "click",
+      "behaviour": "ct_TomatoCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_MeatCounter_00",
+      "kind": "click",
+      "behaviour": "ct_MeatCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "c_CheeseCounter_00",
+      "kind": "click",
+      "behaviour": "ct_CheeseCounter_00",
+      "method": "Clicked"
+    },
+    {
+      "object": "btnPlay",
+      "kind": "click",
+      "behaviour": "mainMenuOptions",
+      "method": "PlayGame"
+    },
+    {
+      "object": "btnTutorial",
+      "kind": "click",
+      "behaviour": "mainMenuOptions",
+      "method": "PlayTutorial"
+    },
+    {
+      "object": "btnSounds",
+      "kind": "click",
+      "behaviour": "mainMenuOptions",
+      "method": "RequestOpenSoundOptions"
+    },
+    {
+      "object": "btnCredits",
+      "kind": "click",
+      "behaviour": "mainMenuOptions",
+      "method": "RequestOpenCredits"
+    },
+    {
+      "object": "btnCook",
+      "kind": "click",
+      "behaviour": "mainMenuOptions",
+      "method": "ToggleCook"
+    },
+    {
+      "object": "btnCloseCredits",
+      "kind": "click",
+      "behaviour": "mainMenu",
+      "method": "CloseCredits"
+    },
+    {
+      "object": "btnMusicUp",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "MusicUp"
+    },
+    {
+      "object": "btnMusicDown",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "MusicDown"
+    },
+    {
+      "object": "btnEffectsUp",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "EffectsUp"
+    },
+    {
+      "object": "btnEffectsDown",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "EffectsDown"
+    },
+    {
+      "object": "btnResetVolumes",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "HandleResetButtonClick"
+    },
+    {
+      "object": "btnSoundsBack",
+      "kind": "click",
+      "behaviour": "soundPopup",
+      "method": "HandleCloseButtonClick"
+    },
+    {
+      "object": "btnPause",
+      "kind": "click",
+      "behaviour": "pauseOptions",
+      "method": "Pause"
+    },
+    {
+      "object": "btnResume",
+      "kind": "click",
+      "behaviour": "pauseOptions",
+      "method": "Resume"
+    },
+    {
+      "object": "btnRestart",
+      "kind": "click",
+      "behaviour": "pauseOptions",
+      "method": "Restart"
+    },
+    {
+      "object": "btnPauseSounds",
+      "kind": "click",
+      "behaviour": "pauseOptions",
+      "method": "Sound"
+    },
+    {
+      "object": "btnEndRound",
+      "kind": "click",
+      "behaviour": "pauseOptions",
+      "method": "Exit"
+    },
+    {
+      "object": "btnYes",
+      "kind": "click",
+      "behaviour": "pauseCanvas",
+      "method": "Confirmed"
+    },
+    {
+      "object": "btnNo",
+      "kind": "click",
+      "behaviour": "pauseCanvas",
+      "method": "Declined"
+    },
+    {
+      "object": "btnContinue",
+      "kind": "click",
+      "behaviour": "results",
+      "method": "HandleContinueButtonClick"
+    }
+  ]
+}
