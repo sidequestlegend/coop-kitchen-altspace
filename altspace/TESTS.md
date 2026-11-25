@@ -18,6 +18,14 @@ portkit/tools/remote.sh coop-kitchen-port/altspace menu "PortKit/Multiplayer/Act
 portkit/tools/playtest.sh coop-kitchen-port/altspace coop-kitchen-port/altspace/playtest/multi.json coop-kitchen    rung 4
 ```
 
+## Page script on portkit 552622c, 2026-11-25 evening
+
+Re-synced `ts/portkit` and the package to portkit `552622c`. That commit includes `425bd55`: the page loads kit
+items one at a time, because overlapping loads lost relay graphs and Variables in the app. It also includes
+`0880bf5`: a referee claimant starts only once its claim has stood for 1.5 s, which fixes the equal-term double
+claim, and user-state flushes go one at a time. The bundles are unchanged from the rebuild below. `npm test`:
+**48 of 48** (0 failed). `npm run build`: 564899 bytes. Export Artifacts -> `dist/`: 12 files (7 licence texts), footprint 10.93 x 3.19 x 7.68 m, bindings 4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55.
+
 ## Held items and pushing, 2026-11-25 evening (portkit 476075d)
 
 A held item is drawn 0.45 m in front of the holder's head and 0.3 m below it (`Kitchen.HandPosition`), and it moves
