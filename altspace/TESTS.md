@@ -25,16 +25,29 @@ portkit/tools/playtest.sh coop-kitchen-port/altspace coop-kitchen-port/altspace/
 ## Rung 1: Node (no Unity)
 
 `npm test` in `altspace/ts`, on the kit builder's real `bindings.json` (hash `4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55`):
-**43 tests, 43 pass, 0 fail** (about 4 s). 8 golden-vector tests against the upstream C# compiled with dotnet 8 (V1 to
+**47 tests, 47 pass, 0 fail** (about 20 s). 8 golden-vector tests against the upstream C# compiled with dotnet 8 (V1 to
 V7 exact, V9 timelines within the upstream's own frame drift; the orders scenarios with deliveries now event for event,
 the fix of checklist 128 applied to the upstream's log as written in the test), 8 rules tests on a RulesBench, 13
 multi-client scenarios on the fake room (three chefs deliver; cutting and its pause; the burn sequence; plating rules;
 expiry; shared pause; referee loss mid-round; a chef leaving with a plate; a late joiner; two kitchens in one room; time
-up and results; the tutorial with two chefs; a forged command refused), and 14 review tests (`test/review.test.ts`, each
+up and results; the tutorial with two chefs; a forged command refused), 4 reach tests (`test/reach.test.ts`, below), and
+14 review tests (`test/review.test.ts`, each
 failing on the code before its fix: run with the fixed sources stashed, 12 of the 14 failed, the other two being the new
 soak tests of PORT.md 9.2 #3 and #12, which pass on both). Details in PORT.md 11.4 and 11.8. On portkit c971100 the 43
-pass unchanged, and the kit's own tests in the game's copy (`node --test "portkit/test/*.test.ts"`) give 110 pass,
+passed unchanged, and the kit's own tests in the game's copy (`node --test "portkit/test/*.test.ts"`) give 110 pass,
 0 fail.
+
+**The referee's reach check (2026-11-25, PORT.md 11.5 and the trust note in 11.8):** `test/reach.test.ts`, 4 tests,
+each failing on the code before the check (run against the old `Kitchen.ts` and `index.ts` with only the new names
+added, so that the tests load: all 4 fail on their assertions, a far intent taking the cheese, or on the missing check
+record). A modified client's far intent, sent past its own page's check, is refused (20 m; 4.9 m from the head with a
+hand within 2 m; a far floor drop); an honest intent with the head 4.0 m away and a hand 1.9 m away counts, measured
+from the referee's head reading, and a Q whose chef walks off before it arrives is judged by an earlier reading; an
+unknown head, a reading that never comes and too many waiting intents are refused (at most 8 of one chef wait); a page
+that knows no position for its player sends nothing. Every chef in the Node tests now stands somewhere
+(`test/helpers.ts`, `STAND`), and three older tests (review "never lands outside the floor" and "a pick-up sounds",
+scenario "plating rules") stand their chef by the floor spot they click: with no position known, every click used to
+count, and now none does.
 
 ## Rung 2: the kit in edit mode (`PortKit/Kit/Check`)
 
@@ -69,7 +82,8 @@ A hand-written `<bs-snippet name="coop-kitchen" ... seed="1">` (the seed makes t
 built script and the bundles from the test's local server, and `Assets/WebRoot/playtest/kitchen-playtest.js`, which
 drives the kitchen through the SDK's desktop player with portkit's InputSim (the SDK casts its own rays and raises
 the clicks) and reads Unity back with the `probe` command (`Logs/portkit_playtest_kitchen-single.txt`, copied to
-`playtest/evidence_single.txt`). **RESULT 37 passed, 0 failed; 0 console error lines, twice in a row** on the bundles
+`playtest/evidence_single.txt`). **RESULT 37 passed, 0 failed; 0 console error lines, twice in a row** with the
+referee's reach check and the fail-closed page (2026-11-25), and before them on the bundles
 rebuilt on portkit c971100 (2026-11-25, `--keep-play` between the runs; the same 37 on 812f285; the first pass on
 2026-11-24 had 32 checks). Since the review a chef's reach is 2 m, so the test
 stands the desktop player at each counter before clicking it (InputSim `place`, and the page's own `TeleportTo`, which
@@ -127,9 +141,19 @@ lead's bread, then pauses and resumes, then reloads its page. The pages exchange
 digests as one-shots (which the runtime ignores). Since the review, before the reload, both chefs also act on one
 board at the same wall-clock moment named by the lead (both players run on this machine; the clicks landed 47 to 116 ms
 after it in the c971100 run kept as evidence): Q on a board holding a cheese, then E on it holding the slice (PORT.md
-9.5 "both clicking the same item"). **RESULT 51 passed, 0 failed; 0 console error lines, twice in a row** on the bundles
-rebuilt on portkit c971100 (2026-11-25, `--keep-play` between the runs; the same 51 on 812f285; 41 checks in the first
-pass) (`playtest/evidence_multi.txt`, the second run: the digests after the reload agree, `3a3a1f2f`).
+9.5 "both clicking the same item"). **RESULT 57 passed, 0 failed; 0 console error lines, twice in a row** with the
+referee's reach check (2026-11-25, `--keep-play` between the runs; `playtest/evidence_multi.txt`, the second run: the
+digests after the reload agree, `c9ac9b6b`). Before the check: 51 passed twice on the c971100 bundles and on 812f285,
+41 in the first pass.
+
+The six new checks: after the races, the page that is not the referee (Player 2 in these runs; the main editor is the
+referee) stands at the bread crate and, past its own reach check (`debug.forceIntent`, as a modified page would), sends
+E on the crate farthest from it (CabbageCounter_01, 7.50 m); its hand stays empty, and the remote referee refuses it
+from its own app's reading of Player 2's head (`[0.96,1.6,2.39]`, 7.499 m, "at most 4.5"), the only refusal of the run,
+while it let Player 2's 12 logged honest intents through by the same check (for example the E race on CutCounter_01,
+1.196 m). The first run with the check (not counted) failed 9: the referee refused an honest Q on a board, read 6.83 m
+away, because the intent arrived after the chef had moved on to the meat crate; the referee now judges an intent by
+the nearest of its readings of the chef's head over the last 3 s (PORT.md 11.5).
 
 ```
 [main] PASS two players in the room
@@ -154,6 +178,12 @@ pass) (`playtest/evidence_multi.txt`, the second run: the digests after the relo
 [vp] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
 [main] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71..."]
 [vp] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71..."]
+[vp] PASS a counter far across the kitchen to aim at: CabbageCounter_01 7.50 m
+[vp] PASS a far E sent past this page's own check changes nothing here (no ingredient taken): CabbageCounter_01 at 7.50 m, hand null
+[main] PASS the other chef sends a far intent
+[main] PASS as the referee, this page refuses the other chef's far intent, from its own app's reading of their head: {"target":"c:CabbageCounter_01","head":[0.96,1.6,2.39],"age":0,"distance":7.499,"ok":false,...}, their hand null
+[main] PASS as the referee, this page let the other chef's honest intents through by the same check: 12 passed, e.g. {"target":"c:CutCounter_01","head":[0.96,1.6,-2.39],"distance":1.196,"ok":true}; refused 1
+[vp] PASS the remote referee says it refused the far intent
 ```
 
 Artifacts (`PortKit/Kit/Take Photos`, `PortKit/Kit/Export Artifacts`, 2026-11-25, portkit c971100): `dist/` with the bundles
@@ -175,6 +205,8 @@ the decided attribution).
   kitchens in one page, a referee leaving, a chef leaving with an item, a later session's high score, forged effects
   or intents, VR grabs racing (all covered by the Node tests on the fake room).
 - **Reach in VR:** measured from the nearest of head and hands; in Play mode only the desktop head (and teleports) was
-  used. The 2 m value is a judgement (PORT.md C2), not tested with people.
+  used. The 2 m value is a judgement (PORT.md C2), not tested with people. The referee's 2.5 m slack and 3 s of head
+  readings are judgements too: in Play mode both players run on one machine, so the app's placing of a remote avatar
+  was barely late; over the internet and on Quest it is later, and an honest chef may be refused more often.
 - **Where pick-up and drop sounds play** (the counter acted on): checked as relay records in Node; nobody listened.
 - **The highlight (checklist 109)** is not done: no hover event reaches the page.

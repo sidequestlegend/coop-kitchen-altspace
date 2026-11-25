@@ -1549,7 +1549,7 @@ ships; 138, the crate's icon, was missing.)
 | 137 | T | rules.test.ts |
 | 138 | I | the crate counter's front shows its ingredient's icon (sprite text from the board's icon sprites, `CoopKitchenKitBuilder.CrateIcon`); Play mode reads it (rung 3) |
 
-### 11.4 Tests (`npm test`: 43 tests, all passing on portkit c971100; the kit's own 110 pass in the game's copy)
+### 11.4 Tests (`npm test`: 47 tests, all passing on portkit c971100; the kit's own 110 pass in the game's copy)
 
 - `test/golden.test.ts` (8): the upstream C# compiled unchanged with dotnet 8 against `golden/UnityStubs.cs`, driven by
   `golden/Harness.cs`, written to `vectors/upstream.json`. V1 weighted pick (1,012 rolls), V2 waiting times, V3 tips
@@ -1571,12 +1571,20 @@ ships; 138, the crate's icon, was missing.)
   the floor; forged effects; two Q presses and two E presses on one counter; two grabs of one item; pick-up and drop
   sounds where they happen; the pause panel; and PORT.md 9.2 #3 (500 random intents) and #12 (ten minutes of joins,
   leaves and referee losses).
+- `test/reach.test.ts` (4), the referee's reach check (11.5, trust), each failing on the code before it: a far intent a
+  modified client sends past its own check is refused (20 m, 4.9 m with a hand within 2 m, a far floor drop); an
+  honest intent with the head 4.0 m away and a hand 1.9 m away counts, measured from the referee's head reading, and a
+  Q whose chef walks off before it arrives is judged by where they were (an earlier reading); an
+  unknown head, a reading that never comes and too many waiting intents are refused (at most 8 of one chef wait); a page
+  that knows no position for its player sends nothing. Every chef in the Node tests now stands somewhere
+  (`helpers.STAND`, 1.7 m from the kit's objects, which the fake room puts at the origin), and three older tests stand
+  their chef by the floor spot they click (before, with no position known, every click counted)
 
 ### 11.5 Gaps and local workarounds (portkit not edited)
 
 | Gap | Local workaround |
 |---|---|
-| The page cannot read remote players' heads | `Chef` (a per-player behaviour) publishes its player's head, rounded, only while they hold an item; others draw the held item there; a chef who leaves drops it there |
+| The page cannot read remote players' heads every frame (portkit c971100 has `Networking.HeadOf`, a one-off reading the referee now uses for reach) | `Chef` (a per-player behaviour) publishes its player's head, rounded, only while they hold an item; others draw the held item there; a chef who leaves drops it there. It is the chef's own word, used only for drawing and for where a departing chef's item falls |
 | No relay op for a slider or bar (8 bars) | the fill object's `localScale.x`, set by the page (rounded to 1 %) |
 | The relay drives Animators only; every gameplay clip upstream is a legacy `Animation` (5.4) | the script sends `animPlay` with the clip's name; the kit builder must convert each legacy clip to an Animator state of that name (5.4, option 1) |
 | No `Stop` for a looping AudioSource | the sizzle is a play-on-enable child switched by path |
@@ -1587,7 +1595,8 @@ ships; 138, the crate's icon, was missing.)
 | (closed) No kit yet | the kit is built (11.7); `tools/gen-bindings.ts` writes the contract the kit builder follows |
 | (closed by portkit 812f285) `KitStage.Behaviour` took no id or per-player flag | the builder passes each behaviour's id and `perPlayer` from the contract (`Behaviour(go, type, fields, perPlayer, id)`); `gen-bindings.ts` no longer seeds the lock. `Chef` keeps `static perPlayer` too |
 | Found in Play mode: the local chef's held item is drawn in front of their head, in the way of every desktop click (a click on it grabbed its pool slot and dropped the item) | `Kitchen.ts`: the slot of the item the local chef holds by a click, and of the ingredients on a plate they hold, goes to the Default layer (0) while held; a physical grab keeps its layer |
-| Not adopted yet (portkit c971100; this round was rebuild only) | the kit now has `Networking.HeadOf(player, seconds)` and `InReach(point, metres, whenUnknown)` / `GameDefinition.reachWhenUnknown`. They could replace `Chef`'s own head publishing (first row) and let the referee check reach too (the trust note in 11.8, "Reach is checked on the clicking client only"); nothing in the game uses them yet. The rebuild itself needed no game change and removed no workaround: the item a chef holds by a click still leaves the pointer layers, so the kit's new click events on grabbables (`BSPlayerEvents`) cannot reach it either (rungs 3 and 4 click past it as before) |
+| (closed, portkit c971100) The referee took every chef's intent on its word: reach was checked on the clicking page only (trust, 11.8) | the referee asks its own app where a remote chef's head is (`Networking.HeadOf`, relay op `pkHead`) before it runs their intent, and refuses it unless the target was within `REACH` + `REFEREE_REACH_SLACK` (2 + 2.5 m) of that head at the nearest in the last `HEAD_HISTORY` = 3 s: that reading and the ones the referee takes of every remote chef 4 times a second (`PollHeads`; a query of its own app, no network message). The history is there because an intent can reach the referee a second or two after the click (it waits for the chef's earlier writes): the first Play-mode run refused an honest Q on a board, read 6.8 m away after the chef had moved on to the meat crate (`Kitchen.Intent`, `OnHead`, `TargetPoint`, `PollHeads`). It fails closed (no head reading in the last 3 s, none within `HEAD_SECONDS` = 2 s), keeps each chef's intents in order (one reading serves all of a chef's waiting intents), and lets at most 32 wait (8 of one chef). The clicking page fails closed too (`reachWhenUnknown: false`, `Input.InReach(p, 2, false)` in `Kitchen.Reaches`). `Chef`'s own head publishing stays: the others draw a held item at it and a departing chef's item falls there, which no head reading serves (it is not used for the check). Node: `test/reach.test.ts`; Play mode: rung 4's forced far intent |
+| (portkit c971100, rebuild) | no game change needed and no workaround removed: the item a chef holds by a click still leaves the pointer layers, so the kit's new click events on grabbables (`BSPlayerEvents`) cannot reach it either (rungs 3 and 4 click past it as before) |
 | Closed by the portkit re-sync (c7abead..1118ef0) | `networkCallable` lists on Kitchen and MatchManager; music pitch and volume through `audioPitch` / `audioVolume`; the effects volume through `PlayOneShot`'s volume scale; `GameObject.ReleaseGrab()` |
 
 Unproven until the app (rung 5): grab and release on pooled kit objects, intent latency on Quest, how a held item
@@ -1722,11 +1731,17 @@ The independent review (`REVIEW-FINDINGS.md`, coop-kitchen) and how each finding
 rule runs where the player is, and nothing is shared. Here the referee's client runs the rules for everyone (C3), and
 the runtime's trust rules apply (portkit README, "Trust" and "Referee"):
 
-- **Reach is checked on the clicking client only.** The referee does not know where another player is (the page reads
-  no remote poses; a chef publishes its own head only while holding an item, and could publish anything). A modified
-  client can act on any counter, knife or knob of the kitchen from anywhere in the room: a chef with an unlimited arm.
-  It cannot act outside the rules (intents run the upstream rule on the referee), nor drop an item outside the kitchen's
-  floor.
+- **Reach is checked by the referee too, with some slack.** Since portkit c971100 the referee asks its own app where a
+  remote chef's avatar is (`Networking.HeadOf`: the app's placing of the avatar, not the chef's word) and refuses an
+  intent whose target is more than 4.5 m from that head (2 m reach + 2.5 m for an arm, a counter's size and a remote
+  avatar's lag; `REFEREE_REACH_SLACK`) at the nearest that head came to it in the last 3 s, or when its app knows no
+  head for the chef. A modified client therefore gains up to 2.5 m of arm and 3 s of memory: from the middle of the
+  kitchen it can still reach the counters near the middle of the long sides, and it can act on a counter for 3 s
+  after walking past it, but not on the kitchen's ends or anything from outside it. A forged head does not help: the chef's
+  published head (`Chef`) is only used for drawing. It cannot act outside the rules (intents run the upstream rule on
+  the referee), nor drop an item outside the kitchen's floor or far from where it stands. An honest chef who clicks
+  within a moment of a long teleport can be refused (the referee's app has not placed the avatar there yet); clicking
+  again works.
 - **Synced state is public space state.** As with VRChat's synced variables, a modified client can overwrite the
   kitchen's leaves (items, orders, score, the match and the kitchen's best) directly; everyone then sees it until the
   referee writes that leaf again. The referee does not re-check its own leaves against tampering.

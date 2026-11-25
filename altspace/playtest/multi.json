@@ -1,6 +1,6 @@
 {
   "name": "kitchen-multi",
-  "timeout": 420,
+  "timeout": 480,
   "players": 2,
   "elements": [
     "<script>window.__kitchenPlan = \"multi\";</script>",

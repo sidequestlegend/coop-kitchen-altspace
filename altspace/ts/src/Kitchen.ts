@@ -119,6 +119,52 @@ const FLOOR_HALF = [8.25, 5.25] as const;
 const GRAB_WAIT = 3;
 const round3 = (v: number) => Math.round(v * 1000) / 1000;
 
+/**
+ * What the referee allows on top of REACH between a chef's head, as the referee's app places that chef's avatar
+ * (Networking.HeadOf), and the target of their intent. The chef's own page measures 2 m from the nearer of head and
+ * hands to the spot clicked; the referee measures from the head only (an arm: up to 0.8 m), to a counter's top rather
+ * than the spot clicked on it (a counter is 0.96 m square: up to 0.7 m), and sees a remote avatar a little late (about
+ * half a second of a walking chef: 1 m). A modified client therefore still gains up to 2.5 m of arm, but no longer works
+ * the kitchen from anywhere in the room.
+ */
+export const REFEREE_REACH_SLACK = 2.5;
+/** A head reading that has not come back by then refuses the waiting intents (Networking.HeadOf's time limit). */
+export const HEAD_SECONDS = 2;
+/** At most this many remote intents wait for head readings at once, and this many of one chef; more are refused. */
+export const MAX_REACH_CHECKS = 32;
+export const MAX_REACH_CHECKS_PER_CHEF = 8;
+/** How often (s) the referee reads each remote chef's head, and how far back (s) an intent may be judged by. */
+export const HEAD_POLL = 0.25;
+export const HEAD_HISTORY = 3;
+const HEAD_HISTORY_MAX = 32;
+/** How many of the referee's latest reach checks it keeps (tests and the Play-mode check read them). */
+const REACH_LOG = 16;
+
+/** A remote chef's intent waiting for the referee's head reading. */
+interface WaitingIntent {
+  kind: string;
+  target: string;
+  x: number | null;
+  y: number | null;
+  z: number | null;
+  release: boolean;
+  seen: string | null;
+}
+
+/** One reach check the referee made of a remote chef's intent. */
+export interface ReachCheck {
+  uid: string;
+  target: string;
+  /** The chef's head as the referee's app placed it (rounded) at the nearest to the target, or null when it knew none. */
+  head: number[] | null;
+  /** How old (s) that reading was when the intent was judged. */
+  age: number | null;
+  /** Metres from that head to the target (Infinity with no head or no target position). */
+  distance: number;
+  ok: boolean;
+  why?: string;
+}
+
 export class Kitchen extends Behaviour implements KitchenItems {
   static override synced = ["items", "holders", "stacks", "off", "prep", "roster", "next"];
   /** What other clients may run here: chefs' intents and COOK (commands to the referee), the referee's effects. */
@@ -183,6 +229,20 @@ export class Kitchen extends Behaviour implements KitchenItems {
    *  catches the pointer: it is drawn just in front of the head, in the way of every click (found in Play mode). The
    *  slots of the ingredients on a held plate too. */
   private heldSlots = new Set<number>();
+  /** Referee: remote chefs' intents waiting for a head reading, by session id, in the order they came. */
+  private readonly waiting = new Map<string, WaitingIntent[]>();
+  private waitingCount = 0;
+  /** Referee: its latest reach checks of remote intents, oldest first, and how many it refused. */
+  readonly reachLog: ReachCheck[] = [];
+  reachRefused = 0;
+  /** Referee: each remote chef's recent head readings (by session id), oldest first, over HEAD_HISTORY seconds. */
+  private readonly headHistory = new Map<string, Array<{ t: number; head: Vector3 }>>();
+  private readonly headPolling = new Set<string>();
+  private lastHeadPoll = -Infinity;
+  /** Referee: how many remote intents wait for a head reading now. */
+  get reachWaiting(): number {
+    return this.waitingCount;
+  }
 
   override Start(): void {
     this.ingredientSettings = new IngredientSettings();
@@ -412,12 +472,156 @@ export class Kitchen extends Behaviour implements KitchenItems {
     return prep ? `${item}|${prep.p}${prep.ps}${prep.burn !== null ? 1 : 0}` : item;
   }
 
-  /** Runs on the referee (a command): the upstream rule, for the calling chef, against the named target. */
+  /**
+   * Runs on the referee (a command): the upstream rule, for the calling chef, against the named target. The referee's
+   * own intents run at once (its page checked the reach, and a referee is trusted with the whole kitchen anyway). Another
+   * chef's intent first waits for the referee's app to say where that chef's head is (Networking.HeadOf: the avatar as
+   * the app places it, not the chef's own word) and runs only if the target was within REACH + REFEREE_REACH_SLACK of
+   * that head at the nearest in the last HEAD_HISTORY seconds (that reading and the referee's polled ones, PollHeads).
+   * Each chef's intents keep their order; one head reading serves every intent of that chef waiting for it.
+   */
   Intent(kind: string, target: string, x: number | null, y: number | null, z: number | null, release = false, seen: string | null = null): void {
     const player = this.Networking.CallingPlayer;
     if (!player || typeof kind !== "string" || typeof target !== "string") return;
     const n = (v: unknown) => (typeof v === "number" && Number.isFinite(v) ? v : null);
-    this.IntentFor(player.uid, kind, target, n(x), n(y), n(z), release === true, typeof seen === "string" ? seen : null);
+    const intent: WaitingIntent = { kind, target, x: n(x), y: n(y), z: n(z), release: release === true, seen: typeof seen === "string" ? seen : null };
+    if (player.isLocal) {
+      this.RunIntent(player.uid, intent);
+      return;
+    }
+    let queue = this.waiting.get(player.sid);
+    if (this.waitingCount >= MAX_REACH_CHECKS || (queue && queue.length >= MAX_REACH_CHECKS_PER_CHEF)) {
+      this.RefuseReach({ uid: player.uid, target, head: null, age: null, distance: Infinity, ok: false, why: "too many intents waiting for a head reading" });
+      return;
+    }
+    if (!queue) this.waiting.set(player.sid, (queue = []));
+    queue.push(intent);
+    this.waitingCount++;
+    if (queue.length === 1) this.ReadHead(player);
+  }
+
+  private RunIntent(uid: string, i: WaitingIntent): void {
+    this.IntentFor(uid, i.kind, i.target, i.x, i.y, i.z, i.release, i.seen);
+  }
+
+  /** Asks the referee's app where a chef's head is; the answer (or none within HEAD_SECONDS) settles their waiting intents. */
+  private ReadHead(player: Player): void {
+    void this.Networking.HeadOf(player, HEAD_SECONDS).then(
+      (head) => this.OnHead(player, head),
+      () => this.OnHead(player, null),
+    );
+  }
+
+  private OnHead(player: Player, head: Vector3 | null): void {
+    const queue = this.waiting.get(player.sid);
+    this.waiting.delete(player.sid);
+    if (!queue) return;
+    this.waitingCount = Math.max(0, this.waitingCount - queue.length);
+    // the seat may have moved on while the reading was out: only the referee runs intents
+    if (!this.Networking.IsReferee) return;
+    if (head) this.NoteHead(player.sid, head);
+    const now = this.Time.time;
+    const recent = (this.headHistory.get(player.sid) ?? []).filter((r) => now - r.t <= HEAD_HISTORY);
+    for (const intent of queue) {
+      // the nearest the chef's head came to the target in the last HEAD_HISTORY seconds, the reading just made included
+      let best: { t: number; head: Vector3 } | null = null;
+      let distance = Infinity;
+      for (const r of recent) {
+        const at = this.TargetPoint(intent, r.head);
+        const d = at ? Vector3.Distance(r.head, at) : Infinity;
+        if (d <= distance || !best) { // the latest of equally near readings
+          best = r;
+          distance = d;
+        }
+      }
+      const check: ReachCheck = {
+        uid: player.uid,
+        target: intent.target,
+        head: best ? [round3(best.head.x), round3(best.head.y), round3(best.head.z)] : null,
+        age: best ? round3(now - best.t) : null,
+        distance: round3(distance),
+        ok: distance <= REACH + REFEREE_REACH_SLACK,
+      };
+      if (!check.ok) {
+        check.why = !best ? `no head position in the last ${HEAD_HISTORY} s` : distance === Infinity ? "a target the referee cannot place" : `${distance.toFixed(2)} m from the target at the nearest in the last ${HEAD_HISTORY} s (at most ${REACH + REFEREE_REACH_SLACK})`;
+        this.RefuseReach(check);
+        continue;
+      }
+      this.NoteReach(check);
+      this.RunIntent(player.uid, intent);
+    }
+  }
+
+  private NoteHead(sid: string, head: Vector3): void {
+    let list = this.headHistory.get(sid);
+    if (!list) this.headHistory.set(sid, (list = []));
+    const now = this.Time.time;
+    list.push({ t: now, head });
+    while (list.length && (now - list[0]!.t > HEAD_HISTORY || list.length > HEAD_HISTORY_MAX)) list.shift();
+  }
+
+  /**
+   * Referee: reads every remote chef's head HEAD_POLL apart (its own app's placing of their avatar: a local query, not
+   * a network message), so that an intent is judged by where the chef was when they acted, not only where they are when
+   * it arrives. An intent can arrive a second or two after the click (it waits for the chef's earlier writes), by which
+   * time a chef may have walked or teleported on: found in Play mode, where a Q on a board was read 6.8 m away.
+   */
+  private PollHeads(): void {
+    const now = this.Time.time;
+    if (now - this.lastHeadPoll < HEAD_POLL) return;
+    this.lastHeadPoll = now;
+    const present = new Set<string>();
+    for (const player of this.Networking.GetPlayers()) {
+      present.add(player.sid);
+      if (player.isLocal || this.roster[player.uid] === undefined || this.headPolling.has(player.sid)) continue;
+      this.headPolling.add(player.sid);
+      void this.Networking.HeadOf(player, HEAD_SECONDS).then(
+        (head) => {
+          this.headPolling.delete(player.sid);
+          if (head && this.Networking.IsReferee) this.NoteHead(player.sid, head);
+        },
+        () => this.headPolling.delete(player.sid),
+      );
+    }
+    for (const sid of [...this.headHistory.keys()]) if (!present.has(sid)) this.headHistory.delete(sid);
+  }
+
+  /**
+   * Where the referee measures an intent's reach to: a counter's top (where items sit) or the counter itself, a loose
+   * item where the state has it, a floor drop at the point named (kept inside the kitchen's floor, where the item would
+   * land) or, with no point, the floor below the head just read (the chef's own feet). Null: nothing the referee can
+   * place (a corner, which does nothing anyway, or an object whose pose is not known), and the intent is refused.
+   */
+  private TargetPoint(i: WaitingIntent, head: Vector3 | null): Vector3 | null {
+    if (i.target.startsWith("c:")) {
+      const counter = this.counters.get(i.target.slice(2));
+      const top = counter?.top ?? null;
+      if (top?.transform.known) return top.transform.position;
+      return counter?.gameObject.transform.known ? counter.gameObject.transform.position : null;
+    }
+    if (i.target.startsWith("i:")) {
+      const pos = this.items[i.target.slice(2)]?.pos;
+      return pos ? new Vector3(pos[0]!, pos[1]!, pos[2]!) : null;
+    }
+    if (i.target === "floor") {
+      if (i.x !== null && i.y !== null && i.z !== null) {
+        const f = this.OnFloor([i.x, i.y, i.z]);
+        return new Vector3(f[0]!, f[1]!, f[2]!);
+      }
+      return head ? new Vector3(head.x, this.OnFloor([head.x, head.y, head.z])[1]!, head.z) : null;
+    }
+    return null;
+  }
+
+  private NoteReach(check: ReachCheck): void {
+    this.reachLog.push(check);
+    if (this.reachLog.length > REACH_LOG) this.reachLog.splice(0, this.reachLog.length - REACH_LOG);
+  }
+
+  private RefuseReach(check: ReachCheck): void {
+    this.reachRefused++;
+    this.NoteReach(check);
+    this.Debug.LogWarning(`coop-kitchen: an intent of ${check.uid} on ${check.target} was refused: ${check.why ?? ""}`);
   }
 
   /** The kit object a pick-up or drop of the intent being run sounds at: the counter acted on, else the counter nearest
@@ -562,7 +766,10 @@ export class Kitchen extends Behaviour implements KitchenItems {
 
   override Update(): void {
     this.NoteHeads();
-    if (this.Networking.IsReferee) this.RefereeTick();
+    if (this.Networking.IsReferee) {
+      this.RefereeTick();
+      this.PollHeads();
+    }
     this.Render();
     this.CheckGrabs();
     const now = this.Time.time;
@@ -805,10 +1012,13 @@ export class Kitchen extends Behaviour implements KitchenItems {
     return "i:" + id;
   }
 
-  /** A click counts within a chef's reach of the point clicked (C2; Counter.interactReach for counters, knives, knobs). */
+  /**
+   * A click counts within a chef's reach of the point clicked (C2; Counter.interactReach for counters, knives, knobs).
+   * It fails closed: no point, or no position yet for the local player, and it does not count (the referee checks again).
+   */
   private Reaches(detail: HostEventDetail, object: GameObject | null): boolean {
     const point = detail.point ?? (object?.transform.known ? object.transform.position : null);
-    return !point || this.Input.InReach(point, REACH);
+    return !!point && this.Input.InReach(point, REACH, false);
   }
 
   private ClickSlot(slot: number, detail: HostEventDetail): void {

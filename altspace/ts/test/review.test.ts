@@ -193,6 +193,8 @@ test("a dropped item never lands outside the kitchen's floor, whatever point a c
   await play(world, ann);
   await E(world, eve, CRATE[V.Bread]!);
   const bread = held(world, eve)!.id;
+  // Eve stands in the floor's corner, so that the referee's reach check (reach.test.ts) passes for the clamped spot
+  eve.pose(new Vector3(5, 1.6, -3.2));
   kitchen(world, eve).SendCommand("Intent", "E", "floor", 1000, 5, -1000, false, "");
   await world.run(STEP);
   const k = kitchen(world, ann);
@@ -317,6 +319,7 @@ test("a pick-up sounds at the counter it came from, a drop at the counter neares
   const pickup = audio(bob).slice(before).filter((e) => e.args[0] === "0" || e.args[0] === "1");
   assert.deepEqual(pickup.map((e) => e.target), ["c_MeatCounter_00"], "the pick-up sounds at the meat crate");
   const mark = audio(bob).length;
+  ann.pose(new Vector3(1, 1.6, -0.5)); // the spot is within her reach
   await click(world, ann, "floor", "0", STEP, new Vector3(1, 0, -1));
   const drop = audio(bob).slice(mark).filter((e) => e.args[0] === "2" || e.args[0] === "3");
   assert.equal(drop.length, 1);

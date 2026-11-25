@@ -132,7 +132,8 @@
       say("INFO", "TeleportTo: " + e);
     }
     await sleep(400);
-    return placed;
+    if (!String(placed).startsWith("ok")) say("INFO", "place: " + placed);
+    return [x, z];
   }
   /** E on a counter: a click on its front (never under an item), standing at it. */
   const E = async (cell) => {
@@ -370,6 +371,7 @@
       await act(() => E("CutCounter_01"), () => on("CutCounter_01") && on("CutCounter_01").k === V.Cheese && !hand(), "lead: put it on the second board");
       await race("Q", Date.now() + 7000, send);
       await race("E", Date.now() + 9000, send);
+      await farIntent(send);
       // the other page reloads: it must come back to the same kitchen
       const word = await until(() => heard.find((m) => m.kind === "back"), 120000, 250);
       check(!!word && word.score === debug().score(), "after reloading, the other page sees the score (late join)", word ? `${word.score} / ${debug().score()}` : "no word");
@@ -411,6 +413,7 @@
         if (!check(!!word, "second: the lead names the moment for the " + kind + " race", "")) break;
         await race(kind, word.at, null);
       }
+      await farIntent(send);
       await sleep(1500);
       try {
         sessionStorage.setItem("kitchenTestReloaded", "1");
@@ -450,6 +453,63 @@
       const holders = debug().holders();
       const hands = Object.keys(holders).filter((k) => k.indexOf("hand:") === 0 && debug().items()[holders[k]] && debug().items()[holders[k]].k === V.CheeseSliced);
       check(hands.length === 1 && !on("CutCounter_01"), "two chefs press E on one board at once: exactly one takes the slice", show(hands));
+    }
+  }
+
+  /**
+   * The referee checks reach itself (PORT.md 11.8, trust). The page that is not the referee stands at the bread crate
+   * and sends, as a modified client would (past its own reach check), an E on a counter far across the kitchen: a crate
+   * when its hand is empty, else an empty plain counter (either would change the kitchen if it ran). The referee's page,
+   * the other player, must refuse it from its own app's reading of this player's head, and must have let this chef's
+   * honest intents through by the same check.
+   */
+  const ALLOWED = 2 + 2.5; // REACH + REFEREE_REACH_SLACK (Kitchen.ts)
+  const CRATES = ["BreadCounter_01", "CabbageCounter_00", "CabbageCounter_01", "CheeseCounter_00", "CheeseCounter_01", "MeatCounter_00", "MeatCounter_01", "TomatoCounter_00", "TomatoCounter_01"];
+  const PLAIN = ["Counter_Normal_00", "Counter_Normal_01", "Counter_Normal_02", "Counter_Normal_03", "Counter_Normal_05", "Counter_Normal_06", "Counter_Normal_07", "Counter_Normal_08", "Counter_Normal_09", "Counter_Normal_11"];
+  async function farIntent(send) {
+    const ref = debug().referee();
+    const referee = !!ref && ref.sid === me().sid;
+    say("INFO", "far intent check: this page is " + (referee ? "the referee" : "not the referee"));
+    if (!referee) {
+      const at = await goTo("BreadCounter_00");
+      await sleep(4000); // the referee judges by the nearest of its last 3 s of head readings (Kitchen.HEAD_HISTORY)
+      const head = [at[0], 1.6, at[1]];
+      const holding = hand();
+      let best = null;
+      for (const cell of holding ? PLAIN : CRATES) {
+        if (holding && on(cell)) continue;
+        if ((await probe("active", "Counters/" + cell)) !== "True") continue;
+        const p = xyz(await probe("pos", "Counters/" + cell + "/Top"));
+        if (p.length !== 3 || p.some((v) => !isFinite(v))) continue;
+        const d = Math.hypot(p[0] - head[0], p[1] - head[1], p[2] - head[2]);
+        if (!best || d > best.d) best = { cell, d };
+      }
+      if (!check(!!best && best.d > ALLOWED + 1, "a counter far across the kitchen to aim at", best ? best.cell + " " + best.d.toFixed(2) + " m" : "none")) return;
+      const before = show(hand());
+      const there = show(on(best.cell));
+      debug().forceIntent("E", "c:" + best.cell);
+      await sleep(3000);
+      check(show(hand()) === before && show(on(best.cell)) === there, "a far E sent past this page's own check changes nothing here (" + (holding ? "the held item stays in hand" : "no ingredient taken") + ")",
+        `${best.cell} at ${best.d.toFixed(2)} m, hand ${show(hand())}`);
+      send({ kind: "far", uid: me().uid, target: "c:" + best.cell, d: best.d, hand: before, there });
+      const word = await until(() => heard.find((m) => m.kind === "farSeen"), 30000, 200);
+      check(!!word && word.refused, "the remote referee says it refused the far intent", word ? show(word.check) : "no word");
+    } else {
+      const word = await until(() => heard.find((m) => m.kind === "far"), 90000, 200);
+      if (!check(!!word, "the other chef sends a far intent", "")) return;
+      await sleep(1500);
+      const reach = debug().reach();
+      const mine = reach.log.filter((c) => c.uid === word.uid);
+      const far = mine.filter((c) => c.target === word.target).at(-1);
+      const honest = mine.filter((c) => c.ok);
+      const refused = !!far && !far.ok && far.distance > ALLOWED && !!far.head;
+      const holders = debug().holders();
+      const theirHand = holders["hand:" + word.uid] ? Object.assign({ id: holders["hand:" + word.uid] }, debug().items()[holders["hand:" + word.uid]]) : null;
+      check(refused && show(theirHand) === word.hand && show(on(word.target.slice(2))) === word.there,
+        "as the referee, this page refuses the other chef's far intent, from its own app's reading of their head", show(far) + ", their hand " + show(theirHand));
+      check(honest.length > 0 && honest.every((c) => c.distance <= ALLOWED && !!c.head), "as the referee, this page let the other chef's honest intents through by the same check",
+        honest.length + " passed, e.g. " + show(honest.at(-1)) + "; refused " + reach.refused);
+      send({ kind: "farSeen", refused, check: far || null });
     }
   }
 

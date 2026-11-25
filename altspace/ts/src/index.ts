@@ -68,6 +68,8 @@ const game: GameDefinition = {
     TutorialManager,
     Chef,
   },
+  // a click with a reach does not count while the page knows no position for its player (the referee checks it again)
+  reachWhenUnknown: false,
   debug: (instance: GameInstance) => debugHooks(instance),
 };
 
@@ -92,6 +94,10 @@ function debugHooks(instance: GameInstance): Record<string, unknown> {
     },
     /** The pool slot that shows an item on this page (-1: none). */
     slotOf: (id: string) => kitchen().SlotOf(id),
+    /** The referee's reach checks of other chefs' intents: how many it refused, and its latest checks. */
+    reach: () => ({ refused: kitchen().reachRefused, log: kitchen().reachLog.map((c) => ({ ...c })) }),
+    /** Sends an intent as a modified client would: past this page's own reach check (Play-mode test of the referee's). */
+    forceIntent: (kind: "E" | "Q", target: string) => kitchen().LocalIntent(kind, target, null),
     /** A kit object's path by its key (bindings.json). */
     pathOf: (key: string) => instance.bindings.objects[key]?.path ?? "",
   };

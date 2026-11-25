@@ -230,6 +230,7 @@ test("plating rules: only plateable variants, one bread, never from a busy board
   assert.equal(on(world, bob, "Counter_PlateStack")?.k, V.Plate);
   // drop on the floor and pick up again by grabbing it (23, 24)
   await E(world, ann, "Counter_PlateStack");
+  ann.pose(new Vector3(1, 1.6, -1)); // the spot is within her reach
   await click(world, ann, "floor", "0", STEP, new Vector3(1, 0, -2));
   const loose = Object.keys(k.items).find((id) => k.items[id]!.pos && k.WhereIs(id) === "loose");
   assert.ok(loose, "a loose plate on the floor");
