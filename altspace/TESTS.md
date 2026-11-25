@@ -1,8 +1,9 @@
 # coop-kitchen ("Co-op Kitchen", working title): test evidence
 
 Everything here ran on Windows, Unity 6000.3.21f1, Creator SDK 4.0.29, in the Unity editor: first on 2026-11-24, and
-again on 2026-11-25 after the re-sync to portkit 812f285 and the review's fixes (PORT.md 11.8); the numbers below are
-from the second pass. Nothing ran in the Altspace app, on a Quest, or with controllers (rung 5: not run; worlds stay
+again on 2026-11-25 after the re-sync to portkit 812f285 and the review's fixes (PORT.md 11.8), and a third time on
+2026-11-25 after the re-sync to portkit c971100 (no game code changed: rebuild only); the numbers below are from the
+third pass. Nothing ran in the Altspace app, on a Quest, or with controllers (rung 5: not run; worlds stay
 Private).
 
 How to run each rung again (from `C:\workspace\AltspaceGames`, with an editor slot and the editor open):
@@ -31,29 +32,36 @@ multi-client scenarios on the fake room (three chefs deliver; cutting and its pa
 expiry; shared pause; referee loss mid-round; a chef leaving with a plate; a late joiner; two kitchens in one room; time
 up and results; the tutorial with two chefs; a forged command refused), and 14 review tests (`test/review.test.ts`, each
 failing on the code before its fix: run with the fixed sources stashed, 12 of the 14 failed, the other two being the new
-soak tests of PORT.md 9.2 #3 and #12, which pass on both). Details in PORT.md 11.4 and 11.8.
+soak tests of PORT.md 9.2 #3 and #12, which pass on both). Details in PORT.md 11.4 and 11.8. On portkit c971100 the 43
+pass unchanged, and the kit's own tests in the game's copy (`node --test "portkit/test/*.test.ts"`) give 110 pass,
+0 fail.
 
 ## Rung 2: the kit in edit mode (`PortKit/Kit/Check`)
 
 ```
 PASS graphs: the SDK's check found 0 nodes the app will not run
 PASS coop-kitchen bindings: 186 objects resolve by path; hash matches (4cbdd4350c00ecc46b2e12f2ae74ebebc947ac55)
-PASS coop-kitchen android bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 427/6881, behaviours 392, scripts 9, ...
-PASS coop-kitchen windows bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 427/6881, ...
+PASS coop-kitchen android bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 524/6978, behaviours 488, scripts 10, ...
+PASS coop-kitchen windows bundle: PASS Kind=Pass Reasons=[] Reports=[] Stats=files 1 (format 22), scenes 0, objects 524/6978, ...
 DONE
 ```
 
 The kit (`Logs/portkit_kits.txt`): 2,285 objects (2,275 before; the ten crate icons are new), 186 bound (48 grabbable
 pool slots, 59 clickable), 92 refs, 60 behaviours (ids and `perPlayer` now passed to portkit's `KitStage`), 54 events;
-relay graph 565 units, 49 distinct members, all on the SDK allow list of 29,061. Bundles: Android 1,600 KiB (1,586
-before), Windows 2,231 KiB (2,215 before), each with the third-party notices and the licence texts inside
+relay graph 620 units (565 on 812f285; the kit's new `pkHead` op), 52 distinct members (49), all on the SDK allow list
+of 29,061. The bindings hash is unchanged by the c971100 rebuild. The bundles gain 97 objects and 96 behaviours, two
+new components on each of the 48 grabbable pool slots (the kit's `BSPlayerEvents` for clicks on grabbables and the
+per-target launch variables), one new script type. Bundles: Android 1,620 KiB (1,600 on 812f285, 1,586 before), Windows
+2,234 KiB (2,231, 2,215 before), each with the third-party notices and the licence texts inside
 (`Logs/portkit_bundles.txt`: `LICENSE-KayKit-Restaurant-Bits.txt`, `LICENSE-Kenney-Impact-Sounds.txt`,
 `LICENSE-Kenney-Interface-Sounds.txt`, `CC0-1.0-legalcode.txt`, `KitchenChaos-LICENSE.txt`, `portkit-LICENSE.txt`,
 `LiberationSans - OFL.txt`).
 
 Artifacts (`PortKit/Kit/Export Artifacts`, `altspace/dist/`, not committed): `android/coop-kitchen`,
 `windows/coop-kitchen`, `pk-coop-kitchen.js`, `coop-kitchen.jpg`, `coop-kitchen.snippet.html` (the game's settings,
-`position="0 0 0"`, a box gizmo 11.3 x 7.7 m), `manifest.json` (checks android PASS, windows PASS).
+`position="0 0 0"`, a box gizmo 11.3 x 7.7 m), `manifest.json` (checks android PASS, windows PASS; footprint
+10.93 x 3.19 x 7.68 m, now counting world-space uGUI), and since c971100 `licenses/coop-kitchen/` with the seven licence
+texts.
 
 ## Rung 3: Play mode, one player (`playtest/single.json`)
 
@@ -61,8 +69,9 @@ A hand-written `<bs-snippet name="coop-kitchen" ... seed="1">` (the seed makes t
 built script and the bundles from the test's local server, and `Assets/WebRoot/playtest/kitchen-playtest.js`, which
 drives the kitchen through the SDK's desktop player with portkit's InputSim (the SDK casts its own rays and raises
 the clicks) and reads Unity back with the `probe` command (`Logs/portkit_playtest_kitchen-single.txt`, copied to
-`playtest/evidence_single.txt`). **RESULT 37 passed, 0 failed; 0 console error lines, twice in a row** on the rebuilt
-bundles (2026-11-25; the first pass on 2026-11-24 had 32 checks). Since the review a chef's reach is 2 m, so the test
+`playtest/evidence_single.txt`). **RESULT 37 passed, 0 failed; 0 console error lines, twice in a row** on the bundles
+rebuilt on portkit c971100 (2026-11-25, `--keep-play` between the runs; the same 37 on 812f285; the first pass on
+2026-11-24 had 32 checks). Since the review a chef's reach is 2 m, so the test
 stands the desktop player at each counter before clicking it (InputSim `place`, and the page's own `TeleportTo`, which
 the runtime hears as `player-teleported`). Pictures (from the first pass):
 `playtest/evidence_single_plated.jpg` (the X Burger on its plate beside the board and stove),
@@ -116,10 +125,11 @@ press COOK. The player whose session id sorts first ("lead", Player 2 in this ru
 plate and delivers; the other ("second", the main editor) cuts the cheese and cooks the meat and plates both on the
 lead's bread, then pauses and resumes, then reloads its page. The pages exchange the score they see and their state
 digests as one-shots (which the runtime ignores). Since the review, before the reload, both chefs also act on one
-board at the same wall-clock moment named by the lead (both players run on this machine; the clicks landed 53 to 61 ms
-after it): Q on a board holding a cheese, then E on it holding the slice (PORT.md 9.5 "both clicking the same item").
-**RESULT 51 passed, 0 failed; 0 console error lines, twice in a row** on the rebuilt bundles (2026-11-25; 41 checks in
-the first pass) (`playtest/evidence_multi.txt`, the second run).
+board at the same wall-clock moment named by the lead (both players run on this machine; the clicks landed 47 to 116 ms
+after it in the c971100 run kept as evidence): Q on a board holding a cheese, then E on it holding the slice (PORT.md
+9.5 "both clicking the same item"). **RESULT 51 passed, 0 failed; 0 console error lines, twice in a row** on the bundles
+rebuilt on portkit c971100 (2026-11-25, `--keep-play` between the runs; the same 51 on 812f285; 41 checks in the first
+pass) (`playtest/evidence_multi.txt`, the second run: the digests after the reload agree, `3a3a1f2f`).
 
 ```
 [main] PASS two players in the room
@@ -146,9 +156,10 @@ the first pass) (`playtest/evidence_multi.txt`, the second run).
 [vp] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71..."]
 ```
 
-Artifacts (`PortKit/Kit/Take Photos`, `PortKit/Kit/Export Artifacts`, 2026-11-25): `dist/` with the bundles (Android
-1,638,799 bytes, Windows 2,284,148), `pk-coop-kitchen.js` (540,780 bytes, the upstream's MIT notice and portkit's in its
-banner), the photo, the snippet markup and `manifest.json` (checks android PASS, windows PASS; its description uses
+Artifacts (`PortKit/Kit/Take Photos`, `PortKit/Kit/Export Artifacts`, 2026-11-25, portkit c971100): `dist/` with the bundles
+(Android 1,658,926 bytes, Windows 2,287,945; 1,638,799 and 2,284,148 on 812f285), `pk-coop-kitchen.js` (553,599
+bytes, 540,780 on 812f285; the upstream's MIT notice and portkit's in its banner), the photo, the snippet markup,
+`licenses/coop-kitchen/` (the seven licence texts, new in c971100) and `manifest.json` (checks android PASS, windows PASS; its description uses
 the decided attribution).
 
 ## What remains unverified

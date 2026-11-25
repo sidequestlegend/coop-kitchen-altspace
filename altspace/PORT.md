@@ -1,6 +1,6 @@
 # PORT.md: coop-kitchen
 
-**Status (2026-11-25): the rules are ported to TypeScript and tested in Node, the kit is built, rungs 0 to 4 pass in the editor, and the independent review's findings are fixed (11.8); see section 11 (status, decisions, the three proposed names, gaps, trust). Sections 1 to 10 are the analysis made before the port; where the port went another way, section 11 says so.**
+**Status (2026-11-25): the rules are ported to TypeScript and tested in Node, the kit is built, rungs 0 to 4 pass in the editor, and the independent review's findings are fixed (11.8); kit re-synced to portkit c971100 and rungs 0 to 4 passed again on the rebuilt bundles (TESTS.md); see section 11 (status, decisions, the three proposed names, gaps, trust). Sections 1 to 10 are the analysis made before the port; where the port went another way, section 11 says so.**
 
 Upstream: `HyagoOliveira/KitchenChaos` at commit `4a73a26`. Target: one Altspace snippet, a co-op
 cooking game under its own name, with the upstream rules. (This analysis first planned to use Code Monkey's course
@@ -1549,7 +1549,7 @@ ships; 138, the crate's icon, was missing.)
 | 137 | T | rules.test.ts |
 | 138 | I | the crate counter's front shows its ingredient's icon (sprite text from the board's icon sprites, `CoopKitchenKitBuilder.CrateIcon`); Play mode reads it (rung 3) |
 
-### 11.4 Tests (`npm test`: 43 tests, all passing on portkit 812f285)
+### 11.4 Tests (`npm test`: 43 tests, all passing on portkit c971100; the kit's own 110 pass in the game's copy)
 
 - `test/golden.test.ts` (8): the upstream C# compiled unchanged with dotnet 8 against `golden/UnityStubs.cs`, driven by
   `golden/Harness.cs`, written to `vectors/upstream.json`. V1 weighted pick (1,012 rolls), V2 waiting times, V3 tips
@@ -1587,6 +1587,7 @@ ships; 138, the crate's icon, was missing.)
 | (closed) No kit yet | the kit is built (11.7); `tools/gen-bindings.ts` writes the contract the kit builder follows |
 | (closed by portkit 812f285) `KitStage.Behaviour` took no id or per-player flag | the builder passes each behaviour's id and `perPlayer` from the contract (`Behaviour(go, type, fields, perPlayer, id)`); `gen-bindings.ts` no longer seeds the lock. `Chef` keeps `static perPlayer` too |
 | Found in Play mode: the local chef's held item is drawn in front of their head, in the way of every desktop click (a click on it grabbed its pool slot and dropped the item) | `Kitchen.ts`: the slot of the item the local chef holds by a click, and of the ingredients on a plate they hold, goes to the Default layer (0) while held; a physical grab keeps its layer |
+| Not adopted yet (portkit c971100; this round was rebuild only) | the kit now has `Networking.HeadOf(player, seconds)` and `InReach(point, metres, whenUnknown)` / `GameDefinition.reachWhenUnknown`. They could replace `Chef`'s own head publishing (first row) and let the referee check reach too (the trust note in 11.8, "Reach is checked on the clicking client only"); nothing in the game uses them yet. The rebuild itself needed no game change and removed no workaround: the item a chef holds by a click still leaves the pointer layers, so the kit's new click events on grabbables (`BSPlayerEvents`) cannot reach it either (rungs 3 and 4 click past it as before) |
 | Closed by the portkit re-sync (c7abead..1118ef0) | `networkCallable` lists on Kitchen and MatchManager; music pitch and volume through `audioPitch` / `audioVolume`; the effects volume through `PlayOneShot`'s volume scale; `GameObject.ReleaseGrab()` |
 
 Unproven until the app (rung 5): grab and release on pooled kit objects, intent latency on Quest, how a held item
@@ -1715,7 +1716,7 @@ The independent review (`REVIEW-FINDINGS.md`, coop-kitchen) and how each finding
 | 11 | Any chef could Restart or End during another's pause | Fixed: the resume rule (the chef who paused, the referee, or any chef once the one who paused has left) |
 | 12 | Golden orders scenarios compared only deliveries and tips | Fixed: event for event (11.4); a plate return moved by 0.5 s now fails it (checked), and passed before |
 | 13 | PORT.md stale: course art (top, 8.5), VR push triggers, the crate's icon, sounds at the kitchen's centre | Fixed: the text (top, 8.4, 8.5, C2, C15); the crate's icon built (138); pick-up and drop sounds now play at the counter acted on or nearest the spot (test "pick-up sounds"; before, every one from the floor's speaker in the middle) |
-| 14 | Kit copy at 6c2033b | Re-synced to portkit 812f285 |
+| 14 | Kit copy at 6c2033b | Re-synced to portkit 812f285, then to c971100 (rebuilt, rungs 0 to 4 passed again) |
 
 **Trust: what a modified client can still do, compared with upstream.** Upstream is one program on one machine; every
 rule runs where the player is, and nothing is shared. Here the referee's client runs the rules for everyone (C3), and

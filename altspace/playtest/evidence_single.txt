@@ -47,7 +47,7 @@ local: script and bundles from the test server http://localhost:43700
 [main] PASS the round starts after the countdown: round
 [main] CMD k18 probe pk1:coop-kitchen:0 text Board/Orders/Ticket0/Name
 [main] REPLY k18 X Burger
-[main] PASS the first order is an X Burger (seed 1) and its ticket shows: {"id":1,"r":2,"born":3.2025,"wait":93,"left":null,"st":0,"at":0}, ticket 'X Burger'
+[main] PASS the first order is an X Burger (seed 1) and its ticket shows: {"id":1,"r":2,"born":3.2479,"wait":93,"left":null,"st":0,"at":0}, ticket 'X Burger'
 [main] CMD k19 probe pk1:coop-kitchen:0 text Board/Orders/Ticket0/Icons
 [main] REPLY k19 <sprite name="Bread"><sprite name="CheeseSlice"><sprite name="MeatPattyCooked">
 [main] PASS the ticket's ingredient icons reached Unity: <sprite name="Bread"><sprite name="CheeseSlice"><sprite name="MeatPattyCooked">
@@ -129,8 +129,8 @@ local: script and bundles from the test server http://localhost:43700
 [main] REPLY k50 True
 [main] PASS Q on the knife starts cutting: the knife shows and chops, the bar shows: knife before False, while cutting True, bar True
 [main] CMD k51 probe pk1:coop-kitchen:0 scale Counters/CutCounter_00/CuttingBoard/Canvas/Bar/Fill
-[main] REPLY k51 0.060 1.000 1.000
-[main] INFO cutting bar fill scale 0.060 1.000 1.000
+[main] REPLY k51 0.070 1.000 1.000
+[main] INFO cutting bar fill scale 0.070 1.000 1.000
 [main] CMD k52 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00/Front
 [main] REPLY k52 2.880 0.350 2.890
 [main] CMD k53 probe pk1:coop-kitchen:0 pos Counters/MeatCounter_00
@@ -349,18 +349,18 @@ local: script and bundles from the test server http://localhost:43700
 [main] REPLY k144 ok screen 643,421 of 1285x842
 [main] INFO click floor ok screen 643,421 of 1285x842
 [main] CMD k145 probe pk1:coop-kitchen:0 pos Items/Slot01
-[main] REPLY k145 0.960 1.221 2.542
-[main] CMD k146 probe pk1:coop-kitchen:0 pos Items/Slot01
-[main] REPLY k146 0.960 0.140 1.890
+[main] REPLY k145 0.960 0.140 1.890
 [main] PASS a floor click drops the held item on the floor where clicked (state and Unity): clicked 0.96 0.00 1.89, state [0.96,0,1.89], drawn at 0.960 0.140 1.890
-[main] CMD k147 probe pk1:coop-kitchen:0 pos Board/Hud/Pause
-[main] REPLY k147 5.600 1.750 -1.200
-[main] CMD k148 look 5.600 1.750 -1.200
-[main] REPLY k148 ok camera at 0.96,1.60,2.39
-[main] CMD k149 click 5.600 1.750 -1.200
-[main] REPLY k149 ok screen 642,421 of 1285x842
+[main] CMD k146 probe pk1:coop-kitchen:0 pos Board/Hud/Pause
+[main] REPLY k146 5.600 1.750 -1.200
+[main] CMD k147 look 5.600 1.750 -1.200
+[main] REPLY k147 ok camera at 0.96,1.60,2.39
+[main] CMD k148 click 5.600 1.750 -1.200
+[main] REPLY k148 ok screen 642,421 of 1285x842
 [main] INFO click Pause: ok screen 642,421 of 1285x842
 [main] PASS Pause pauses the round:
+[main] CMD k149 probe pk1:coop-kitchen:0 active Board/PausePanel
+[main] REPLY k149 False
 [main] CMD k150 probe pk1:coop-kitchen:0 active Board/PausePanel
 [main] REPLY k150 True
 [main] PASS the pause panel shows: True
