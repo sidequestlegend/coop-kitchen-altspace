@@ -488,6 +488,9 @@ namespace CoopKitchen
                 string path = $"Items/Slot{i:00}";
                 var slot = Put(path);
                 Box(slot, new Vector3(0f, 0.14f, 0f), new Vector3(0.5f, 0.28f, 0.5f));
+                // a trigger: the item is clicked or grabbed (both find triggers on layers 5 and 20), placed by the page (drops snap to a
+                // counter or the floor), and a held item is drawn 0.45 m in front of the holder's face, where a solid box shoved them
+                slot.GetComponent<BoxCollider>().isTrigger = true;
                 var body = slot.AddComponent<Rigidbody>();
                 body.isKinematic = true;
                 body.useGravity = false;

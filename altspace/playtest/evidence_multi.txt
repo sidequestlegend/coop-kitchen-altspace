@@ -10,7 +10,7 @@ local: script and bundles from the test server http://localhost:43700
 [main] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
 [main] REPLY k4 False
 [main] PASS the kitchen is in the scene: pool slots off, the west doorway open: holder True, slot 47 active False, doorway counter active False, stove True
-[main] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_10ea36a5-720e-4113-9cbe-3ace31b2b8fc"},{"id":2,"name":"Player 2","sid":"rsess_61eb5581-f0e1-4d05-b639-420ebb7e1306"}]
+[main] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_0874a423-b7f4-497f-b88e-a8894e286ab6"},{"id":2,"name":"Player 2","sid":"rsess_4e0c225d-0e86-4b98-8967-5ac3b0f8d7d2"}]
 [main] INFO lead chef (plates, delivers): Main Editor
 [main] CMD k5 probe pk1:coop-kitchen:0 pos Board/Lobby/Cook
 [main] REPLY k5 5.570 2.120 0.000
@@ -134,7 +134,7 @@ local: script and bundles from the test server http://localhost:43700
 [main] REPLY k53 ok camera at 0.96,1.60,-2.39
 [main] CMD k54 click 1.010 0.960 -3.000
 [main] REPLY k54 ok screen 642,421 of 1285x842
-[main] INFO Q race click at 41 ms past the moment: ok screen 642,421 of 1285x842
+[main] INFO Q race click at 43 ms past the moment: ok screen 642,421 of 1285x842
 [main] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
 [main] PASS the race's cheese is cut: {"id":"i10","k":4}
 [main] CMD k55 probe pk1:coop-kitchen:0 pos Counters/CutCounter_01/Front
@@ -149,14 +149,14 @@ local: script and bundles from the test server http://localhost:43700
 [main] REPLY k59 ok camera at 0.96,1.60,-2.39
 [main] CMD k60 click 0.960 0.350 -2.890
 [main] REPLY k60 ok screen 643,421 of 1285x842
-[main] INFO E race click at 50 ms past the moment: ok screen 643,421 of 1285x842
+[main] INFO E race click at 40 ms past the moment: ok screen 643,421 of 1285x842
 [main] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71beabbcdd9d67f76671884c9073a7"]
 [main] INFO far intent check: this page is the referee
 [main] PASS the other chef sends a far intent:
 [main] PASS as the referee, this page refuses the other chef's far intent, from its own app's reading of their head: {"uid":"0f2b21f87e29f9a5936877c44d19f63a","target":"c:CabbageCounter_01","head":[0.96,1.6,2.39],"age":0,"distance":7.499,"ok":false,"why":"7.50 m from the target at the nearest in the last 3 s (at most 4.5)"}, their hand null
 [main] PASS as the referee, this page let the other chef's honest intents through by the same check: 12 passed, e.g. {"uid":"0f2b21f87e29f9a5936877c44d19f63a","target":"c:CutCounter_01","head":[0.96,1.6,-2.39],"age":0,"distance":1.196,"ok":true}; refused 1
 [main] PASS after reloading, the other page sees the score (late join): 30 / 30
-[main] PASS both pages reach the same state digest after the reload: c9ac9b6b
+[main] PASS both pages reach the same state digest after the reload: b01a6641
 [main] CMD k61 shot multi_lead 0 1.7 0 0 0.9 3.36 70
 [main] REPLY k61 Library/PortKit/shots/kitchen-multi_multi_lead.jpg
 [main] INFO page result 25 passed, 0 failed
@@ -172,7 +172,7 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
 [vp-mppm3baa9e3c] REPLY k4 False
 [vp-mppm3baa9e3c] PASS the kitchen is in the scene: pool slots off, the west doorway open: holder True, slot 47 active False, doorway counter active False, stove True
-[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_10ea36a5-720e-4113-9cbe-3ace31b2b8fc"},{"id":2,"name":"Player 2","sid":"rsess_61eb5581-f0e1-4d05-b639-420ebb7e1306"}]
+[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_0874a423-b7f4-497f-b88e-a8894e286ab6"},{"id":2,"name":"Player 2","sid":"rsess_4e0c225d-0e86-4b98-8967-5ac3b0f8d7d2"}]
 [vp-mppm3baa9e3c] INFO second chef (cuts, cooks, pauses, reloads): Player 2
 [vp-mppm3baa9e3c] CMD k5 probe pk1:coop-kitchen:0 pos Board/Lobby/Cook
 [vp-mppm3baa9e3c] REPLY k5 5.570 2.120 0.000
@@ -356,7 +356,7 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] REPLY k79 ok camera at 0.96,1.60,-2.39
 [vp-mppm3baa9e3c] CMD k80 click 1.010 0.960 -3.000
 [vp-mppm3baa9e3c] REPLY k80 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO Q race click at 43 ms past the moment: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO Q race click at 41 ms past the moment: ok screen 1280,351 of 2560x702
 [vp-mppm3baa9e3c] PASS two chefs press Q on one board at once: it cuts, and the second press does not pause it: {"p":1,"ps":0,"burn":false}
 [vp-mppm3baa9e3c] PASS the race's cheese is cut: {"id":"i10","k":4}
 [vp-mppm3baa9e3c] PASS second: the lead names the moment for the E race:
@@ -372,7 +372,7 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] REPLY k85 ok camera at 0.96,1.60,-2.39
 [vp-mppm3baa9e3c] CMD k86 click 0.960 0.350 -2.890
 [vp-mppm3baa9e3c] REPLY k86 ok screen 1280,351 of 2560x702
-[vp-mppm3baa9e3c] INFO E race click at 49 ms past the moment: ok screen 1280,351 of 2560x702
+[vp-mppm3baa9e3c] INFO E race click at 36 ms past the moment: ok screen 1280,351 of 2560x702
 [vp-mppm3baa9e3c] PASS two chefs press E on one board at once: exactly one takes the slice: ["hand:ea71beabbcdd9d67f76671884c9073a7"]
 [vp-mppm3baa9e3c] INFO far intent check: this page is not the referee
 [vp-mppm3baa9e3c] CMD k87 probe pk1:coop-kitchen:0 pos Counters/BreadCounter_00/Front
@@ -431,7 +431,7 @@ local: script and bundles from the test server http://localhost:43700
 [vp-mppm3baa9e3c] CMD k4 probe pk1:coop-kitchen:0 active Counters/Counter_Normal_10
 [vp-mppm3baa9e3c] REPLY k4 False
 [vp-mppm3baa9e3c] PASS the kitchen is in the scene: pool slots off, the west doorway open (again): holder True, slot 47 active False, doorway counter active False, stove True
-[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_10ea36a5-720e-4113-9cbe-3ace31b2b8fc"},{"id":3,"name":"Player 2","sid":"rsess_deef854c-f9d6-4a1c-8a5b-dba4b7085962"}]
+[vp-mppm3baa9e3c] PASS two players in the room: [{"id":1,"name":"Main Editor","sid":"rsess_0874a423-b7f4-497f-b88e-a8894e286ab6"},{"id":3,"name":"Player 2","sid":"rsess_0f926318-e8be-47a8-a512-149c8b629970"}]
 [vp-mppm3baa9e3c] PASS after reloading, this page sees the running round and the score (late join): round, score 30
 [vp-mppm3baa9e3c] CMD k5 probe pk1:coop-kitchen:0 text Board/Hud/Score/Current
 [vp-mppm3baa9e3c] REPLY k5 30

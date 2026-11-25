@@ -211,6 +211,10 @@
 
     // cut the cheese
     await act(() => E("CheeseCounter_00"), () => hand() && hand().k === V.Cheese, "take a cheese from its crate");
+    // the push check (world 9d7311): the held cheese is drawn 0.45 m in front of the face; its box is a trigger, so a
+    // body standing still for 5 s with it in hand is not moved
+    const still = await cmd("standstill 5", 20000);
+    check(/^ok still/.test(still), "a chef standing still for 5 s with an item in hand is not pushed by it", still);
     await act(() => E("CutCounter_00"), () => on("CutCounter_00") && on("CutCounter_00").k === V.Cheese && !hand(), "put the cheese on the cutting board");
     const knifeHidden = await probeUntil("active", "Counters/CutCounter_00/CuttingBoard/Knife/Model", (v) => v === "False");
     await Q("CutCounter_00");

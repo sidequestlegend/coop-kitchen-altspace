@@ -18,6 +18,27 @@ portkit/tools/remote.sh coop-kitchen-port/altspace menu "PortKit/Multiplayer/Act
 portkit/tools/playtest.sh coop-kitchen-port/altspace coop-kitchen-port/altspace/playtest/multi.json coop-kitchen    rung 4
 ```
 
+## Held items and pushing, 2026-11-25 evening (portkit 476075d)
+
+A held item is drawn 0.45 m in front of the holder's head and 0.3 m below it (`Kitchen.HandPosition`), and it moves
+there every frame. While it is held, the holder's copy is on the Default layer (`SetHeldSlots`), and a remote holder's
+item sits 0.3 m under their head. Its 0.5 x 0.28 x 0.5 box was solid, so it could shove the holder, and anyone near a
+remote holder. This is the same kind of fault as world 9d7311's moving solid colliders: hidden-role's panel and
+rp-toolkit's head label. The kit now makes every item slot's box a **trigger** (`CoopKitchenKitBuilder.Items`).
+Clicks and grabs still find it: the SDK's click rays and the desktop grab both take triggers on layers 5 and 20, and
+the app's hand grab uses `OverlapSphere(..., QueryTriggerInteraction.Collide)`. Physics never holds an item up,
+because the page places every item and drops snap to a counter or the floor. Re-synced to portkit `476075d`, which
+also gives any world-space canvas a trigger box of its own.
+
+- rung 0/1: `npm test` **48 of 48** (47 before). New: `test/push.test.ts`, which checks that all 48 item slot colliders
+  in the built prefab are triggers. It failed on the kit built before.
+- rung 2: Check all PASS (graphs, 186 bindings `4cbdd435`, the new canvas colliders line, both bundles). Android
+  1,620 KiB, Windows 2,236 KiB. Script 562,082 bytes.
+- rung 3: **38 passed, 0 failed** (37 before). New push check with a cheese in hand: `standstill 5` returned "ok still:
+  body moved 0.000 m, player moved 0.000 m, touched none". All the click and E/Q steps still work on the trigger items.
+- rung 4: **57 passed, 0 failed**, 0 console errors.
+- `dist/` exported (12 files, footprint 10.93 x 3.19 x 7.68 m).
+
 ## Rung 0: static
 
 `npm run typecheck` (tsc, strict) and `npm run lint`: clean (`lint: src, portkit/src clean (page and clock rules)`).
